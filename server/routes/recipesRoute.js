@@ -7,6 +7,7 @@ const router = express.Router();
 // the arrow function in the second argument is a request handler that takes req and res as 2 parameters. req has information on incoming http request and res sends response back to client
 router.get('/', async (request, response) => {
   try {
+    console.log('test');
     const recipes = await Recipe.find({});
     return response.status(200).json({
       count: recipes.length,
@@ -14,6 +15,7 @@ router.get('/', async (request, response) => {
     });
   } catch (error) {
     response.status(500).send({ message: error.message });
+    console.log('hmm it failed');
   }
 });
 
