@@ -9,7 +9,7 @@ import ShowRecipe from './pages/ShowRecipe';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/recipes" element={<Home />} />
       <Route path="/recipes/create" element={<CreateRecipe />} />
       <Route path="/recipes/details/:id" element={<ShowRecipe />} />
       <Route path="/recipes/edit/:id" element={<UpdateRecipe />} />
