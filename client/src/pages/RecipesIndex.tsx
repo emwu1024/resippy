@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -18,12 +18,11 @@ const Home = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl my-8">This is the homepage</h1>
-      {/* <Link to='/books/create'>
-        </Link> */}
-      <h1>HOMEPAGE TITLE</h1>
+      <h1 className="text-3xl my-8">Recipes List</h1>
+      <Link to="/recipes/create"></Link>
+      <h1>RECIPES INDEX</h1>
     </div>
   );
 };
 
-export default Home;
+export default RecipesIndex;

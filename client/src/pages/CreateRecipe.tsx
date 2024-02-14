@@ -8,17 +8,17 @@ const CreateRecipe = () => {
   const [description, setDescription] = useState('');
   const [steps, setSteps] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [publishYear, setPublishYear] = useState('');
+  const [publishedYear, setPublishedYear] = useState('');
   const navigate = useNavigate();
 
-  const handleSaveBook = () => {
+  const handleSaveRecipe = () => {
     const data = {
       name,
       author,
       description,
       steps,
       ingredients,
-      publishYear,
+      publishedYear,
     };
     axios
       .post('http://localhost:8000/recipes', data)
@@ -26,75 +26,83 @@ const CreateRecipe = () => {
         navigate('/');
       })
       .catch((error) => {
-        alert('An error happened. Please Chack console');
+        alert('An error happened. Please Check console');
         console.log(error);
       });
   };
 
   return (
-    <div className='p-4'>
-      <h1 className='text-3xl my-4'>Create Recipe</h1>
-      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Title</label>
+    <div className="p-4">
+      <h1 className="text-3xl my-4">Create A Recipe</h1>
+      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Name of Recipe</label>
           <input
-            type='text'
+            type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Title</label>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Recipe Description
+          </label>
           <input
-            type='text'
-            value={name}
+            type="text"
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Author</label>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Author</label>
           <input
-            type='text'
+            type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            className="border-2 border-gray-500 px-4 py-2  w-full "
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Steps</label>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Recipe Steps (the value is taken in as an array)
+          </label>
           <input
-            type='text'
-            value={name}
+            type="text"
+            value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Ingredients</label>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Ingredients (the value is taken in as an array)
+          </label>
           <input
-            type='text'
-            value={name}
+            type="text"
+            value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Publish Year</label>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Publish Year (to be automated later)
+          </label>
           <input
-            type='number'
-            value={publishYear}
-            onChange={(e) => setPublishYear(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            type="number"
+            value={publishedYear}
+            onChange={(e) => setPublishedYear(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2  w-full "
           />
         </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveBook}>
+        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveRecipe}>
           Save
         </button>
       </div>
     </div>
   );
-}
+};
 
-export default CreateRecipe
+export default CreateRecipe;

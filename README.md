@@ -4,7 +4,7 @@ This project is a repository for recipes I have previously made so I can remembe
 
 ## Stack
 
-- npm
+- NPM
 - Vite
 - React
 - Typescript

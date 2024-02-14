@@ -32,19 +32,22 @@ router.get('/:id', async (request, response) => {
 // Since post = update, remember to autopopulate the fields with the previous data so that it isn't left empty.
 router.post('/', async (request, response) => {
   try {
+    // ???? ok for some reason this section was breaking it but I don't see why cause it looks right
     if (
-      !request.body.title ||
+      !request.body.name ||
+      !request.body.description ||
       !request.body.author ||
       !request.body.steps ||
       !request.body.ingredients ||
       !request.body.publishedYear
     ) {
+      console.log(request.body);
       return response.status(400).send({
         message: 'You forgot a field :(',
       });
     }
     const newRecipe = {
-      title: request.body.title,
+      name: request.body.name,
       author: request.body.author,
       description: request.body.description,
       steps: request.body.steps,
@@ -62,7 +65,7 @@ router.post('/', async (request, response) => {
 router.put('/:id', async (request, response) => {
   try {
     if (
-      !request.body.title ||
+      !request.body.name ||
       !request.body.author ||
       !request.body.steps ||
       !request.body.ingredients ||

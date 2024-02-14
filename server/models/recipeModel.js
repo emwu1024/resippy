@@ -1,14 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const recipeSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
     },
     author: {
       type: String,
-      required: true,
+      required: false,
     },
     description: {
       type: String,
@@ -16,15 +16,15 @@ const recipeSchema = mongoose.Schema(
     },
     steps: {
       type: Array,
-      required: true,
+      required: false,
     },
     ingredients: {
       type: Array,
-      required: true,
+      required: false,
     },
     publishedYear: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   {
@@ -32,4 +32,4 @@ const recipeSchema = mongoose.Schema(
   }
 );
 
-export const Recipe = mongoose.model("Recipe", recipeSchema);
+export const Recipe = mongoose.model('Recipe', recipeSchema);

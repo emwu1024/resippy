@@ -2,6 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CreateRecipe from './pages/CreateRecipe';
+import RecipesIndex from './pages/RecipesIndex';
 // import UpdateRecipe from './pages/UpdateRecipe';
 // import DeleteRecipe from './pages/DeleteRecipe';
 // import ShowRecipe from './pages/ShowRecipe';
@@ -9,7 +10,8 @@ import CreateRecipe from './pages/CreateRecipe';
 function App() {
   return (
     <Routes>
-      <Route path="/recipes" element={<Home />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/recipes" element={<RecipesIndex />} />
       <Route path="/recipes/create" element={<CreateRecipe />} />
       {/* <Route path="/recipes/details/:id" element={<ShowRecipe />} />
       <Route path="/recipes/edit/:id" element={<UpdateRecipe />} />
