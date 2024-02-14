@@ -17,12 +17,12 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='p-4'>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Books List</h1>
+    <div className="p-4">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl my-8">Recipes List</h1>
         {/* <Link to='/books/create'>
         </Link> */}
-        <h1>HOMEPAGE TEST</h1>
+        <h1>HOMEPAGE TITLE</h1>
       </div>
     </div>
   );
