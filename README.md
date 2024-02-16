@@ -39,3 +39,4 @@ This project is a repository for recipes I have previously made so I can remembe
 
 1. Currently implementing the frontend + backend from this tutorial: https://medium.com/@arpitha.rajeev37/mern-stack-refresher-crud-operations-for-a-book-store-15ff826636e9
 2. Currently figuring out how to make the input of arrays smoother
+3. Currently working through this repo for help setting up the backend: https://github.com/mohammad-taheri1/Book-Store-MERN-Stack/blob/main/frontend/src/pages/EditBook.jsx

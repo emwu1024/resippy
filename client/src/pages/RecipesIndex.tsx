@@ -3,11 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineDelete } from 'react-icons/md';
 
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([]);
-
   useEffect(() => {
     axios
       .get('http://localhost:8000/recipes')
@@ -59,14 +58,14 @@ const RecipesIndex = () => {
               </td>
               <td className="border border-slate-700 rounded-md text-center">
                 <div className="flex justify-center gap-x-4">
-                  <Link to={`/books/details/${recipe._id}`}>
+                  <Link to={`/recipes/details/${recipe._id}`}>
                     {/* Debug Tip: React Icons + Typescript do NOT like the className attribute */}
                     <BsInfoCircle color="green" />
                   </Link>
-                  <Link to={`/books/edit/${recipe._id}`}>
+                  <Link to={`/recipes/edit/${recipe._id}`}>
                     <AiOutlineEdit color="green" />
                   </Link>
-                  <Link to={`/books/delete/${recipe._id}`}>
+                  <Link to={`/recipes/delete/${recipe._id}`}>
                     <MdOutlineDelete color="green" />
                   </Link>
                 </div>

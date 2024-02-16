@@ -73,7 +73,7 @@ const CreateRecipe = () => {
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
-            rows="5"
+            rows={5}
           />
         </div>
         <div className="my-4">
@@ -85,7 +85,7 @@ const CreateRecipe = () => {
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
-            rows="5"
+            rows={5}
           />
         </div>
         <div className="my-4">

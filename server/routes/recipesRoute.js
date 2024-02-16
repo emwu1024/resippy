@@ -19,6 +19,7 @@ router.get('/', async (request, response) => {
   }
 });
 
+// Get individual recipe
 router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params;
@@ -29,6 +30,7 @@ router.get('/:id', async (request, response) => {
   }
 });
 
+// Create
 router.post('/', async (request, response) => {
   try {
     if (
@@ -52,9 +54,6 @@ router.post('/', async (request, response) => {
     let ingredientsString = request.body.ingredients;
     let ingredientsArray = ingredientsString.split('\n');
 
-    console.log(stepsArray);
-    console.log(ingredientsArray);
-
     const newRecipe = {
       name: request.body.name,
       author: request.body.author,
@@ -71,7 +70,7 @@ router.post('/', async (request, response) => {
   }
 });
 
-// Since put = update, remember to autopopulate the fields with the previous data so that it isn't left empty.
+// Update | Edit
 router.put('/:id', async (request, response) => {
   try {
     if (
@@ -86,8 +85,34 @@ router.put('/:id', async (request, response) => {
       });
     }
 
-    const { id } = request.params;
+    // ok real talk there's probably a better way to handle arrays in mongodb but im not sure what it is rn
+    // so will revisit this later but for now we ball
 
+    console.log('steps length: ' + request.body.steps.length);
+    console.log(request.body.steps);
+    console.log('ingredients length: ' + request.body.ingredients.length);
+    console.log(request.body.ingredients);
+
+    request.body.steps = request.body.steps.split('\n');
+    //   console.log('steps length: ' + request.body.steps.length);
+    //   console.log(request.body.steps);
+
+    // let stepsString = request.body.steps[0].split(',');
+    // console.log(stepsString);
+    // let stepsArray = stepsString.split(',');
+
+    //   console.log('ingredients  ' + request.body.ingredients.length);
+    request.body.ingredients = request.body.ingredients.split('\n');
+
+    console.log('Request body: ');
+    console.log(request.body);
+
+    // let ingredientsString = request.body.ingredients[0].split(',');
+    // console.log(ingredientsString);
+    // let ingredientsArray = ingredientsString.split(',');
+    // console.log(ingredientsArray);
+
+    const { id } = request.params;
     const result = await Recipe.findByIdAndUpdate(id, request.body);
 
     if (!result) {
@@ -102,6 +127,7 @@ router.put('/:id', async (request, response) => {
   }
 });
 
+// Delete recipe
 router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params;
