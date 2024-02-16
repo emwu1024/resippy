@@ -71,6 +71,7 @@ router.post('/', async (request, response) => {
 });
 
 // Update | Edit
+// take away trailing whitespaces if existent
 router.put('/:id', async (request, response) => {
   try {
     if (
@@ -88,29 +89,9 @@ router.put('/:id', async (request, response) => {
     // ok real talk there's probably a better way to handle arrays in mongodb but im not sure what it is rn
     // so will revisit this later but for now we ball
 
-    console.log('steps length: ' + request.body.steps.length);
-    console.log(request.body.steps);
-    console.log('ingredients length: ' + request.body.ingredients.length);
-    console.log(request.body.ingredients);
+    request.body.steps = request.body.steps.trim().split('\n');
 
-    request.body.steps = request.body.steps.split('\n');
-    //   console.log('steps length: ' + request.body.steps.length);
-    //   console.log(request.body.steps);
-
-    // let stepsString = request.body.steps[0].split(',');
-    // console.log(stepsString);
-    // let stepsArray = stepsString.split(',');
-
-    //   console.log('ingredients  ' + request.body.ingredients.length);
-    request.body.ingredients = request.body.ingredients.split('\n');
-
-    console.log('Request body: ');
-    console.log(request.body);
-
-    // let ingredientsString = request.body.ingredients[0].split(',');
-    // console.log(ingredientsString);
-    // let ingredientsArray = ingredientsString.split(',');
-    // console.log(ingredientsArray);
+    request.body.ingredients = request.body.ingredients.trim().split('\n');
 
     const { id } = request.params;
     const result = await Recipe.findByIdAndUpdate(id, request.body);
