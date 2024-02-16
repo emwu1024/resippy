@@ -26,7 +26,7 @@ const CreateRecipe = () => {
         navigate('/');
       })
       .catch((error) => {
-        alert('An error happened. Please Check console');
+        alert('You probably missed a field, check the console for more deets');
         console.log(error);
       });
   };
@@ -66,24 +66,26 @@ const CreateRecipe = () => {
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">
-            Recipe Steps (the value is taken in as an array)
+            Recipe Steps (Separate steps with a new line)
           </label>
-          <input
-            type="text"
+          <textarea
+            // type="text"
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
+            rows="5"
           />
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">
-            Ingredients (the value is taken in as an array)
+            Ingredients (Separate ingredients with a new line)
           </label>
-          <input
-            type="text"
+          <textarea
+            // type="text"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
+            rows="5"
           />
         </div>
         <div className="my-4">

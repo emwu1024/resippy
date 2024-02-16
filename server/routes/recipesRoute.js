@@ -7,7 +7,7 @@ const router = express.Router();
 // the arrow function in the second argument is a request handler that takes req and res as 2 parameters. req has information on incoming http request and res sends response back to client
 router.get('/', async (request, response) => {
   try {
-    console.log('test');
+    console.log('working >:D');
     const recipes = await Recipe.find({});
     return response.status(200).json({
       count: recipes.length,
@@ -29,10 +29,8 @@ router.get('/:id', async (request, response) => {
   }
 });
 
-// Since post = update, remember to autopopulate the fields with the previous data so that it isn't left empty.
 router.post('/', async (request, response) => {
   try {
-    // ???? ok for some reason this section was breaking it but I don't see why cause it looks right
     if (
       !request.body.name ||
       !request.body.description ||
@@ -46,12 +44,23 @@ router.post('/', async (request, response) => {
         message: 'You forgot a field :(',
       });
     }
+
+    // Since steps and ingredients are arrays they will be processed differently
+    let stepsString = request.body.steps;
+    let stepsArray = stepsString.split('\n');
+
+    let ingredientsString = request.body.ingredients;
+    let ingredientsArray = ingredientsString.split('\n');
+
+    console.log(stepsArray);
+    console.log(ingredientsArray);
+
     const newRecipe = {
       name: request.body.name,
       author: request.body.author,
       description: request.body.description,
-      steps: request.body.steps,
-      ingredients: request.body.ingredients,
+      steps: stepsArray,
+      ingredients: ingredientsArray,
       publishedYear: request.body.publishedYear,
     };
 
@@ -62,6 +71,7 @@ router.post('/', async (request, response) => {
   }
 });
 
+// Since put = update, remember to autopopulate the fields with the previous data so that it isn't left empty.
 router.put('/:id', async (request, response) => {
   try {
     if (

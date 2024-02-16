@@ -4,27 +4,27 @@ const recipeSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: false,
+      required: true,
     },
     author: {
       type: String,
-      required: false,
+      required: true,
     },
     description: {
       type: String,
-      required: false,
+      required: true,
     },
     steps: {
       type: Array,
-      required: false,
+      required: true,
     },
     ingredients: {
       type: Array,
-      required: false,
+      required: true,
     },
     publishedYear: {
       type: Number,
-      required: false,
+      required: true,
     },
   },
   {
