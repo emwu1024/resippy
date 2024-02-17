@@ -31,21 +31,14 @@ const UpdateRecipe = () => {
       });
   }, []);
 
-  const formatArray = (recipeArray) => {
-    console.log('title:');
-    console.log(recipeArray);
-    // console.log(typeof recipeArray);
-    // console.log(recipeArray);
+  const formatArray = (recipeArray: string[] | string) => {
     const recipeString = recipeArray.toString().split(',');
     let returnString = '';
 
     recipeString.forEach((item: string) => {
       returnString += item + '\n';
-      console.log('Another: ' + item);
     });
-    console.log(returnString);
     return returnString;
-    // return recipeArray;
   };
 
   const handleEditRecipe = () => {
