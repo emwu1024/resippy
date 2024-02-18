@@ -53,7 +53,7 @@ const UpdateRecipe = () => {
     axios
       .put(`http://localhost:8000/recipes/${id}`, data)
       .then(() => {
-        navigate('/');
+        navigate('/recipes');
       })
       .catch((error) => {
         console.log(error);

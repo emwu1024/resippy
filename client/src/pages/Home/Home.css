@@ -1,0 +1,35 @@
+@import url("https://use.typekit.net/buu0hkn.css");
+
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/main-hero-1.jpg");
+  height: 100vh;
+  /* width: 100%; */
+  /* background-size:contain ; */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #dda15e;
+  font-family: "flood-std", sans-serif;
+  font-size: 4rem;
+}
+
+.content-container {
+  text-align: center;
+}
+
+.page-content {
+  width: 70%;
+  margin: auto;
+  padding-bottom: 4rem;
+}

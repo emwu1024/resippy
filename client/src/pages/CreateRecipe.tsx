@@ -23,7 +23,7 @@ const CreateRecipe = () => {
     axios
       .post('http://localhost:8000/recipes', data)
       .then(() => {
-        navigate('/');
+        navigate('/recipes');
       })
       .catch((error) => {
         alert('You probably missed a field, check the console for more deets');

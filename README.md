@@ -2,7 +2,7 @@
 
 This project is a repository for recipes I have previously made so I can remember that these recipes exist for longer than a month at a time :)
 
-## Stack
+## Stack + Reference
 
 - NPM
 - Vite
@@ -11,6 +11,7 @@ This project is a repository for recipes I have previously made so I can remembe
 - Node
 - Express
 - Postgresql
+- Colour Scheme: https://coolors.co/2c462c-606c38-283618-0f140a-2b0d06-3d1308-7d4017-bc6c25-dda15e-f3cea4
 
 ## Running The Application
 
@@ -40,3 +41,4 @@ This project is a repository for recipes I have previously made so I can remembe
 1. Currently implementing the frontend + backend from this tutorial: https://medium.com/@arpitha.rajeev37/mern-stack-refresher-crud-operations-for-a-book-store-15ff826636e9
 2. Currently figuring out how to make the input of arrays smoother
 3. Currently working through this repo for help setting up the backend: https://github.com/mohammad-taheri1/Book-Store-MERN-Stack/blob/main/frontend/src/pages/EditBook.jsx
+4. Currently coding Navbar following this tutorial: https://blog.logrocket.com/create-responsive-navbar-react-css/
