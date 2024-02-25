@@ -12,6 +12,7 @@ This project is a repository for recipes I have previously made so I can remembe
 - Express
 - Postgresql
 - Colour Scheme: https://coolors.co/2c462c-606c38-283618-0f140a-2b0d06-3d1308-7d4017-bc6c25-dda15e-f3cea4
+  - Colour Scheme should be inspired by: Greens (banana leaf, matcha, grass); Golds (Wood, Gold, Aged Bamboo); Reds (Red Bean, Dates, Cinnabar Stamps)
 
 ## Running The Application
 

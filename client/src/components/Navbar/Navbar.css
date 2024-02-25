@@ -1,7 +1,29 @@
+.header-container {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000000;
+  background-color: #283618;
+  height: 7rem;
+  overflow: visible;
+}
+
 .nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+ul {
+  margin: auto;
 }
 
 .nav-logo {
+  color: #dda15e;
+  transition: color 0.4s;
 }
 
 .nav-list {
@@ -10,5 +32,37 @@
 
 .nav-item {
   display: inline;
-  margin-left: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  color: #dda15e;
+  font-size: 1.5rem;
+  transition: color 0.4s;
+  text-decoration: none !important;
+  box-shadow: none;
 }
+
+.nav-item:hover {
+  color: #f3cea4;
+}
+
+/* There is probably a MUCH better way of coding this :/ */
+.nav-logo-img {
+  width: 150px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* position: absolute;
+  float: left;
+  margin: 0 auto; */
+  /* margin-top: 5rem; */
+}
+
+/* For some reason these aren't needed?? */
+/* ul {
+  list-style: none;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+} */
