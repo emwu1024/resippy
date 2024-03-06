@@ -1,7 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import "./Navbar.css";
-import logo from "../../assets/round-logo-smaller.png";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import './Navbar.css';
+import logo from '../../assets/resippy-logo-v2.png';
 
 const Navbar = () => {
   return (
