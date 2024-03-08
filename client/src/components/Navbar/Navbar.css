@@ -57,9 +57,9 @@
   top: 1rem;
   margin-left: 2rem;
   margin-right: 2rem;
-  transition: 0.3s ease-out width;
+  transition: 0.3s ease-out transform;
 }
 
 .nav-logo-img:hover {
-  width: 177px;
+  transform: scale(1.05);
 }
