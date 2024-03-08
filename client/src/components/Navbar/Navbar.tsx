@@ -9,13 +9,13 @@ const Navbar = () => {
       <header className="header-container">
         <nav className="nav-container">
           <ul className="nav-list">
-            <li className="nav-item">
+            <li className="nav-item" data-text="HOME">
               <NavLink to="/" className="nav-link">
                 HOME
               </NavLink>
             </li>
 
-            <li className="nav-item">
+            <li className="nav-item" data-text="RECIPES">
               <NavLink to="/recipes" className="nav-link">
                 RECIPES
               </NavLink>
@@ -31,12 +31,12 @@ const Navbar = () => {
               </NavLink>
             </li> */}
 
-            <li className="nav-item">
+            <li className="nav-item" data-text="ATLAS">
               <NavLink to="/" className="nav-link">
                 ATLAS
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" data-text="ABOUT">
               <NavLink to="/" className="nav-link">
                 ABOUT
               </NavLink>

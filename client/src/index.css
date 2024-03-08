@@ -1,30 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 :root {
+  /* Custom Property Declarations */
+  --body-text-color: #e1be96;
+  --decoration-text-color: #dda15e;
+  --decoration-hover-text-color: #c17d42;
+  --primary-bg-color: #0e1309;
+  --secondary-bg-color: #283618;
+
   font-family: 'Quicksand', sans-serif;
-
-  /* Check later, idk what this does */
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: 0px;
-  padding: 0px;
 }
 
 body {
   margin: 0px;
-  background-color: #0e1309;
-  color: #e1be96;
+  background-color: var(--primary-bg-color);
+  color: var(--body-text-color);
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
-}
+} */

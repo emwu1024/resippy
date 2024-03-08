@@ -2,7 +2,7 @@
   position: fixed;
   width: 100%;
   z-index: 1000000;
-  background-color: #283618;
+  background-color: var(--secondary-bg-color);
   height: 7.5rem;
   display: inline-flex;
 }
@@ -18,28 +18,48 @@
 }
 
 .nav-link {
-  color: #dda15e;
+  color: var(--decoration-hover-text-color);
   text-decoration: none;
-  font-weight: 800;
 }
 
-.nav-item:hover {
-  color: #f3cea4;
-}
+/* .nav-link:hover {
+  color: var(--decoration-hover-text-color);
+} */
 
 .nav-item {
   display: inline;
+  position: relative;
   margin-left: 4rem;
   margin-right: 4rem;
   font-size: 1.5rem;
+  font-weight: 800;
 }
 
-/* There is probably a MUCH better way of coding this :/ */
+.nav-item::before {
+  content: attr(data-text);
+  position: absolute;
+  z-index: 1;
+  color: var(--decoration-text-color);
+  pointer-events: none;
+
+  height: 100%;
+  overflow: hidden;
+  transition: 0.9s ease-out height;
+}
+
+.nav-item:hover::before {
+  height: 0;
+}
+
 .nav-logo-img {
   width: 175px;
-  display: block;
   position: relative;
   top: 1rem;
   margin-left: 2rem;
   margin-right: 2rem;
+  transition: 0.3s ease-out width;
+}
+
+.nav-logo-img:hover {
+  width: 177px;
 }
