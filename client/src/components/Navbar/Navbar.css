@@ -57,9 +57,53 @@
   top: 1rem;
   margin-left: 2rem;
   margin-right: 2rem;
-  transition: 0.3s ease-out transform;
+  transition: 0.5s ease-out transform;
 }
 
 .nav-logo-img:hover {
   transform: scale(1.05);
+}
+
+.hamburger-container {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 1.5rem;
+  height: 0.2rem;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--decoration-text-color);
+  border-radius: 5px;
+}
+
+/* Responsive based on media queries for screen size */
+@media only screen and (max-width: 768px) {
+  .nav-list {
+    position: fixed;
+    left: -100%;
+    top: 5rem;
+    flex-direction: column;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-list.active {
+    left: 0;
+  }
+
+  .nav-list {
+    margin: 2.5rem 0;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
 }
