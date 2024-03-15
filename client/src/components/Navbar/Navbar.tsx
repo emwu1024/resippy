@@ -68,10 +68,12 @@ const Navbar = () => {
   return (
     <div>
       <header className="header-container">
-        <nav className="nav-container">
+        <nav
+          className={`nav-container  ${isMobile ? 'nav-container-mobile' : ''}`}
+        >
           {isMobile && (
             <div
-              className={`hamburger  ${isMenuOpen ? 'hide-burger' : ''}`}
+              className={`hamburger  ${isMenuOpen ? 'hide-icon' : 'show-icon'}`}
               id="nav-toggle"
               onClick={toggleMenu}
             >
@@ -85,7 +87,13 @@ const Navbar = () => {
               id="nav-menu"
             >
               {renderNavLinks()}
-              <div className="nav__close" id="nav-close" onClick={toggleMenu}>
+              <div
+                className={`nav-close  ${
+                  isMenuOpen ? 'show-icon' : 'hide-icon'
+                }`}
+                id="nav-close"
+                onClick={toggleMenu}
+              >
                 <IoClose />
               </div>
             </div>
