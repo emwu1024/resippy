@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { useMediaQuery } from "react-responsive";
-import { NavLink } from "react-router-dom";
-import { IoClose, IoMenu } from "react-icons/io5";
+import React, { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { NavLink } from 'react-router-dom';
+import { IoClose, IoMenu } from 'react-icons/io5';
 
-import "./Navbar.css";
-import logo from "../../assets/resippy-logo-v2.png";
+import './Navbar.css';
+import logo from '../../assets/resippy-logo-v2.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isMobile = useMediaQuery({ maxWidth: "1100px" });
+  const isMobile = useMediaQuery({ maxWidth: '1100px' });
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -23,8 +23,8 @@ const Navbar = () => {
   //   Conditionally rendered navbar code
   // Real talk this will need some work as i've implemented the list way differently to them oop
   const renderNavLinks = () => {
-    const listClassName = isMobile ? "nav-list-mobile" : "nav-list";
-    const listContainerClassName = isMobile ? "" : "list-container";
+    const listClassName = isMobile ? 'nav-list-mobile' : 'nav-list';
+    const listContainerClassName = isMobile ? '' : 'list-container';
 
     return (
       <div className={listContainerClassName}>
@@ -71,7 +71,7 @@ const Navbar = () => {
         <nav className="nav-container">
           {isMobile && (
             <div
-              className={`hamburger  ${isMenuOpen ? "hide-burger" : ""}`}
+              className={`hamburger  ${isMenuOpen ? 'hide-burger' : ''}`}
               id="nav-toggle"
               onClick={toggleMenu}
             >
@@ -81,7 +81,7 @@ const Navbar = () => {
 
           {isMobile ? (
             <div
-              className={`${isMenuOpen ? "show-menu" : "hide-menu"}`}
+              className={`${isMenuOpen ? 'show-menu' : 'hide-menu'}`}
               id="nav-menu"
             >
               {renderNavLinks()}
