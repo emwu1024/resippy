@@ -71,6 +71,12 @@ const Navbar = () => {
         <nav
           className={`nav-container  ${isMobile ? 'nav-container-mobile' : ''}`}
         >
+          <div className="bar-hamburger">
+            <p>hello</p>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </div>
           {isMobile && (
             <div
               className={`hamburger  ${isMenuOpen ? 'hide-icon' : 'show-icon'}`}

@@ -8,6 +8,8 @@
   --primary-bg-color: #0e1309;
   --secondary-bg-color: #283618;
 
+  --heading-text-size: 28px;
+
   font-family: 'Quicksand', sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,6 +21,9 @@ body {
   margin: 0px;
   background-color: var(--primary-bg-color);
   color: var(--body-text-color);
+  h1 {
+    font-size: (--heading-text-size);
+  }
 }
 
 /* @media (prefers-color-scheme: light) {
