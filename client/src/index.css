@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&display=swap");
 
 :root {
   /* Custom Property Declarations */
@@ -6,11 +7,12 @@
   --decoration-text-color: #dda15e;
   --decoration-hover-text-color: #c17d42;
   --primary-bg-color: #0e1309;
-  --secondary-bg-color: #283618;
+  /* --secondary-bg-color: #283618; */
+  --secondary-bg-color: #1b2511;
 
-  --heading-text-size: 28px;
+  --heading-text-size: 50px;
 
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -21,8 +23,11 @@ body {
   margin: 0px;
   background-color: var(--primary-bg-color);
   color: var(--body-text-color);
-  h1 {
-    font-size: (--heading-text-size);
+  .heading-title {
+    font-size: var(--heading-text-size);
+    font-family: "Philosopher", sans-serif;
+    font-weight: 400;
+    font-style: normal;
   }
 }
 

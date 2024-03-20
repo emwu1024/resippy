@@ -1,0 +1,10 @@
+.content-container {
+  text-align: center;
+}
+
+.page-content {
+  width: 70%;
+  margin: auto;
+  padding-bottom: 4rem;
+  padding-top: 3rem;
+}
