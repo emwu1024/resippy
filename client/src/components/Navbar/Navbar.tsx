@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useMediaQuery } from "react-responsive";
-import { NavLink } from "react-router-dom";
-import { IoClose, IoMenu } from "react-icons/io5";
+import React, { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { NavLink } from 'react-router-dom';
+import { IoClose, IoMenu } from 'react-icons/io5';
 
-import "./Navbar.css";
+import './Navbar.css';
 // import logo from '../../assets/resippy-logo-v2.png';
-import logo from "../../assets/stamp-logo-red-round-2.png";
+import logo from '../../assets/stamp-logo-red-round-2.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isMobile = useMediaQuery({ maxWidth: "1100px" });
+  const isMobile = useMediaQuery({ maxWidth: '1100px' });
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,8 +24,8 @@ const Navbar = () => {
   //   Conditionally rendered navbar code
   // Real talk this will need some work as i've implemented the list way differently to them oop
   const renderNavLinks = () => {
-    const listClassName = isMobile ? "nav-list-mobile" : "nav-list";
-    const listContainerClassName = isMobile ? "" : "list-container";
+    const listClassName = isMobile ? 'nav-list-mobile' : 'nav-list';
+    const listContainerClassName = isMobile ? '' : 'list-container';
 
     return (
       <div className={listContainerClassName}>
@@ -47,8 +47,10 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Only render logo when not in mobile view */}
-        {!isMobile && <img src={logo} alt="Logo" className="nav-logo-img" />}
+        <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
+          {/* Only render logo when not in mobile view */}
+          {!isMobile && <img src={logo} alt="Logo" className="nav-logo-img" />}
+        </NavLink>
 
         <ul className={listClassName}>
           <li className="nav-item" data-text="ATLAS">
@@ -70,11 +72,11 @@ const Navbar = () => {
     <div>
       <header className="header-container">
         <nav
-          className={`nav-container  ${isMobile ? "nav-container-mobile" : ""}`}
+          className={`nav-container  ${isMobile ? 'nav-container-mobile' : ''}`}
         >
           {isMobile && (
             <div
-              className={`hamburger  ${isMenuOpen ? "hide-icon" : "show-icon"}`}
+              className={`hamburger  ${isMenuOpen ? 'hide-icon' : 'show-icon'}`}
               id="nav-toggle"
               onClick={toggleMenu}
             >
@@ -84,13 +86,13 @@ const Navbar = () => {
 
           {isMobile ? (
             <div
-              className={`${isMenuOpen ? "show-menu" : "hide-menu"}`}
+              className={`${isMenuOpen ? 'show-menu' : 'hide-menu'}`}
               id="nav-menu"
             >
               {renderNavLinks()}
               <div
                 className={`nav-close  ${
-                  isMenuOpen ? "show-icon" : "hide-icon"
+                  isMenuOpen ? 'show-icon' : 'hide-icon'
                 }`}
                 id="nav-close"
                 onClick={toggleMenu}
