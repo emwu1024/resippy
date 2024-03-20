@@ -1,11 +1,11 @@
-import './App.css';
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import CreateRecipe from './pages/CreateRecipe';
-import RecipesIndex from './pages/RecipesIndex';
-import UpdateRecipe from './pages/UpdateRecipe';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import CreateRecipe from "./pages/CreateRecipe";
+import RecipesIndex from "./pages/RecipesIndex";
+import UpdateRecipe from "./pages/UpdateRecipe";
 // import DeleteRecipe from './pages/DeleteRecipe';
-// import ShowRecipe from './pages/ShowRecipe';
+import ShowRecipe from "./pages/ShowRecipe";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
       <Route path="/recipes" element={<RecipesIndex />} />
       <Route path="/recipes/create" element={<CreateRecipe />} />
       <Route path="/recipes/edit/:id" element={<UpdateRecipe />} />
-      {/* <Route path="/recipes/details/:id" element={<ShowRecipe />} />
-      <Route path="/recipes/delete/:id" element={<DeleteRecipe />} /> */}
+      <Route path="/recipes/:id" element={<ShowRecipe />} />
+      {/* <Route path="/recipes/delete/:id" element={<DeleteRecipe />} /> */}
     </Routes>
   );
 }

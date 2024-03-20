@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineDelete } from 'react-icons/md';
-import Navbar from '../components/Navbar/Navbar';
-import PageContentContainer from '../components/PageContentContainer/PageContentContainer';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BsInfoCircle } from "react-icons/bs";
+import { MdOutlineDelete } from "react-icons/md";
+import Navbar from "../components/Navbar/Navbar";
+import PageContentContainer from "../components/PageContentContainer/PageContentContainer";
 
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     axios
-      .get('http://localhost:8000/recipes')
+      .get("http://localhost:8000/recipes")
       .then((response) => {
         setRecipes(response.data.data);
       })
@@ -64,7 +64,7 @@ const RecipesIndex = () => {
                 </td>
                 <td className="border border-slate-700 rounded-md text-center">
                   <div className="flex justify-center gap-x-4">
-                    <Link to={`/recipes/details/${recipe._id}`}>
+                    <Link to={`/recipes/${recipe._id}`}>
                       {/* Debug Tip: React Icons + Typescript do NOT like the className attribute */}
                       <BsInfoCircle color="green" />
                     </Link>
