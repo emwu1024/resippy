@@ -1,0 +1,138 @@
+.header-container {
+  position: fixed;
+  width: 100%;
+  z-index: 1000000;
+  background-color: var(--secondary-bg-color);
+  height: 7.5rem;
+  display: inline-flex;
+}
+
+.list-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-container {
+  width: 100%;
+  text-align: center;
+}
+
+.nav-container-mobile {
+  margin-top: 2rem;
+}
+
+.nav-list {
+  padding-left: 0;
+}
+
+.nav-list-mobile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.75rem;
+  padding-left: 0;
+  align-items: center;
+  margin-bottom: 0rem;
+  margin-top: 1.75rem;
+}
+
+.nav-link {
+  color: var(--decoration-hover-text-color);
+  text-decoration: none;
+}
+
+.nav-item {
+  display: inline;
+  position: relative;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-style: bold;
+}
+
+.nav-item::before {
+  content: attr(data-text);
+  position: absolute;
+  z-index: 1;
+  color: var(--decoration-text-color);
+  pointer-events: none;
+
+  height: 100%;
+  overflow: hidden;
+  transition: 0.9s ease-out height;
+}
+
+.nav-item:hover::before {
+  height: 0;
+}
+
+.nav-logo-img {
+  width: 155px;
+  position: relative;
+  top: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  transition: 0.5s ease-out transform;
+}
+
+.nav-logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* trying out menu display */
+.hamburger,
+.nav-close {
+  font-size: 2.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+.show-menu {
+  top: 0;
+  background-color: var(--secondary-bg-color);
+  padding-bottom: 2rem;
+  overflow: hidden;
+  transition: max-height 2.3s ease-out;
+  height: auto;
+  max-height: 600px;
+}
+
+.hide-menu {
+  background-color: var(--secondary-bg-color);
+  max-height: 0;
+  padding-bottom: 2rem;
+  transition: max-height 1.5s ease-out;
+  overflow: hidden;
+}
+
+.nav-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+.hide-icon {
+  /* visibility: collapse; */
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.show-icon {
+  /* visibility: collapse; */
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.bar-hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}

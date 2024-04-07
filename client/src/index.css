@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700');
+
+:root {
+  /* Custom Property Declarations */
+  --body-text-color: #e1be96;
+  --decoration-text-color: #dda15e;
+  --decoration-hover-text-color: #c17d42;
+  --primary-bg-color: #0e1309;
+  /* --secondary-bg-color: #283618; */
+  --secondary-bg-color: #1b2511;
+
+  --heading-text-size: 50px;
+  --subheading-text-size: 36px;
+
+  --heading-font: 'Philosopher', sans-serif;
+
+  font-family: 'Quicksand', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0px;
+  background-color: var(--primary-bg-color);
+  color: var(--body-text-color);
+
+  .heading {
+    font-size: var(--heading-text-size);
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .subheading {
+    font-size: var(--subheading-text-size);
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-style: normal;
+  }
+}
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+} */
