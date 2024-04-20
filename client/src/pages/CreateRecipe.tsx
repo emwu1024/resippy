@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Tiptap from "../components/TextEditor/Tiptap.tsx";
+import parser from "html-react-parser";
 
 const CreateRecipe = () => {
+  // Current Idea: 2 data entry formats, 1 for custom component breakdown and styling and another for WYSIWYG rich text editing?
+  // Custom data format Code:
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [publishedYear, setPublishedYear] = useState("");
+
+  // TipTap Code:
+  const [desc, setDesc] = useState("");
+
   const navigate = useNavigate();
 
   const handleSaveRecipe = () => {
@@ -105,7 +112,8 @@ const CreateRecipe = () => {
         </button>
       </div>
 
-      <Tiptap />
+      <Tiptap setDesc={setDesc} />
+      <div className="ProseMirror">{parser(desc)}</div>
     </div>
   );
 };

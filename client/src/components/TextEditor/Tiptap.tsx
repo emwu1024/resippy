@@ -138,13 +138,17 @@ const extensions = [
 const content = `
 `;
 
-export default () => {
+export default ({ setDesc }) => {
   return (
     <div className="editor-container">
       <EditorProvider
         slotBefore={<MenuBar />}
         extensions={extensions}
         content={content}
+        onUpdate={({ editor }) => {
+          const html = editor.getHTML();
+          setDesc(html);
+        }}
       ></EditorProvider>
     </div>
   );
