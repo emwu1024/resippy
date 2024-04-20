@@ -37,6 +37,7 @@ This project is a repository for recipes I have previously made so I can remembe
 1. If I want to store high quality photos's on MongoDB I will need to use something called GridFS: https://www.freecodecamp.org/news/gridfs-making-file-uploading-to-mongodb/
 2. Was encountering issues running the backend. Fixed by whitelisting IP address of new working location 🤦‍♀️
 3. Typescript doesn't like some of the things Javascript accepts e.g. react-icons doesn't like the use of 'className' instead of attributes like 'color' etc.
+4. Tiptap is working as expected, some fonts do not have italics.
 
 ## Work Log
 
@@ -47,3 +48,6 @@ This project is a repository for recipes I have previously made so I can remembe
 5. Adding text and image animations to the navbar using these: https://tahazsh.com/blog/text-fill-animation + https://webdesign.tutsplus.com/css-hover-effects-techniques-for-creating-a-text-wipe-fill--cms-34137t#toc-4i7s-css-text-effect
 6. Adding responsiveness to the navbar using this: https://dev.to/devggaurav/let-s-build-a-responsive-navbar-and-hamburger-menu-using-html-css-and-javascript-4gci
 7. Navbar configured and done! Now currently working on implementing a WYSIWYG editor as it might be easier to layout recipe and steps like that. Currently researching the different WYSIWYG Editors for React, will probs go with TipTap and hope for the best.
+8. Researching extensions from TipTap: https://tiptap.dev/docs/editor/extensions: File Handler, Image, Youtube
+9. Currently following this tiptap tutorial: https://www.youtube.com/watch?v=JFzH4bDEUPo&t=232s
+10. Ah no, WYSIWYG might be useful for a mobile format of the data, but the web version will handle things differently, images will go on one side and instructions will go on the other, this might be difficult to render. This will require a smarter way of saving the data for use in different formats or duplicating user input of data which isnt ideal.

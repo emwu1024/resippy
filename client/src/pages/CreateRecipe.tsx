@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Tiptap from "../components/TextEditor/Tiptap.tsx";
 
 const CreateRecipe = () => {
-  const [name, setName] = useState('');
-  const [author, setAuthor] = useState('');
-  const [description, setDescription] = useState('');
-  const [steps, setSteps] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [publishedYear, setPublishedYear] = useState('');
+  const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [description, setDescription] = useState("");
+  const [steps, setSteps] = useState("");
+  const [ingredients, setIngredients] = useState("");
+  const [publishedYear, setPublishedYear] = useState("");
   const navigate = useNavigate();
 
   const handleSaveRecipe = () => {
@@ -21,12 +22,12 @@ const CreateRecipe = () => {
       publishedYear,
     };
     axios
-      .post('http://localhost:8000/recipes', data)
+      .post("http://localhost:8000/recipes", data)
       .then(() => {
-        navigate('/recipes');
+        navigate("/recipes");
       })
       .catch((error) => {
-        alert('You probably missed a field, check the console for more deets');
+        alert("You probably missed a field, check the console for more deets");
         console.log(error);
       });
   };
@@ -103,6 +104,8 @@ const CreateRecipe = () => {
           Save
         </button>
       </div>
+
+      <Tiptap />
     </div>
   );
 };
