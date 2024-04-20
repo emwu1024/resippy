@@ -52,3 +52,6 @@ This project is a repository for recipes I have previously made so I can remembe
 8. Researching extensions from TipTap: https://tiptap.dev/docs/editor/extensions: File Handler, Image, Youtube
 9. Currently following this tiptap tutorial: https://www.youtube.com/watch?v=JFzH4bDEUPo&t=232s
 10. Ah no, WYSIWYG might be useful for a mobile format of the data, but the web version will handle things differently, images will go on one side and instructions will go on the other, this might be difficult to render. This will require a smarter way of saving the data for use in different formats or duplicating user input of data which isnt ideal.
+11. Connecting TipTap to the backend worked! Now working on creating some new components for hte create recipe page following these resources:
+12. GeeksForGeeks tabs: https://www.geeksforgeeks.org/how-to-create-tabs-in-reactjs/
+13. CSSTricks: https://css-tricks.com/tabs-its-complicated/

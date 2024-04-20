@@ -26,6 +26,10 @@ const recipeSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    editorHtml: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

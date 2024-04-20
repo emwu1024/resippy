@@ -138,7 +138,7 @@ const extensions = [
 const content = `
 `;
 
-export default ({ setEditorText }) => {
+export default ({ setEditorHtml }) => {
   return (
     <div className="editor-container">
       <EditorProvider
@@ -147,7 +147,7 @@ export default ({ setEditorText }) => {
         content={content}
         onUpdate={({ editor }) => {
           const html = editor.getHTML();
-          setEditorText(html);
+          setEditorHtml(html);
         }}
       ></EditorProvider>
     </div>

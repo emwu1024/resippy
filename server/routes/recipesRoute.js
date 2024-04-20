@@ -39,7 +39,8 @@ router.post('/', async (request, response) => {
       !request.body.author ||
       !request.body.steps ||
       !request.body.ingredients ||
-      !request.body.publishedYear
+      !request.body.publishedYear ||
+      !request.body.editorHtml
     ) {
       console.log(request.body);
       return response.status(400).send({
@@ -61,6 +62,7 @@ router.post('/', async (request, response) => {
       steps: stepsArray,
       ingredients: ingredientsArray,
       publishedYear: request.body.publishedYear,
+      editorHtml: request.body.editorHtml,
     };
 
     const recipe = await Recipe.create(newRecipe);
