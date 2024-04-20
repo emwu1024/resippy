@@ -138,7 +138,7 @@ const extensions = [
 const content = `
 `;
 
-export default ({ setDesc }) => {
+export default ({ setEditorText }) => {
   return (
     <div className="editor-container">
       <EditorProvider
@@ -147,7 +147,7 @@ export default ({ setDesc }) => {
         content={content}
         onUpdate={({ editor }) => {
           const html = editor.getHTML();
-          setDesc(html);
+          setEditorText(html);
         }}
       ></EditorProvider>
     </div>

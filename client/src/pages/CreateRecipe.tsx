@@ -15,7 +15,7 @@ const CreateRecipe = () => {
   const [publishedYear, setPublishedYear] = useState("");
 
   // TipTap Code:
-  const [desc, setDesc] = useState("");
+  const [editorText, setEditorText] = useState("");
 
   const navigate = useNavigate();
 
@@ -112,8 +112,8 @@ const CreateRecipe = () => {
         </button>
       </div>
 
-      <Tiptap setDesc={setDesc} />
-      <div className="ProseMirror">{parser(desc)}</div>
+      <Tiptap setEditorText={setEditorText} />
+      <div className="ProseMirror">{parser(editorText)}</div>
     </div>
   );
 };
