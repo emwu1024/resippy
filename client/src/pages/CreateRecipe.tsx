@@ -7,6 +7,7 @@ import parser from "html-react-parser";
 import Navbar from "../components/Navbar/Navbar";
 import PageContentContainer from "../components/PageContentContainer/PageContentContainer";
 import Tabs from "../components/Tabs/Tabs";
+import CreateRecipeForm from "../components/CreateRecipeForm/CreateRecipeForm";
 
 const CreateRecipe = () => {
   // Current Idea: 2 data entry formats, 1 for custom component breakdown and styling and another for WYSIWYG rich text editing?
@@ -46,7 +47,19 @@ const CreateRecipe = () => {
 
   const tabSections = [
     { label: "First Tab", content: <Tiptap setEditorHtml={setEditorHtml} /> },
-    { label: "Second Tab" },
+    {
+      label: "Second Tab",
+      content: (
+        <CreateRecipeForm
+          setName={setName}
+          setAuthor={setAuthor}
+          setDescription={setDescription}
+          setSteps={setSteps}
+          setIngredients={setIngredients}
+          setPublishedYear={setPublishedYear}
+        ></CreateRecipeForm>
+      ),
+    },
     { label: "Third Tab" },
   ];
 
@@ -57,7 +70,7 @@ const CreateRecipe = () => {
         <h1 className="text-3xl my-4">Create A Recipe</h1>
         <Tabs tabs={tabSections} />
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-          <div className="my-4">
+          {/* <div className="my-4">
             <label className="text-xl mr-4 text-gray-500">Name of Recipe</label>
             <input
               type="text"
@@ -120,13 +133,13 @@ const CreateRecipe = () => {
               onChange={(e) => setPublishedYear(e.target.value)}
               className="border-2 border-gray-500 px-4 py-2  w-full "
             />
-          </div>
+          </div> */}
           <button className="p-2 bg-sky-300 m-8" onClick={handleSaveRecipe}>
             Save
           </button>
         </div>
 
-        <Tiptap setEditorHtml={setEditorHtml} />
+        {/* <Tiptap setEditorHtml={setEditorHtml} /> */}
         <div className="ProseMirror">{parser(editorHtml)}</div>
       </PageContentContainer>
     </div>
