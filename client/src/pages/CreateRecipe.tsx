@@ -67,7 +67,13 @@ const CreateRecipe = () => {
     <div>
       <Navbar></Navbar>
       <PageContentContainer>
-        <h1 className="text-3xl my-4">Create A Recipe</h1>
+        <h1 className="heading page-margin-top">Create A Recipe</h1>
+        <p>
+          This page is for creating a new recipe. It allows you to choose
+          between 2 different formats for data entry: Custom Format which will
+          allow for a more standardised recipe format OR Rich Text which allows
+          for more freedom with the recipe display
+        </p>
         <Tabs tabs={tabSections} />
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
           {/* <div className="my-4">

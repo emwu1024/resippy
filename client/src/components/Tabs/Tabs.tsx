@@ -6,7 +6,7 @@ const Tabs = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(1);
 
   const handleTabClick = (index) => {
-    setActiveTab(index + 1);
+    setActiveTab(index);
   };
 
   return (
@@ -20,13 +20,12 @@ const Tabs = ({ tabs }) => {
               handleTabClick(index);
             }}
             isActive={index === activeTab}
-            content={tab.content}
           />
         ))}
       </div>
       <div className="tab-content">
         Tab {activeTab} is Active
-        {tabs[activeTab - 1].content}
+        {tabs[activeTab].content}
       </div>
     </div>
   );
