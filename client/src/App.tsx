@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import CreateRecipe from "./pages/CreateRecipe";
+import CreateRecipe from "./pages/CreateRecipe/CreateRecipe";
 import RecipesIndex from "./pages/RecipesIndex";
 import UpdateRecipe from "./pages/UpdateRecipe";
 // import DeleteRecipe from './pages/DeleteRecipe';

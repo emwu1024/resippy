@@ -24,7 +24,8 @@ const Tabs = ({ tabs }) => {
         ))}
       </div>
       <div className="tab-content">
-        Tab {activeTab} is Active
+        <h2> {tabs[activeTab].label} </h2>
+        <hr className="decorative-hr" />
         {tabs[activeTab].content}
       </div>
     </div>

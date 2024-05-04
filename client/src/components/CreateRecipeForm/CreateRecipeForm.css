@@ -1,0 +1,18 @@
+.form-container {
+  margin: 0 auto;
+  width: 70%;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.form-label {
+  font-size: 13px;
+}
+
+.form-field-container {
+  margin: 0.75rem;
+}

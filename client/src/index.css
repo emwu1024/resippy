@@ -26,24 +26,33 @@ body {
   margin: 0px;
   background-color: var(--primary-bg-color);
   color: var(--body-text-color);
+}
 
-  .heading {
-    font-size: var(--heading-text-size);
-    font-family: var(--heading-font);
-    font-weight: 700;
-    font-style: normal;
-  }
+.heading {
+  font-size: var(--heading-text-size);
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-style: normal;
+}
 
-  .subheading {
-    font-size: var(--subheading-text-size);
-    font-family: var(--heading-font);
-    font-weight: 700;
-    font-style: normal;
-  }
+.subheading {
+  font-size: var(--subheading-text-size);
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-style: normal;
+}
 
-  .page-margin-top {
-    margin-top: 10rem;
-  }
+.page-margin-top {
+  margin-top: 10rem;
+}
+
+.decorative-hr {
+  width: 10%;
+  height: 3px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--body-text-color);
+  margin-bottom: 3rem;
 }
 
 /* @media (prefers-color-scheme: light) {

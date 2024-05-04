@@ -1,63 +1,64 @@
 import React, { useState } from "react";
+import "./CreateRecipeForm.css";
 
 const CreateRecipeForm = (props) => {
-  //   TO DO: styling of compoennt, current names are from tutorial but not using MUI so not working
+  //   TO DO: styling of component, current names are from tutorial but not using MUI so not working
 
   return (
     <div>
-      <div className="flex">
-        <div className="m">
-          <label className="text-xl">Name of Recipe</label>
+      <div className="form-container">
+        <div className="form-field-container">
+          <label className="form-label">Name of Recipe</label>
           <input
             type="text"
             onChange={(e) => props.setName(e.target.value)}
-            className="border-2 "
+            className="form-field"
           />
         </div>
-        <div className="my-4">
-          <label className="text">Recipe Description</label>
+        <div className="form-field-container">
+          <label className="form-label">Recipe Description</label>
           <input
             type="text"
             onChange={(e) => props.setDescription(e.target.value)}
-            className="border-2"
+            className="form-field"
           />
         </div>
-        <div className="my-4">
-          <label className="text-xl">Author</label>
+        <div className="form-field-container">
+          <label className="form-label">Author</label>
           <input
             type="text"
             onChange={(e) => props.setAuthor(e.target.value)}
-            className="border-2"
+            className="form-field"
           />
         </div>
-        <div className="my-4">
-          <label className="text">
-            Recipe Steps (Separate steps with a new line)
+        <div className="form-field-container">
+          <label className="form-label">
+            Recipe Steps (Start another step with a new line)
           </label>
           <textarea
             onChange={(e) => props.setSteps(e.target.value)}
-            className="border-2"
+            className="form-field"
             rows={5}
           />
         </div>
-        <div className="my-4">
-          <label className="text-xl">
+        <div className="form-field-container">
+          <label className="form-label">
             Ingredients (Separate ingredients with a new line)
           </label>
           <textarea
             onChange={(e) => props.setIngredients(e.target.value)}
-            className="border-2 "
+            className="form-field"
             rows={5}
           />
         </div>
-        <div className="my-4">
-          <label className="text-xl">
+        <div className="form-field-container">
+          <label className="form-label">
             Publish Year (to be automated later)
           </label>
           <input
             type="number"
             onChange={(e) => props.setPublishedYear(e.target.value)}
-            className="border-2"
+            className="form-field"
           />
         </div>
       </div>

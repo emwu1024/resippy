@@ -3,7 +3,6 @@
   margin: 1rem;
   border-radius: 5px;
   border: 2px solid grey;
-  width: 80%;
   background: white;
 }
 
@@ -86,7 +85,6 @@ h6 {
 }
 
 .tiptap hr {
-  border: none;
   border-top: 2px solid rgba(#0d0d0d, 0.1);
   margin: 2rem 0;
 }
