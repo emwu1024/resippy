@@ -59,6 +59,12 @@ const CreateRecipe = () => {
       label: "Standardised Data Editor",
       content: (
         <CreateRecipeForm
+          name={name}
+          author={author}
+          description={description}
+          steps={steps}
+          ingredients={ingredients}
+          publishedYear={publishedYear}
           setName={setName}
           setAuthor={setAuthor}
           setDescription={setDescription}

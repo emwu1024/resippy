@@ -39,8 +39,7 @@ router.post('/', async (request, response) => {
       !request.body.author ||
       !request.body.steps ||
       !request.body.ingredients ||
-      !request.body.publishedYear ||
-      !request.body.isRichText
+      !request.body.publishedYear
     ) {
       console.log(request.body);
       return response.status(400).send({
