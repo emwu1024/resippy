@@ -59,3 +59,4 @@ This project is a repository for recipes I have previously made so I can remembe
 12. Created a 'CreateRecipeForm' component and separated into tabs, next will be working on improving the styling and then adding a toggle button component to allow the user to decide between input forms to display
 13. Found a good resource for creating animations: https://webcode.tools/css-generator/keyframe-animation
 14. Following this tutorial for creating a toggle button: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_switch
+15. Learnt how to use interface for prop type declaration: https://www.reddit.com/r/reactjs/comments/wjq51d/is_reactfc_not_recommended_what_are_other/ AND https://medium.com/@jeffbutsch/typescript-interface-functions-c691a108e3f1

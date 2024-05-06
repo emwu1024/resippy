@@ -3,6 +3,7 @@
   display: inline-block;
   width: 60px;
   height: 34px;
+  margin: 2rem;
 }
 
 .switch input {
@@ -56,4 +57,17 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.toggle-container {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.toggle-text {
+  font-weight: 900;
 }

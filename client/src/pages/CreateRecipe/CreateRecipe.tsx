@@ -92,11 +92,17 @@ const CreateRecipe = () => {
           </li>
           <li>
             Standardised Data Editor: data fields that structure the recipe and
-            displays recipes in a more standardised way
+            displays recipes in a more consistent way
           </li>
         </ul>
 
-        <ToggleButton setIsRichText={setIsRichText} isRichText={isRichText} />
+        <ToggleButton
+          setIsRichText={setIsRichText}
+          isRichText={isRichText}
+          leftText="Display Rich Text"
+          rightText="Display Standardised"
+        />
+
         <Tabs tabs={tabSections} />
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
           {/* <div className="my-4">
