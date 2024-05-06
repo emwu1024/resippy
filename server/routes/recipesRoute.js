@@ -40,7 +40,7 @@ router.post('/', async (request, response) => {
       !request.body.steps ||
       !request.body.ingredients ||
       !request.body.publishedYear ||
-      !request.body.editorHtml
+      !request.body.isRichText
     ) {
       console.log(request.body);
       return response.status(400).send({
@@ -63,6 +63,7 @@ router.post('/', async (request, response) => {
       ingredients: ingredientsArray,
       publishedYear: request.body.publishedYear,
       editorHtml: request.body.editorHtml,
+      isRichText: request.body.isRichText,
     };
 
     const recipe = await Recipe.create(newRecipe);

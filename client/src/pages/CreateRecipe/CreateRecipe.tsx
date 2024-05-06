@@ -7,6 +7,7 @@ import parser from "html-react-parser";
 import Navbar from "../../components/Navbar/Navbar";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import Tabs from "../../components/Tabs/Tabs";
+import ToggleButton from "../../components/ToggleButton/ToggleButton";
 import CreateRecipeForm from "../../components/CreateRecipeForm/CreateRecipeForm";
 
 import "./CreateRecipe.css";
@@ -20,6 +21,7 @@ const CreateRecipe = () => {
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [publishedYear, setPublishedYear] = useState("");
+  const [isRichText, setIsRichText] = useState(false);
 
   // TipTap Code:
   const [editorHtml, setEditorHtml] = useState("");
@@ -35,6 +37,7 @@ const CreateRecipe = () => {
       ingredients,
       publishedYear,
       editorHtml,
+      isRichText,
     };
     axios
       .post("http://localhost:8000/recipes", data)
@@ -86,6 +89,8 @@ const CreateRecipe = () => {
             displays recipes in a more standardised way
           </li>
         </ul>
+
+        <ToggleButton setIsRichText={setIsRichText} isRichText={isRichText} />
         <Tabs tabs={tabSections} />
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
           {/* <div className="my-4">

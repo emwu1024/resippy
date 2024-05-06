@@ -28,6 +28,10 @@ const recipeSchema = mongoose.Schema(
     },
     editorHtml: {
       type: String,
+      required: false,
+    },
+    isRichText: {
+      type: Boolean,
       required: true,
     },
   },

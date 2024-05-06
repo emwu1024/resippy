@@ -17,9 +17,21 @@
 
 .tab.active {
   background-color: #ddd;
+  animation: fade-in 1s ease-in 0s 1 normal forwards;
 }
 
 .tab-content {
   border: 1px solid #ddd;
   padding: 10px;
+  animation: fade-in 1s ease-in 0s 1 normal forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

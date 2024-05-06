@@ -39,6 +39,7 @@ This project is a repository for recipes I have previously made so I can remembe
 2. Was encountering issues running the backend. Fixed by whitelisting IP address of new working location 🤦‍♀️
 3. Typescript doesn't like some of the things Javascript accepts e.g. react-icons doesn't like the use of 'className' instead of attributes like 'color' etc.
 4. Tiptap is working as expected, some fonts do not have italics.
+5. Good website for creating css animations: https://webcode.tools/css-generator/keyframe-animation
 
 ## Work Log
 
@@ -56,3 +57,5 @@ This project is a repository for recipes I have previously made so I can remembe
     1. GeeksForGeeks tabs: https://www.geeksforgeeks.org/how-to-create-tabs-in-reactjs/
     2. CSSTricks: https://css-tricks.com/tabs-its-complicated/
 12. Created a 'CreateRecipeForm' component and separated into tabs, next will be working on improving the styling and then adding a toggle button component to allow the user to decide between input forms to display
+13. Found a good resource for creating animations: https://webcode.tools/css-generator/keyframe-animation
+14. Following this tutorial for creating a toggle button: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_switch

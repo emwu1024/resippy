@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./CreateRecipeForm.css";
 
 const CreateRecipeForm = (props) => {
-  //   TO DO: styling of component, current names are from tutorial but not using MUI so not working
-
   return (
     <div>
       <div className="form-container">
