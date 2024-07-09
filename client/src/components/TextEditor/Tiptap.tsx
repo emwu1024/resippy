@@ -1,9 +1,13 @@
+import React from "react";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
 import Underline from "@tiptap/extension-underline";
 import { EditorProvider, useCurrentEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import FileHandler from "@tiptap-pro/extension-file-handler";
+import Image from "@tiptap/extension-image";
+
 import {
   FaBold,
   FaItalic,
@@ -19,7 +23,6 @@ import {
 } from "react-icons/fa";
 import { GoHorizontalRule } from "react-icons/go";
 
-import React from "react";
 import "./TipTap.css";
 
 const MenuBar = () => {
@@ -131,6 +134,55 @@ const extensions = [
     orderedList: {
       keepMarks: true,
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+    },
+  }),
+  Image.configure({}),
+  FileHandler.configure({
+    allowedMimeTypes: ["image/png", "image/jpeg", "image/gif", "image/webp"],
+    onDrop: (currentEditor, files, pos) => {
+      files.forEach((file) => {
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          currentEditor
+            .chain()
+            .insertContentAt(pos, {
+              type: "image",
+              attrs: {
+                src: fileReader.result,
+              },
+            })
+            .focus()
+            .run();
+        };
+      });
+    },
+    onPaste: (currentEditor, files, htmlContent) => {
+      files.forEach((file) => {
+        if (htmlContent) {
+          // if there is htmlContent, stop manual insertion & let other extensions handle insertion via inputRule
+          // you could extract the pasted file from this url string and upload it to a server for example
+          console.log(htmlContent); // eslint-disable-line no-console
+          return false;
+        }
+
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          currentEditor
+            .chain()
+            .insertContentAt(currentEditor.state.selection.anchor, {
+              type: "image",
+              attrs: {
+                src: fileReader.result,
+              },
+            })
+            .focus()
+            .run();
+        };
+      });
     },
   }),
 ];
