@@ -1,7 +1,33 @@
 import express from 'express';
 import { Recipe } from '../models/recipeModel.js';
 import multer from 'multer'
-const upload = multer({dest: 'uploads'});
+// const upload = multer({dest: 'uploads'});
+
+const storage = multer.diskStorage({
+  destination: function(request, file, cb) {
+    cb(null, './uploads/')
+  },
+  filename: function(request, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname)
+  },
+});
+
+// We already have a mimetype / filetype filter in the tiptap editor component but it's nice to have the code for both in those example project for access at a later date
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/webp' || file.mimetype === 'image/gif' || file.mimetype === 'image/heic') {
+    cb(null, true);
+  } else {
+    cb(new Error('This file type is UNACCEPTABLE. Please check that your images are jpeg / jpg / png / webp / gif / heic '), false);
+  }
+}
+
+const upload = multer({
+  storage: storage, 
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
 
 const router = express.Router();
 
@@ -35,7 +61,7 @@ router.get('/:id', async (request, response) => {
 // Create
 // Deviating from the tutorial because we want an array of images
 // The number parameter is for the Max number of photos to store in the away, can change later if too restrictive
-router.post('/', upload.array('photos', 15), async (request, response) => {
+router.post('/', upload.array('photos', 15), async (request, response, next) => {
   try {
     if (
       !request.body.name ||
@@ -51,13 +77,21 @@ router.post('/', upload.array('photos', 15), async (request, response) => {
       });
     }
 
-    // console.log(req.file);
+    console.log(request.files);
     // Since steps and ingredients are arrays they will be processed differently
     let stepsString = request.body.steps;
     let stepsArray = stepsString.split('\n');
 
     let ingredientsString = request.body.ingredients;
     let ingredientsArray = ingredientsString.split('\n');
+
+    let filePaths = []
+    for (let i = 0; i < request.files.length; i++) {
+      filePaths.push(request.files[i].path);
+      console.log(filePaths);
+    }
+
+    console.log('HERE!!! ' + filePaths);
 
     const newRecipe = {
       name: request.body.name,
@@ -68,6 +102,7 @@ router.post('/', upload.array('photos', 15), async (request, response) => {
       publishedYear: request.body.publishedYear,
       editorHtml: request.body.editorHtml,
       isRichText: request.body.isRichText,
+      photos: filePaths,
     };
 
     const recipe = await Recipe.create(newRecipe);

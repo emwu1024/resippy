@@ -10,6 +10,7 @@ const app = express();
 // middleware for parsing request body
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
+app.use('/uploads', express.static('uploads'));
 
 // Allows all origins by default and prevents CORS errors from cropping up.
 app.use(cors());

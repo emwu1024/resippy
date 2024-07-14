@@ -66,3 +66,4 @@ This project is a repository for recipes I have previously made so I can remembe
 16. Researched image storage types, ended up wanting to use Amazon S3 but was concerned about surprise billing horror stories and opted for local storage for now.
 17. Currently following this multer MERN tutorial: https://www.youtube.com/watch?v=srPXMt1Q0nY - really brilliantly explained
 18. Will use server storage + multer + sharp for now for MVP, on the backlog will add looking into implementing S3
+19. The string of base64 stored in mongo actually works so there isn't the need for multer that I thought there was, that being said it's nice for additional validation and learnings so I have started that implementation on a separate branch to decide if I want to keep it or not

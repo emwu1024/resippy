@@ -34,6 +34,10 @@ const recipeSchema = mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    photos: {
+      type: Array,
+      required: false,
+    }
   },
   {
     timestamps: true,
