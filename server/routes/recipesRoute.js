@@ -1,7 +1,6 @@
 import express from 'express';
 import { Recipe } from '../models/recipeModel.js';
 import multer from 'multer'
-// const upload = multer({dest: 'uploads'});
 
 const storage = multer.diskStorage({
   destination: function(request, file, cb) {
@@ -86,12 +85,13 @@ router.post('/', upload.array('photos', 15), async (request, response, next) => 
     let ingredientsArray = ingredientsString.split('\n');
 
     let filePaths = []
-    for (let i = 0; i < request.files.length; i++) {
-      filePaths.push(request.files[i].path);
-      console.log(filePaths);
-    }
 
-    console.log('HERE!!! ' + filePaths);
+    if (request.files != undefined) {
+      for (let i = 0; i < request.files.length; i++) {
+        filePaths.push(request.files[i].path);
+      }
+      console.log('HERE!!! ' + filePaths);
+    }
 
     const newRecipe = {
       name: request.body.name,
