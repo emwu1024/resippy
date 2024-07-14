@@ -42,6 +42,7 @@ This project is a repository for recipes I have previously made so I can remembe
 3. Typescript doesn't like some of the things Javascript accepts e.g. react-icons doesn't like the use of 'className' instead of attributes like 'color' etc.
 4. Tiptap is working as expected, some fonts do not have italics.
 5. Good website for creating css animations: https://webcode.tools/css-generator/keyframe-animation
+6. Ran into a PayLoadTooLarge error and found this fix: https://stackoverflow.com/questions/19917401/error-request-entity-too-large
 
 ## Work Log
 

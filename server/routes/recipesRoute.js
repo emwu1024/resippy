@@ -1,5 +1,7 @@
 import express from 'express';
 import { Recipe } from '../models/recipeModel.js';
+import multer from 'multer'
+const upload = multer({dest: 'uploads'});
 
 const router = express.Router();
 
@@ -31,7 +33,9 @@ router.get('/:id', async (request, response) => {
 });
 
 // Create
-router.post('/', async (request, response) => {
+// Deviating from the tutorial because we want an array of images
+// The number parameter is for the Max number of photos to store in the away, can change later if too restrictive
+router.post('/', upload.array('photos', 15), async (request, response) => {
   try {
     if (
       !request.body.name ||
@@ -47,6 +51,7 @@ router.post('/', async (request, response) => {
       });
     }
 
+    // console.log(req.file);
     // Since steps and ingredients are arrays they will be processed differently
     let stepsString = request.body.steps;
     let stepsArray = stepsString.split('\n');
