@@ -33,17 +33,27 @@ router.get('/:id', async (request, response) => {
 // Create
 router.post('/', async (request, response) => {
   try {
-    if (
-      !request.body.name ||
+    if ((request.body.isStandardised === true) && 
+      (!request.body.name ||
       !request.body.description ||
       !request.body.author ||
       !request.body.steps ||
-      !request.body.ingredients ||
-      !request.body.publishedYear
+      !request.body.ingredients)
     ) {
       console.log(request.body);
       return response.status(400).send({
-        message: 'You forgot a field :(',
+        message: 'You forgot a field :( \n You selected the Standardised format so check that these fields are filled in: Name, Description, Author, Steps, Ingredients',
+      });
+    }
+
+    else if ((request.body.isStandardised === false) && 
+    (!request.body.name ||
+    !request.body.description ||
+    !request.body.author ||
+    !request.body.editorHtml )) {
+      console.log(request.body);
+      return response.status(400).send({
+        message: 'You forgot a field :( \n You selected the Rich Text format so check that these fields are filled in: Name, Description, Author, Rich Text Content',
       });
     }
 
@@ -60,9 +70,8 @@ router.post('/', async (request, response) => {
       description: request.body.description,
       steps: stepsArray,
       ingredients: ingredientsArray,
-      publishedYear: request.body.publishedYear,
       editorHtml: request.body.editorHtml,
-      isRichText: request.body.isRichText,
+      isStandardised: request.body.isStandardised,
     };
 
     const recipe = await Recipe.create(newRecipe);
@@ -80,8 +89,7 @@ router.put('/:id', async (request, response) => {
       !request.body.name ||
       !request.body.author ||
       !request.body.steps ||
-      !request.body.ingredients ||
-      !request.body.publishedYear
+      !request.body.ingredients
     ) {
       return response.status(400).send({
         message: 'You forgot a field :(',

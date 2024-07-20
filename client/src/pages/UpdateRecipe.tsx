@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateRecipe = () => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [author, setAuthor] = useState('');
-  const [steps, setSteps] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [publishedYear, setPublishedYear] = useState('');
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [author, setAuthor] = useState("");
+  const [steps, setSteps] = useState("");
+  const [ingredients, setIngredients] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -21,22 +20,21 @@ const UpdateRecipe = () => {
         setAuthor(response.data.author);
         setSteps(formatArray(response.data.steps));
         setIngredients(formatArray(response.data.ingredients));
-        setPublishedYear(response.data.publishedYear);
       })
       .catch((error) => {
         alert(
-          'Error in fetching the data for this recipe, check console for further information'
+          "Error in fetching the data for this recipe, check console for further information"
         );
         console.log(error);
       });
   }, []);
 
   const formatArray = (recipeArray: string[] | string) => {
-    const recipeString = recipeArray.toString().split(',');
-    let returnString = '';
+    const recipeString = recipeArray.toString().split(",");
+    let returnString = "";
 
     recipeString.forEach((item: string) => {
-      returnString += item + '\n';
+      returnString += item + "\n";
     });
     return returnString;
   };
@@ -48,12 +46,11 @@ const UpdateRecipe = () => {
       author,
       steps,
       ingredients,
-      publishedYear,
     };
     axios
       .put(`http://localhost:8000/recipes/${id}`, data)
       .then(() => {
-        navigate('/recipes');
+        navigate("/recipes");
       })
       .catch((error) => {
         console.log(error);
@@ -113,15 +110,6 @@ const UpdateRecipe = () => {
             onChange={(e) => setIngredients(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2  w-full "
             rows={5}
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Publish Year</label>
-          <input
-            type="number"
-            value={publishedYear}
-            onChange={(e) => setPublishedYear(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
           />
         </div>
         <button className="p-2 bg-sky-300 m-8" onClick={handleEditRecipe}>

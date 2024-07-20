@@ -65,3 +65,15 @@ This project is a repository for recipes I have previously made so I can remembe
 16. Researched image storage types, ended up wanting to use Amazon S3 but was concerned about surprise billing horror stories and opted for local storage for now.
 17. Currently following this multer MERN tutorial: https://www.youtube.com/watch?v=srPXMt1Q0nY - really brilliantly explained
 18. Will use server storage + multer + sharp for now for MVP, on the backlog will add looking into implementing S3
+19. Tried multer implementation on separate branch and got it working but realised tiptap takes images in as base64 so it's easier to keep the img embedded in the HTML string instead of decoding the base64 img -> saving locally -> putting the image back
+20. Today: work on input validation and errors with backend saving
+
+## Back Log
+
+1. Editor:
+   1. Add picture button to editor
+   2. Add drag and drop of images
+   3. Make rich text easier to use
+2. Atlas:
+   1. Look into how to make map visualisations
+   2. Look into a tagging system / possible solutions for categorising recipes

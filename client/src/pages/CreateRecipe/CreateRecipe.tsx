@@ -20,8 +20,7 @@ const CreateRecipe = () => {
   const [description, setDescription] = useState("");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [publishedYear, setPublishedYear] = useState("");
-  const [isRichText, setIsRichText] = useState(false);
+  const [isStandardised, setIsStandardised] = useState(false);
 
   // TipTap Code:
   const [editorHtml, setEditorHtml] = useState("");
@@ -35,9 +34,8 @@ const CreateRecipe = () => {
       description,
       steps,
       ingredients,
-      publishedYear,
       editorHtml,
-      isRichText,
+      isStandardised,
     };
     axios
       .post("http://localhost:8000/recipes", data)
@@ -59,18 +57,10 @@ const CreateRecipe = () => {
       label: "Standardised Data Editor",
       content: (
         <CreateRecipeForm
-          name={name}
-          author={author}
-          description={description}
           steps={steps}
           ingredients={ingredients}
-          publishedYear={publishedYear}
-          setName={setName}
-          setAuthor={setAuthor}
-          setDescription={setDescription}
           setSteps={setSteps}
           setIngredients={setIngredients}
-          setPublishedYear={setPublishedYear}
         ></CreateRecipeForm>
       ),
     },
@@ -82,8 +72,8 @@ const CreateRecipe = () => {
       <PageContentContainer>
         <h1 className="heading page-margin-top">Create A Recipe</h1>
         <h3>
-          This page is for creating a new recipe. It allows 2 different formats
-          for recipe entry:
+          Welcome to our recipe creation page! Here, you have the option to
+          enter your recipe in two different formats. Let's get cooking!
         </h3>
         <ul className="desc-list-container">
           <li>
@@ -97,78 +87,44 @@ const CreateRecipe = () => {
         </ul>
 
         <ToggleButton
-          setIsRichText={setIsRichText}
-          isRichText={isRichText}
+          setIsStandardised={setIsStandardised}
+          isStandardised={isStandardised}
           leftText="Display Rich Text"
           rightText="Display Standardised"
         />
 
+        <div className="form-container">
+          <div className="form-field-container">
+            <label className="form-label">Name of Recipe</label>
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              className="form-field"
+              value={name}
+            />
+          </div>
+          <div className="form-field-container">
+            <label className="form-label">Recipe Description</label>
+            <input
+              type="text"
+              onChange={(e) => setDescription(e.target.value)}
+              className="form-field"
+              value={description}
+            />
+          </div>
+          <div className="form-field-container">
+            <label className="form-label">Author</label>
+            <input
+              type="text"
+              onChange={(e) => setAuthor(e.target.value)}
+              className="form-field"
+              value={author}
+            />
+          </div>
+        </div>
+
         <Tabs tabs={tabSections} />
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-          {/* <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Name of Recipe</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">
-              Recipe Description
-            </label>
-            <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Author</label>
-            <input
-              type="text"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">
-              Recipe Steps (Separate steps with a new line)
-            </label>
-            <textarea
-              // type="text"
-              value={steps}
-              onChange={(e) => setSteps(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-              rows={5}
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">
-              Ingredients (Separate ingredients with a new line)
-            </label>
-            <textarea
-              // type="text"
-              value={ingredients}
-              onChange={(e) => setIngredients(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-              rows={5}
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">
-              Publish Year (to be automated later)
-            </label>
-            <input
-              type="number"
-              value={publishedYear}
-              onChange={(e) => setPublishedYear(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
-            />
-          </div> */}
           <button className="p-2 bg-sky-300 m-8" onClick={handleSaveRecipe}>
             Save
           </button>

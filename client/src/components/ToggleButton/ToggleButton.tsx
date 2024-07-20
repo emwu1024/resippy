@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./ToggleButton.css";
 
 interface ToggleButtonProps {
-  isRichText: boolean;
-  setIsRichText: React.Dispatch<React.SetStateAction<boolean>>;
+  isStandardised: boolean;
+  setIsStandardised: React.Dispatch<React.SetStateAction<boolean>>;
   leftText?: string;
   rightText?: string;
 }
@@ -17,7 +17,7 @@ const ToggleButton = (props: ToggleButtonProps) => {
       <label className="switch">
         <input
           type="checkbox"
-          onChange={() => props.setIsRichText(!props.isRichText)}
+          onChange={() => props.setIsStandardised(!props.isStandardised)}
         />
         <span className="slider round"></span>
       </label>
