@@ -20,6 +20,7 @@ const CreateRecipe = () => {
   const [description, setDescription] = useState("");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
+  const [images, setImages] = useState<Array<string>>([]);
   const [isStandardised, setIsStandardised] = useState(false);
 
   // TipTap Code:
@@ -27,7 +28,7 @@ const CreateRecipe = () => {
 
   const navigate = useNavigate();
 
-  const handleSaveRecipe = () => {
+  const handleSaveRecipe = async () => {
     const data = {
       name,
       author,
@@ -36,6 +37,7 @@ const CreateRecipe = () => {
       ingredients,
       editorHtml,
       isStandardised,
+      images,
     };
     axios
       .post("http://localhost:8000/recipes", data)
@@ -59,8 +61,10 @@ const CreateRecipe = () => {
         <CreateRecipeForm
           steps={steps}
           ingredients={ingredients}
+          images={images}
           setSteps={setSteps}
           setIngredients={setIngredients}
+          setImages={setImages}
         ></CreateRecipeForm>
       ),
     },

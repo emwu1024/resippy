@@ -64,6 +64,9 @@ router.post('/', async (request, response) => {
     let ingredientsString = request.body.ingredients;
     let ingredientsArray = ingredientsString.split('\n');
 
+    // Images are optional and are for the custom format option, this will be an array of base 64 strings
+    // const newImage = req.body.images
+
     const newRecipe = {
       name: request.body.name,
       author: request.body.author,
@@ -72,6 +75,7 @@ router.post('/', async (request, response) => {
       ingredients: ingredientsArray,
       editorHtml: request.body.editorHtml,
       isStandardised: request.body.isStandardised,
+      images: request.body.images,
     };
 
     const recipe = await Recipe.create(newRecipe);
