@@ -66,6 +66,16 @@ input:checked + .slider:before {
   align-items: center;
   text-align: center;
   justify-content: center;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.toggle-container > div {
+  display: inline-block;
+  /* height: 100px; */
+  width: 30%;
+  font-size: initial;
+  /* animation: anime 2s infinite linear alternate; */
 }
 
 .toggle-text {

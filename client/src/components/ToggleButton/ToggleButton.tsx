@@ -6,24 +6,34 @@ interface ToggleButtonProps {
   setIsStandardised: React.Dispatch<React.SetStateAction<boolean>>;
   leftText?: string;
   rightText?: string;
+  leftDesc?: string;
+  rightDesc?: string;
 }
 
 const ToggleButton = (props: ToggleButtonProps) => {
   return (
-    <div className="toggle-container">
-      {props.leftText ? (
-        <span className="toggle-text">{props.leftText}</span>
-      ) : null}
-      <label className="switch">
-        <input
-          type="checkbox"
-          onChange={() => props.setIsStandardised(!props.isStandardised)}
-        />
-        <span className="slider round"></span>
-      </label>
-      {props.rightText ? (
-        <span className="toggle-text">{props.rightText}</span>
-      ) : null}
+    <div>
+      <div className="toggle-container">
+        {props.leftText ? (
+          <div>
+            <span className="toggle-text">{props.leftText}</span>
+          </div>
+        ) : null}
+        <div>
+          <label className="switch">
+            <input
+              type="checkbox"
+              onChange={() => props.setIsStandardised(!props.isStandardised)}
+            />
+            <span className="slider round"></span>
+          </label>
+        </div>
+        {props.rightText ? (
+          <div>
+            <span className="toggle-text">{props.rightText}</span>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };

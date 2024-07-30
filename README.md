@@ -67,6 +67,8 @@ This project is a repository for recipes I have previously made so I can remembe
 18. Will use server storage + multer + sharp for now for MVP, on the backlog will add looking into implementing S3
 19. Tried multer implementation on separate branch and got it working but realised tiptap takes images in as base64 so it's easier to keep the img embedded in the HTML string instead of decoding the base64 img -> saving locally -> putting the image back
 20. Today: work on input validation and errors with backend saving
+21. Followed this tutorial to get be able to upload images for standardised format: https://www.youtube.com/watch?v=pfxd7L1kzio
+22. Created an MVP Plan, currently finalising UI on Create Recipes Page
 
 ## Back Log
 
@@ -77,3 +79,5 @@ This project is a repository for recipes I have previously made so I can remembe
 2. Atlas:
    1. Look into how to make map visualisations
    2. Look into a tagging system / possible solutions for categorising recipes
+3. Create Recipes Page:
+   1. Preview Section

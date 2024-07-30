@@ -52,11 +52,11 @@ const CreateRecipe = () => {
 
   const tabSections = [
     {
-      label: "Rich Text Editor",
+      label: "Text Editor",
       content: <Tiptap setEditorHtml={setEditorHtml} />,
     },
     {
-      label: "Standardised Data Editor",
+      label: "Form",
       content: (
         <CreateRecipeForm
           steps={steps}
@@ -74,27 +74,31 @@ const CreateRecipe = () => {
     <div>
       <Navbar></Navbar>
       <PageContentContainer>
-        <h1 className="heading page-margin-top">Create A Recipe</h1>
-        <h3>
-          Welcome to our recipe creation page! Here, you have the option to
-          enter your recipe in two different formats. Let's get cooking!
-        </h3>
-        <ul className="desc-list-container">
-          <li>
-            Rich Text Editor: a text editor that allows more freedom with how
-            the recipe is displayed
-          </li>
-          <li>
-            Standardised Data Editor: data fields that structure the recipe and
-            displays recipes in a more consistent way
-          </li>
-        </ul>
+        <h1 className="heading page-margin-top">Let's get cooking!</h1>
+        <div className="desc-container">
+          <h3>Welcome to the recipe creation page!</h3>
+          <h3>
+            Here, you have the option to enter your recipe in two different
+            formats:
+          </h3>
+        </div>
+        {/* New format idea: have the text appear  */}
+        {/* <div className="desc-list-container">
+          <p className="list-heading">Text Editor</p>
+          <p>A tool that lets you be creative with how the recipe looks.</p>
+          <p className="list-heading">Form</p>
+          <p>
+            A set of organised fields that makes sure recipes look consistent.
+          </p>
+        </div> */}
 
         <ToggleButton
           setIsStandardised={setIsStandardised}
           isStandardised={isStandardised}
-          leftText="Display Rich Text"
-          rightText="Display Standardised"
+          leftText="Display Text Editor"
+          rightText="Display Form"
+          leftDesc="A tool that lets you be creative with how the recipe looks."
+          rightDesc="A set of organised fields that makes sure recipes look consistent."
         />
 
         <div className="form-container">
@@ -134,8 +138,12 @@ const CreateRecipe = () => {
           </button>
         </div>
 
-        <h2>Preview</h2>
-        <div className="ProseMirror">{parser(editorHtml)}</div>
+        {/* Preview To Be Added Later - Not part of MVP */}
+        {/* <h2>Preview</h2>
+        <div className="preview-container">
+          
+          <div className="ProseMirror">{parser(editorHtml)}</div>
+        </div> */}
       </PageContentContainer>
     </div>
   );
