@@ -12,7 +12,7 @@ interface ToggleButtonProps {
 
 const ToggleButton = (props: ToggleButtonProps) => {
   return (
-    <div>
+    <div className="toggle-desc-container">
       <div className="toggle-container">
         {props.leftText ? (
           <div>
@@ -34,6 +34,15 @@ const ToggleButton = (props: ToggleButtonProps) => {
           </div>
         ) : null}
       </div>
+      {props.isStandardised ? (
+        <div>
+          <span className="toggle-text">{props.rightDesc}</span>
+        </div>
+      ) : (
+        <div>
+          <span className="toggle-text">{props.leftDesc}</span>
+        </div>
+      )}
     </div>
   );
 };

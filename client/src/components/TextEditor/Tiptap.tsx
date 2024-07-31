@@ -187,16 +187,13 @@ const extensions = [
   }),
 ];
 
-const content = `
-`;
-
-export default ({ setEditorHtml }) => {
+export default ({ setEditorHtml, editorHtml }) => {
   return (
     <div className="editor-container">
       <EditorProvider
         slotBefore={<MenuBar />}
         extensions={extensions}
-        content={content}
+        content={editorHtml}
         onUpdate={({ editor }) => {
           const html = editor.getHTML();
           setEditorHtml(html);

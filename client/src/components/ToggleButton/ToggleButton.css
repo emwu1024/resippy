@@ -81,3 +81,7 @@ input:checked + .slider:before {
 .toggle-text {
   font-weight: 900;
 }
+
+.toggle-desc-container {
+  margin-bottom: 3rem;
+}

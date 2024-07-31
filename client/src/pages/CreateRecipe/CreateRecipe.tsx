@@ -53,7 +53,7 @@ const CreateRecipe = () => {
   const tabSections = [
     {
       label: "Text Editor",
-      content: <Tiptap setEditorHtml={setEditorHtml} />,
+      content: <Tiptap editorHtml={editorHtml} setEditorHtml={setEditorHtml} />,
     },
     {
       label: "Form",
@@ -82,15 +82,6 @@ const CreateRecipe = () => {
             formats:
           </h3>
         </div>
-        {/* New format idea: have the text appear  */}
-        {/* <div className="desc-list-container">
-          <p className="list-heading">Text Editor</p>
-          <p>A tool that lets you be creative with how the recipe looks.</p>
-          <p className="list-heading">Form</p>
-          <p>
-            A set of organised fields that makes sure recipes look consistent.
-          </p>
-        </div> */}
 
         <ToggleButton
           setIsStandardised={setIsStandardised}
