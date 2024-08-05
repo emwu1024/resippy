@@ -6,27 +6,34 @@
   display: flex;
 }
 
+/* .tabs >  {
+  display: flex;
+} */
+
 .tab {
+  display: inline-block;
+  width: 50%;
   cursor: pointer;
   padding: 10px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
   border-bottom: none;
-  border-radius: 5px 25px 0px 0px;
+  background: #606c38;
 }
 
 .tab.active {
-  background-color: #ddd;
+  background: #283618;
+  /* color: var(--secondary-text-color); */
   animation: fade-in 1s ease-in 0s 1 normal forwards;
 }
 
 .tab-content {
-  border: 1px solid #ddd;
-  padding: 10px;
-  animation: fade-in 1s ease-in 0s 1 normal forwards;
+  padding: 1.5rem;
+  padding-bottom: 4rem;
+  background: #283618;
+  border-radius: 0px 0px 20px 20px;
+  /* animation: fade-in 1s ease-in 0s 1 normal forwards; */
 }
 
-@keyframes fade-in {
+/* @keyframes fade-in {
   0% {
     opacity: 0;
   }
@@ -34,4 +41,4 @@
   100% {
     opacity: 1;
   }
-}
+} */

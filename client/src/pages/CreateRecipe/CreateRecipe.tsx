@@ -26,6 +26,9 @@ const CreateRecipe = () => {
   // TipTap Code:
   const [editorHtml, setEditorHtml] = useState("");
 
+  // Tab Code:
+  const [activeTab, setActiveTab] = useState(0);
+
   const navigate = useNavigate();
 
   const handleSaveRecipe = async () => {
@@ -93,36 +96,41 @@ const CreateRecipe = () => {
         />
 
         <div className="form-container">
+          <h2 className="subheading-2 centred">Recipe Details</h2>
           <div className="form-field-container">
-            <label className="form-label">Name of Recipe</label>
+            <label className="form-label">*Name of Recipe</label>
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
-              className="form-field"
+              className="form-field input-text"
               value={name}
             />
           </div>
           <div className="form-field-container">
-            <label className="form-label">Recipe Description</label>
+            <label className="form-label">*Recipe Description</label>
             <input
               type="text"
               onChange={(e) => setDescription(e.target.value)}
-              className="form-field"
+              className="form-field input-text"
               value={description}
             />
           </div>
           <div className="form-field-container">
-            <label className="form-label">Author</label>
+            <label className="form-label">*Author</label>
             <input
               type="text"
               onChange={(e) => setAuthor(e.target.value)}
-              className="form-field"
+              className="form-field input-text"
               value={author}
             />
           </div>
         </div>
 
-        <Tabs tabs={tabSections} />
+        <Tabs
+          tabs={tabSections}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
           <button className="p-2 bg-sky-300 m-8" onClick={handleSaveRecipe}>
             Save

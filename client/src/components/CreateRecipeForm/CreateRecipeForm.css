@@ -2,15 +2,30 @@
   margin: 0 auto;
   width: 70%;
   text-align: left;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .form-field {
   width: 100%;
+  border: none;
+  /* background: #606c38; */
+  background: #89975c;
+  /* background: #283618; */
+  margin-top: 0.4rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  padding: 0.5rem;
+  font-family: "Quicksand", sans-serif;
+}
+
+.input-text {
+  color: var(--secondary-text-color);
+  padding: 0.5rem;
+  border-radius: 25px;
 }
 
 .form-label {
-  font-size: 13px;
+  font-size: 0.85rem;
 }
 
 .form-field-container {

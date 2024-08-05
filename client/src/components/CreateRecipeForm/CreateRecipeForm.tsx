@@ -33,7 +33,7 @@ const CreateRecipeForm = (props: CreateRecipeFormProps) => {
           <textarea
             onChange={(e) => props.setSteps(e.target.value)}
             className="form-field"
-            rows={5}
+            rows={10}
             value={props.steps}
           />
         </div>
@@ -44,7 +44,7 @@ const CreateRecipeForm = (props: CreateRecipeFormProps) => {
           <textarea
             onChange={(e) => props.setIngredients(e.target.value)}
             className="form-field"
-            rows={5}
+            rows={10}
             value={props.ingredients}
           />
         </div>

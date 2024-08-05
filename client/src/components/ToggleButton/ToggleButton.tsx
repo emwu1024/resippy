@@ -36,11 +36,11 @@ const ToggleButton = (props: ToggleButtonProps) => {
       </div>
       {props.isStandardised ? (
         <div>
-          <span className="toggle-text">{props.rightDesc}</span>
+          <p className="desc-text">{props.rightDesc}</p>
         </div>
       ) : (
         <div>
-          <span className="toggle-text">{props.leftDesc}</span>
+          <p className="desc-text">{props.leftDesc}</p>
         </div>
       )}
     </div>

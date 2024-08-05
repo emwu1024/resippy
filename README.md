@@ -64,11 +64,14 @@ This project is a repository for recipes I have previously made so I can remembe
 15. Learnt how to use interface for prop type declaration: https://www.reddit.com/r/reactjs/comments/wjq51d/is_reactfc_not_recommended_what_are_other/ AND https://medium.com/@jeffbutsch/typescript-interface-functions-c691a108e3f1
 16. Researched image storage types, ended up wanting to use Amazon S3 but was concerned about surprise billing horror stories and opted for local storage for now.
 17. Currently following this multer MERN tutorial: https://www.youtube.com/watch?v=srPXMt1Q0nY - really brilliantly explained
+    1. Tiptap drag and drop: https://www.codemzy.com/blog/tiptap-drag-drop-image
+    2. Sharp + Multer: https://www.codemzy.com/blog/sharp-with-multer-reduce-image-sizes
 18. Will use server storage + multer + sharp for now for MVP, on the backlog will add looking into implementing S3
 19. Tried multer implementation on separate branch and got it working but realised tiptap takes images in as base64 so it's easier to keep the img embedded in the HTML string instead of decoding the base64 img -> saving locally -> putting the image back
 20. Today: work on input validation and errors with backend saving
 21. Followed this tutorial to get be able to upload images for standardised format: https://www.youtube.com/watch?v=pfxd7L1kzio
 22. Created an MVP Plan, currently finalising UI on Create Recipes Page
+23. Buttons: not for MVP but will be looking into the handdrawn button design for the cookbook style here: https://css-tricks.com/a-complete-guide-to-links-and-buttons/
 
 ## Back Log
 

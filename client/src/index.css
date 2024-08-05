@@ -6,12 +6,14 @@
   --body-text-color: #e1be96;
   --decoration-text-color: #dda15e;
   --decoration-hover-text-color: #c17d42;
+  --secondary-text-color: #3d1308;
   --primary-bg-color: #0e1309;
-  /* --secondary-bg-color: #283618; */
-  --secondary-bg-color: #1b2511;
+  --secondary-bg-color: #283618;
+  /* --secondary-bg-color: #1b2511; */
 
   --heading-text-size: 50px;
-  --subheading-text-size: 36px;
+  --subheading-1-text-size: 36px;
+  --subheading-2-text-size: 30px;
 
   --heading-font: "Philosopher", sans-serif;
 
@@ -35,11 +37,24 @@ body {
   font-style: normal;
 }
 
-.subheading {
-  font-size: var(--subheading-text-size);
+.subheading-1 {
+  font-size: var(--subheading-1-text-size);
   font-family: var(--heading-font);
   font-weight: 700;
   font-style: normal;
+}
+
+.subheading-2 {
+  font-size: var(--subheading-2-text-size);
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-style: normal;
+  margin-bottom: 0.25rem;
+}
+
+.centred {
+  text-align: center;
+  align-items: center;
 }
 
 .page-margin-top {
@@ -47,8 +62,8 @@ body {
 }
 
 .decorative-hr {
-  width: 10%;
-  height: 3px;
+  width: 5%;
+  height: 2px;
   border-radius: 20px;
   border: none;
   background-color: var(--body-text-color);

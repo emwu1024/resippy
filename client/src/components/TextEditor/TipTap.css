@@ -4,6 +4,11 @@
   border-radius: 5px;
   border: 2px solid grey;
   background: white;
+  min-height: 30rem;
+}
+
+.ProseMirror:focus {
+  outline: none;
 }
 
 .menubar-container {

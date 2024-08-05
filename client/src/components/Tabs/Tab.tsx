@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
-const Tab = ({ label, onClick, isActive }) => (
-  <div className={`tab ${isActive ? "active" : ""}`} onClick={onClick}>
+const Tab = ({ label, onClick, isActive, tabWidth }) => (
+  <div
+    style={{ width: tabWidth }}
+    className={`tab ${isActive ? "active" : ""}`}
+    onClick={onClick}
+  >
     {label}
   </div>
 );

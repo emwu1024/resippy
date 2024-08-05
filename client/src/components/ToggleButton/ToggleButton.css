@@ -83,5 +83,9 @@ input:checked + .slider:before {
 }
 
 .toggle-desc-container {
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
+}
+
+.desc-text {
+  margin-top: 1.5rem;
 }
