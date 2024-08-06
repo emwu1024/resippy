@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 
-const Tab = ({ label, onClick, isActive, tabWidth }) => (
+interface TabProps {
+  label: string;
+  onClick: () => any;
+  isActive: boolean;
+  tabWidth: string;
+  borderRadius: string;
+}
+
+const Tab = (props: TabProps) => (
   <div
-    style={{ width: tabWidth }}
-    className={`tab ${isActive ? "active" : ""}`}
-    onClick={onClick}
+    style={{ width: props.tabWidth }}
+    className={`tab ${props.isActive ? "active" : ""} ${props.borderRadius}`}
+    onClick={props.onClick}
   >
-    {label}
+    {props.label}
   </div>
 );
 

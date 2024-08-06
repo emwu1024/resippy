@@ -96,7 +96,7 @@ const CreateRecipe = () => {
         />
 
         <div className="form-container">
-          <h2 className="subheading-2 centred">Recipe Details</h2>
+          <h2 className="subheading-2 horizontal-centre">Recipe Details</h2>
           <div className="form-field-container">
             <label className="form-label">*Name of Recipe</label>
             <input

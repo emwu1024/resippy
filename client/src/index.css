@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 :root {
   /* Custom Property Declarations */
+  --faded-body-text-color: #e1be96c6;
   --body-text-color: #e1be96;
   --decoration-text-color: #dda15e;
   --decoration-hover-text-color: #c17d42;
@@ -52,8 +54,13 @@ body {
   margin-bottom: 0.25rem;
 }
 
-.centred {
+.horizontal-centre {
   text-align: center;
+  align-items: center;
+}
+
+.vertical-centre {
+  display: inline-flex;
   align-items: center;
 }
 
@@ -67,7 +74,25 @@ body {
   border-radius: 20px;
   border: none;
   background-color: var(--body-text-color);
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+.top-left-radius {
+  border-top-left-radius: 20px;
+}
+
+.top-right-radius {
+  border-top-right-radius: 20px;
+}
+
+.help-text {
+  font-size: 0.8rem;
+  font-style: italic;
+  /* font-weight: 200; */
+  margin: 0px;
+  margin-top: 0.25rem;
+  font-family: "Nunito", sans-serif;
+  color: var(--faded-body-text-color);
 }
 
 /* @media (prefers-color-scheme: light) {
