@@ -1,0 +1,25 @@
+/* Figure out way to change button colour? */
+.btn {
+  border: none;
+  color: var(--body-text-color);
+  font-family: "Quicksand", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  padding: 0.8rem 3.5rem;
+  cursor: pointer;
+  background: #3d1308;
+  transition-duration: 0.2s;
+  box-shadow: 0 5px #1f0904;
+}
+
+.btn:hover {
+  background: #330f07;
+}
+
+.btn:active {
+  box-shadow: 0 2px #1f0904;
+  transform: translateY(1px);
+}

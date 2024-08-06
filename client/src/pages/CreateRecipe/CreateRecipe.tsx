@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Tiptap from "../../components/TextEditor/Tiptap";
-import parser from "html-react-parser";
 
 import Navbar from "../../components/Navbar/Navbar";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import Tabs from "../../components/Tabs/Tabs";
 import ToggleButton from "../../components/ToggleButton/ToggleButton";
 import CreateRecipeForm from "../../components/CreateRecipeForm/CreateRecipeForm";
+import Button from "../../components/Button/Button";
 
 import "./CreateRecipe.css";
 
@@ -132,9 +132,10 @@ const CreateRecipe = () => {
           setActiveTab={setActiveTab}
         />
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-          <button className="p-2 bg-sky-300 m-8" onClick={handleSaveRecipe}>
+          <Button btnText="Save" onClick={handleSaveRecipe}></Button>
+          {/* <button className="p-2 bg-sky-300 m-8" onClick={handleSaveRecipe}>
             Save
-          </button>
+          </button> */}
         </div>
 
         {/* Preview To Be Added Later - Not part of MVP */}
