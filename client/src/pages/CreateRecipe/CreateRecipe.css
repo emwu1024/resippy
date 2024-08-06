@@ -1,0 +1,24 @@
+.desc-list-container {
+  /* text-align: left; */
+  text-align: center;
+  margin: 0 auto;
+  width: 55%;
+  line-height: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  list-style-type: none;
+}
+
+.desc-container {
+  margin: 0 auto;
+  font-size: 1.15rem;
+  width: 75%;
+  line-height: 2rem;
+  margin-top: 3.75rem;
+  margin-bottom: 2rem;
+}
+
+.list-heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+}

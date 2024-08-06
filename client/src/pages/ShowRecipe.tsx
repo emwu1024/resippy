@@ -34,10 +34,6 @@ const ShowRecipe = () => {
           <span>{recipe.author}</span>
         </div>
         <div className="my-4">
-          <span className="text-xl mr-4 text-gray-500">Publish Year</span>
-          <span>{recipe.publishYear}</span>
-        </div>
-        <div className="my-4">
           <span className="text-xl mr-4 text-gray-500">Create Time</span>
           <span>{new Date(recipe.createdAt).toString()}</span>
         </div>

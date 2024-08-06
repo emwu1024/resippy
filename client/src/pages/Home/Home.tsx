@@ -1,7 +1,7 @@
-import React from 'react';
-import './home.css';
-import Navbar from '../../components/Navbar/Navbar';
-import PageContentContainer from '../../components/PageContentContainer/PageContentContainer';
+import React from "react";
+import "./home.css";
+import Navbar from "../../components/Navbar/Navbar";
+import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 
 const Home = () => {
   return (
@@ -26,7 +26,7 @@ const Home = () => {
           </p>
           <br />
           <br />
-          <h2 className="subheading">How do I use this website?</h2>
+          <h2 className="subheading-1">How do I use this website?</h2>
           <p>
             Asides from using it like a normal website through, idk clicking
             through stuff till you find what your looking for. You'll be able to

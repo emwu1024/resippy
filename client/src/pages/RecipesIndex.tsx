@@ -38,9 +38,6 @@ const RecipesIndex = () => {
               <th className="border border-slate-600 rounded-md max-md:hidden">
                 Author
               </th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Publish Year
-              </th>
               <th className="border border-slate-600 rounded-md">Operations</th>
             </tr>
           </thead>
@@ -58,9 +55,6 @@ const RecipesIndex = () => {
                 </td>
                 <td className="border border-slate-700 rounded-md text-center max-md:hidden">
                   {recipe.author}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {recipe.publishedYear}
                 </td>
                 <td className="border border-slate-700 rounded-md text-center">
                   <div className="flex justify-center gap-x-4">
