@@ -84,3 +84,7 @@ This project is a repository for recipes I have previously made so I can remembe
    2. Look into a tagging system / possible solutions for categorising recipes
 3. Create Recipes Page:
    1. Preview Section
+4. Recipes:
+   1. Add toggle for displayRecipe - to check if it is ready to be published
+   2. Editors can see all recipe views
+   3. Users can only see recipes that are published
