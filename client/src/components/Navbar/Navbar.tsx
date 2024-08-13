@@ -3,6 +3,8 @@ import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import HideyPanel from "../HideyPanel/HideyPanel";
+import LoginButton from "../Buttons/LoginButton/LoginButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "./Navbar.css";
 // import logo from '../../assets/resippy-logo-v2.png';
@@ -21,6 +23,16 @@ const Navbar = () => {
       setIsMenuOpen(false);
     }
   };
+
+  const onTripleClick = async (e: React.MouseEvent<HTMLImageElement>) => {
+    if (e.detail > 3) {
+      console.log("Triple Clicked! :)");
+    } else {
+      console.log("Not Triple Clicked...");
+    }
+  };
+
+  const { isAuthenticated } = useAuth0();
 
   //   Conditionally rendered navbar code
   // Real talk this will need some work as i've implemented the list way differently to them oop
@@ -50,7 +62,14 @@ const Navbar = () => {
 
         <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
           {/* Only render logo when not in mobile view */}
-          {!isMobile && <img src={logo} alt="Logo" className="nav-logo-img" />}
+          {!isMobile && (
+            <img
+              src={logo}
+              alt="Logo"
+              onClick={(e) => onTripleClick(e)}
+              className="nav-logo-img"
+            />
+          )}
         </NavLink>
 
         <ul className={listClassName}>
@@ -65,7 +84,12 @@ const Navbar = () => {
             </NavLink>
           </li>
         </ul>
-        <HideyPanel></HideyPanel>
+
+        {!isAuthenticated && !isMobile && (
+          <HideyPanel>
+            <LoginButton></LoginButton>
+          </HideyPanel>
+        )}
       </div>
     );
   };
