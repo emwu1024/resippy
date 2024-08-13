@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
+import HideyPanel from "../HideyPanel/HideyPanel";
 
 import "./Navbar.css";
 // import logo from '../../assets/resippy-logo-v2.png';
@@ -64,6 +65,7 @@ const Navbar = () => {
             </NavLink>
           </li>
         </ul>
+        <HideyPanel></HideyPanel>
       </div>
     );
   };

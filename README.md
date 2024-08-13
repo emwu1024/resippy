@@ -42,6 +42,8 @@ This project is a repository for recipes I have previously made so I can remembe
 3. Typescript doesn't like some of the things Javascript accepts e.g. react-icons doesn't like the use of 'className' instead of attributes like 'color' etc.
 4. Tiptap is working as expected, some fonts do not have italics.
 5. Good website for creating css animations: https://webcode.tools/css-generator/keyframe-animation
+6. Values in .env get injected back into the code in production env so additional security measured need to be considered: 8:00 - https://www.youtube.com/watch?v=pAzqscDx580
+7. Wow really cool website about folding CSS effect! https://www.joshwcomeau.com/react/folding-the-dom/
 
 ## Work Log
 
@@ -72,6 +74,13 @@ This project is a repository for recipes I have previously made so I can remembe
 21. Followed this tutorial to get be able to upload images for standardised format: https://www.youtube.com/watch?v=pfxd7L1kzio
 22. Created an MVP Plan, currently finalising UI on Create Recipes Page
 23. Buttons: not for MVP but will be looking into the handdrawn button design for the cookbook style here: https://css-tricks.com/a-complete-guide-to-links-and-buttons/
+24. 11.08.24: Working on Auth + Auth using Auth0:
+    1. https://www.youtube.com/watch?v=pAzqscDx580
+    2. https://auth0.com/docs
+25. Making a component to lightly hide signin button
+    1. https://www.geeksforgeeks.org/how-to-create-border-animation-using-css/
+    2. https://codepen.io/lomojean/pen/XWNNyx
+    3. https://www.joshwcomeau.com/react/folding-the-dom/#our-mvp-5
 
 ## Back Log
 

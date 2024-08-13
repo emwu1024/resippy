@@ -6,9 +6,9 @@ import Tiptap from "../../components/TextEditor/Tiptap";
 import Navbar from "../../components/Navbar/Navbar";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import Tabs from "../../components/Tabs/Tabs";
-import ToggleButton from "../../components/ToggleButton/ToggleButton";
+import ToggleButton from "../../components/Buttons/ToggleButton/ToggleButton";
 import CreateRecipeForm from "../../components/CreateRecipeForm/CreateRecipeForm";
-import Button from "../../components/Button/Button";
+import Button from "../../components/Buttons/Button/Button";
 
 import "./CreateRecipe.css";
 
