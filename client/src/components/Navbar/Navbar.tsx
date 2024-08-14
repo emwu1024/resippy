@@ -12,6 +12,7 @@ import logo from "../../assets/stamp-logo-red-round-2.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSigninDisplayed, setIsSigninDisplayed] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: "1100px" });
 
   const toggleMenu = () => {
@@ -27,6 +28,7 @@ const Navbar = () => {
   const onTripleClick = async (e: React.MouseEvent<HTMLImageElement>) => {
     if (e.detail > 3) {
       console.log("Triple Clicked! :)");
+      setIsSigninDisplayed(true);
     } else {
       console.log("Not Triple Clicked...");
     }
@@ -41,55 +43,56 @@ const Navbar = () => {
     const listContainerClassName = isMobile ? "" : "list-container";
 
     return (
-      <div className={listContainerClassName}>
-        <ul className={listClassName}>
-          <li className="nav-item" data-text="HOME">
-            <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
-              HOME
-            </NavLink>
-          </li>
-
-          <li className="nav-item" data-text="RECIPES">
-            <NavLink
-              to="/recipes"
-              className="nav-link"
-              onClick={closeMobileMenu}
-            >
-              RECIPES
-            </NavLink>
-          </li>
-        </ul>
-
-        <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
-          {/* Only render logo when not in mobile view */}
-          {!isMobile && (
-            <img
-              src={logo}
-              alt="Logo"
-              onClick={(e) => onTripleClick(e)}
-              className="nav-logo-img"
-            />
-          )}
-        </NavLink>
-
-        <ul className={listClassName}>
-          <li className="nav-item" data-text="ATLAS">
-            <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
-              ATLAS
-            </NavLink>
-          </li>
-          <li className="nav-item" data-text="ABOUT">
-            <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
-              ABOUT
-            </NavLink>
-          </li>
-        </ul>
-
+      <div>
         {!isAuthenticated && !isMobile && (
-          <HideyPanel>
-            <LoginButton></LoginButton>
+          <HideyPanel isDisplayed={isSigninDisplayed}>
+            {/* <LoginButton></LoginButton> */}
           </HideyPanel>
         )}
+        <div className={listContainerClassName}>
+          <ul className={listClassName}>
+            <li className="nav-item" data-text="HOME">
+              <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
+                HOME
+              </NavLink>
+            </li>
+
+            <li className="nav-item" data-text="RECIPES">
+              <NavLink
+                to="/recipes"
+                className="nav-link"
+                onClick={closeMobileMenu}
+              >
+                RECIPES
+              </NavLink>
+            </li>
+          </ul>
+
+          <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
+            {/* Only render logo when not in mobile view */}
+            {!isMobile && (
+              <img
+                src={logo}
+                alt="Logo"
+                onClick={(e) => onTripleClick(e)}
+                className="nav-logo-img"
+              />
+            )}
+          </NavLink>
+
+          <ul className={listClassName}>
+            <li className="nav-item" data-text="ATLAS">
+              <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
+                ATLAS
+              </NavLink>
+            </li>
+            <li className="nav-item" data-text="ABOUT">
+              <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
+                ABOUT
+              </NavLink>
+            </li>
+          </ul>
+        </div>
       </div>
     );
   };

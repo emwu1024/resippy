@@ -1,10 +1,11 @@
 .draw-outline-container {
-  left: 85%;
-  top: 40%;
-  position: absolute;
+  margin: 0 auto;
+  /* top: 0%; */
+  position: relative;
+  /* position: absolute; */
   /* background-color: aquamarine; */
   width: 100px;
-  height: 20px;
+  height: 10px;
   text-align: center;
   z-index: 5;
 }
@@ -20,7 +21,7 @@
   border: 1px solid transparent;
 }
 
-.draw-outline-container:hover::before {
+.draw-outline-container-active::before {
   animation: animateTop 0.8s linear forwards;
 }
 
@@ -64,7 +65,7 @@
   border: 1px solid transparent;
 }
 
-.draw-outline-container:hover::after {
+.draw-outline-container-active::after {
   animation: animateBottom 0.8s linear forwards;
 }
 
@@ -101,22 +102,6 @@
   perspective: 500px;
 }
 
-/* REALISTIC WOOD PANEL */
-/* .hidey-panel {
-  transform: rotateX(90deg);
-  visibility: hidden;
-  transform-origin: top;
-  will-change: transform;
-  width: 100px;
-  height: 30px;
-  background-size: 100px 50px;
-  background-image: url("https://images.unsplash.com/photo-1564512533667-015a90133f04?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  border-radius: 3px;
-  position: absolute;
-  z-index: 15;
-  box-shadow: 0 2px 2px 2px #1f0904;
-} */
-
 /* WOOD GRAIN PANEL */
 .hidey-panel {
   transform: rotateX(90deg);
@@ -140,40 +125,35 @@
   visibility: hidden;
   transform-origin: top;
   will-change: transform;
-  width: 80px;
-  height: 80px;
-  background-size: 80px 80px;
+  width: 120px;
+  height: 120px;
+  background-size: 120px 120px;
   background-image: url("../../assets/handdrawnsign1.png");
   position: absolute;
   background-position: bottom center;
   background-repeat: no-repeat;
 } */
 
-/* ARROW WOOD PANEL */
-/* .hidey-panel {
-  transform: rotateX(90deg);
-  visibility: hidden;
-  transform-origin: top;
-  will-change: transform;
-  width: 100px;
-  height: 30px;
-  background-size: 100px 30px;
-  background-image: url("../../assets/arrowsign1.png");
-  position: absolute;
-  background-position: bottom center;
-  background-repeat: no-repeat;
-} */
-
-.draw-outline-container:hover .hidey-panel {
+.hidey-panel-active {
   animation: swinging 2s linear forwards;
-  visibility: visible;
   animation-delay: 0.9s;
+  visibility: visible !important;
 }
 
+.nudge {
+  animation: nudge 2s ease;
+  /* animation-delay: 0.9s; */
+}
+
+/* .hidey-panel-active:not(:hover) {
+  animation: retract 0.4s linear;
+} */
+
+/* 
 .draw-outline-container:not(:hover) .hidey-panel {
   animation: retract 0.4s linear;
   visibility: visible;
-}
+} */
 
 @keyframes retract {
   0% {
@@ -186,6 +166,33 @@
 
   100% {
     visibility: hidden;
+  }
+}
+
+@keyframes nudge {
+  0% {
+    transform: rotateX(0deg);
+  }
+
+  20% {
+    transform: rotateX(-30deg);
+  }
+
+  40% {
+    transform: rotateX(20deg);
+  }
+
+  60% {
+    transform: rotateX(-15deg);
+  }
+
+  80% {
+    transform: rotateX(10deg);
+  }
+
+  100% {
+    transform: rotateX(0deg);
+    visibility: visible;
   }
 }
 
