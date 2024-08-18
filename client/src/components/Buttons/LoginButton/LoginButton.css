@@ -1,0 +1,11 @@
+.btn-login {
+  border: none;
+  background: none;
+  position: relative;
+  top: 4rem;
+  font-family: var(--heading-font);
+  color: var(--secondary-bg-color);
+  font-weight: 500;
+  font-size: 1.5rem;
+  cursor: pointer;
+}

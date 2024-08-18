@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import "./HideyPanel.css";
 
 const HideyPanel = (props: any) => {
-  const [isAnimationDone, setIsAnimationDone] = useState(true);
+  const [isNudgeDone, setIsNudgeDone] = useState(true);
+  const [isSwingingDone, setIsSwingingDone] = useState(false);
+
+  const onAnimationEnd = async (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsNudgeDone(true);
+    setIsSwingingDone(true);
+  };
 
   return (
     <div
@@ -13,10 +19,11 @@ const HideyPanel = (props: any) => {
       <div className="hidey-panel-container">
         <div
           className={`hidey-panel ${
-            props.isDisplayed ? "hidey-panel-active" : ""
-          } ${isAnimationDone ? "" : "nudge"}`}
-          onAnimationEnd={() => setIsAnimationDone(true)}
-          onMouseEnter={() => setIsAnimationDone(false)}
+            props.isDisplayed && !isSwingingDone ? "hidey-panel-active" : ""
+          } ${isNudgeDone ? "" : "nudge"} ${isSwingingDone ? "visible" : ""}`}
+          // onAnimationEnd={() => setIsNudgeDone(true)}
+          onAnimationEnd={(e) => onAnimationEnd(e)}
+          onMouseEnter={() => setIsNudgeDone(false)}
         >
           {" "}
           {props.children}

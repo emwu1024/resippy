@@ -46,7 +46,7 @@ const Navbar = () => {
       <div>
         {!isAuthenticated && !isMobile && (
           <HideyPanel isDisplayed={isSigninDisplayed}>
-            {/* <LoginButton></LoginButton> */}
+            <LoginButton></LoginButton>
           </HideyPanel>
         )}
         <div className={listContainerClassName}>
