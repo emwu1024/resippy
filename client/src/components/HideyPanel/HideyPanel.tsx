@@ -21,7 +21,6 @@ const HideyPanel = (props: any) => {
           className={`hidey-panel ${
             props.isDisplayed && !isSwingingDone ? "hidey-panel-active" : ""
           } ${isNudgeDone ? "" : "nudge"} ${isSwingingDone ? "visible" : ""}`}
-          // onAnimationEnd={() => setIsNudgeDone(true)}
           onAnimationEnd={(e) => onAnimationEnd(e)}
           onMouseEnter={() => setIsNudgeDone(false)}
         >

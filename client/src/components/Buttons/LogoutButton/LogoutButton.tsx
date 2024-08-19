@@ -7,7 +7,11 @@ const LogoutButton = () => {
   return (
     isAuthenticated && (
       <div>
-        <button className="btn" onClick={() => logout()}>
+        <button
+          onClick={() =>
+            logout({ logoutParams: { returnTo: window.location.origin } })
+          }
+        >
           Sign Out
         </button>
       </div>

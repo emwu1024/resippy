@@ -31,10 +31,11 @@ const Navbar = () => {
       setIsSigninDisplayed(true);
     } else {
       console.log("Not Triple Clicked...");
+      console.log(isAuthenticated);
     }
   };
 
-  const { isAuthenticated } = useAuth0();
+  const { logout, isAuthenticated } = useAuth0();
 
   //   Conditionally rendered navbar code
   // Real talk this will need some work as i've implemented the list way differently to them oop
@@ -68,6 +69,18 @@ const Navbar = () => {
             </li>
           </ul>
 
+          {isAuthenticated && (
+            <li className="nav-item" data-text="CREATE">
+              <NavLink
+                to="/recipes/create"
+                className="nav-link"
+                onClick={closeMobileMenu}
+              >
+                CREATE
+              </NavLink>
+            </li>
+          )}
+
           <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
             {/* Only render logo when not in mobile view */}
             {!isMobile && (
@@ -91,6 +104,22 @@ const Navbar = () => {
                 ABOUT
               </NavLink>
             </li>
+            {isAuthenticated && (
+              <li className="nav-item" data-text="LOGOUT">
+                <NavLink
+                  to="/"
+                  className="nav-link"
+                  // onClick={closeMobileMenu}
+                  onClick={() =>
+                    logout({
+                      logoutParams: { returnTo: window.location.origin },
+                    })
+                  }
+                >
+                  LOGOUT
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>
