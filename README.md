@@ -81,6 +81,11 @@ This project is a repository for recipes I have previously made so I can remembe
     1. https://www.geeksforgeeks.org/how-to-create-border-animation-using-css/
     2. https://codepen.io/lomojean/pen/XWNNyx
     3. https://www.joshwcomeau.com/react/folding-the-dom/#our-mvp-5
+26. Looked into RBAC amd there was a useful example here:
+    1. https://developer.auth0.com/resources/code-samples/full-stack/hello-world/basic-role-based-access-control/spa/react-typescript/express-javascript
+    2. https://community.auth0.com/t/how-to-integrate-authentication-in-mern-app-using-auth0/104582/2
+27. Due to time limitations RBAC implementation is in the backlog and deletion will only be available directly through mongodb - authentication will proceed as expected
+28. Fixed refresh login persistence issue with solutions here: https://stackoverflow.com/questions/63537913/auth0-does-not-persist-login-on-page-refresh-for-email-password
 
 ## Back Log
 
@@ -97,3 +102,5 @@ This project is a repository for recipes I have previously made so I can remembe
    1. Add toggle for displayRecipe - to check if it is ready to be published
    2. Editors can see all recipe views
    3. Users can only see recipes that are published
+5. Auth:
+   1. RBAC using the example

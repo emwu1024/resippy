@@ -13,7 +13,7 @@ import logo from "../../assets/stamp-logo-red-round-2.png";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSigninDisplayed, setIsSigninDisplayed] = useState(false);
-  const isMobile = useMediaQuery({ maxWidth: "1100px" });
+  const isMobile = useMediaQuery({ maxWidth: "1050px" });
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -35,7 +35,7 @@ const Navbar = () => {
     }
   };
 
-  const { logout, isAuthenticated } = useAuth0();
+  const { user, logout, isAuthenticated } = useAuth0();
 
   //   Conditionally rendered navbar code
   // Real talk this will need some work as i've implemented the list way differently to them oop
@@ -45,6 +45,11 @@ const Navbar = () => {
 
     return (
       <div>
+        {isAuthenticated && !isMobile && user?.name && (
+          <span className="profile-welcome">
+            Welcome {user.name.split("@", 1)} !
+          </span>
+        )}
         {!isAuthenticated && !isMobile && (
           <HideyPanel isDisplayed={isSigninDisplayed}>
             <LoginButton></LoginButton>
@@ -67,19 +72,19 @@ const Navbar = () => {
                 RECIPES
               </NavLink>
             </li>
-          </ul>
 
-          {isAuthenticated && (
-            <li className="nav-item" data-text="CREATE">
-              <NavLink
-                to="/recipes/create"
-                className="nav-link"
-                onClick={closeMobileMenu}
-              >
-                CREATE
-              </NavLink>
-            </li>
-          )}
+            {isAuthenticated && (
+              <li className="nav-item" data-text="CREATE">
+                <NavLink
+                  to="/recipes/create"
+                  className="nav-link"
+                  onClick={closeMobileMenu}
+                >
+                  CREATE
+                </NavLink>
+              </li>
+            )}
+          </ul>
 
           <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
             {/* Only render logo when not in mobile view */}

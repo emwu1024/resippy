@@ -6,13 +6,18 @@ import RecipesIndex from "./pages/RecipesIndex";
 import UpdateRecipe from "./pages/UpdateRecipe";
 // import DeleteRecipe from './pages/DeleteRecipe';
 import ShowRecipe from "./pages/ShowRecipe";
+import { AuthenticationGuard } from "./components/AuthenticationGuard/AuthenticationGuard";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/recipes" element={<RecipesIndex />} />
-      <Route path="/recipes/create" element={<CreateRecipe />} />
+      <Route
+        path="/recipes/create"
+        element={<AuthenticationGuard component={CreateRecipe} />}
+      />
+      {/* <Route path="/recipes/create" element={<CreateRecipe />} /> */}
       <Route path="/recipes/edit/:id" element={<UpdateRecipe />} />
       <Route path="/recipes/:id" element={<ShowRecipe />} />
       {/* <Route path="/recipes/delete/:id" element={<DeleteRecipe />} /> */}

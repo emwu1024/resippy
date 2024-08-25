@@ -15,6 +15,18 @@
 .nav-container {
   width: 100%;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; */
+
+  /* display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%; */
 }
 
 .nav-container-mobile {
@@ -43,11 +55,12 @@
 .nav-item {
   display: inline;
   position: relative;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  font-size: 1.5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  /* margin-left: 10%;
+  margin-right: 10%; */
+  font-size: 1.35rem;
   font-weight: 900;
-  font-style: bold;
 }
 
 .nav-item::before {
@@ -135,4 +148,10 @@
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   background-color: #101010;
+}
+
+.profile-welcome {
+  position: absolute;
+  right: 3%;
+  top: 23%;
 }

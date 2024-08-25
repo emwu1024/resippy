@@ -146,20 +146,10 @@
 }
 
 .nudge {
-  animation: nudge 2s ease;
+  animation: nudge 3.5s ease;
   visibility: visible !important;
   /* animation-delay: 0.9s; */
 }
-
-/* .hidey-panel-active:not(:hover) {
-  animation: retract 0.4s linear;
-} */
-
-/* 
-.draw-outline-container:not(:hover) .hidey-panel {
-  animation: retract 0.4s linear;
-  visibility: visible;
-} */
 
 @keyframes retract {
   0% {
@@ -180,20 +170,40 @@
     transform: rotateX(0deg);
   }
 
+  10% {
+    transform: rotateX(-40deg);
+  }
+
   20% {
-    transform: rotateX(-30deg);
+    transform: rotateX(30deg);
+  }
+
+  30% {
+    transform: rotateX(-27deg);
   }
 
   40% {
     transform: rotateX(20deg);
   }
 
-  60% {
+  50% {
     transform: rotateX(-15deg);
   }
 
+  60% {
+    transform: rotateX(13deg);
+  }
+
+  70% {
+    transform: rotateX(-10deg);
+  }
+
   80% {
-    transform: rotateX(10deg);
+    transform: rotateX(8deg);
+  }
+
+  90% {
+    transform: rotateX(-5deg);
   }
 
   100% {
