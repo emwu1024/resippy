@@ -15,7 +15,7 @@
 .nav-container {
   width: 100%;
   text-align: center;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 
   /* display: flex;

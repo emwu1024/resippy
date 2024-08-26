@@ -22,18 +22,34 @@ This project is a repository for recipes I have previously made so I can remembe
 
 ### Frontend
 
-1. Navigate to the 'client' folder.
-2. Run `npm run dev`
-3. Frontend URLs:
-4. Homepage: http://localhost:5173
-5. Index: http://localhost:5173/recipes
-6. Create Recipe: http://localhost:5173/recipes/create
+1. If running project from scratch:
+   1. Create .npmrc file from .npmrc.template with your tiptap auth token
+   2. Create .env file from .env.template with your auth0 domain and clientID
+   3. Run `npm install` in client folder
+2. Navigate to the 'client' folder.
+3. Run `npm run dev`
+4. Frontend URLs:
+   1. Homepage: http://localhost:5173
+   2. Index: http://localhost:5173/recipes
+   3. Create Recipe: http://localhost:5173/recipes/create
 
 ### Backend
 
-1. Navigate to the 'server' folder.
-2. Run `npm run dev`
-3. Check Backend by navigating to this URL: http://localhost:8000/recipes
+1. If running project from scratch:
+   1. Create config.js file from config.js.template with your mongoDB information
+   2. Run `npm install` in server folder
+2. Navigate to the 'server' folder.
+3. Run `npm run dev`
+4. Check Backend by navigating to this URL: http://localhost:8000/recipes
+
+#### Mongo Backups
+
+The project runs on mongoDB and this iteration uses the M0 cluster which can't take advantage of mongoDBs autobackup functionality.
+The backupdb.sh script attached just needs to be modified with your details and moved to whatever directory you want
+
+1. Create backupdb.sh from backupdb.sh.template file and add your connection string and absolute paths to work
+2. Ensure the script has permission to run - `chmod +x backupdb.sh `
+3. (optional) Set up a cron job so backups are made incrementally and automatically
 
 ## Findings Log
 
