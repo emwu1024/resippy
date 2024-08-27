@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Tiptap from "../../components/TextEditor/Tiptap";
 
-import Navbar from "../../components/Navbar/Navbar";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import Tabs from "../../components/Tabs/Tabs";
 import ToggleButton from "../../components/Buttons/ToggleButton/ToggleButton";
@@ -75,7 +74,6 @@ const CreateRecipe = () => {
 
   return (
     <div>
-      <Navbar></Navbar>
       <PageContentContainer>
         <h1 className="heading page-margin-top">Let's get cooking!</h1>
         <div className="desc-container">

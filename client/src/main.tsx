@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
+import Navbar from "./components/Navbar/Navbar.tsx";
 import "./index.css";
 
 let domain = "";
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       useRefreshTokens={true}
       cacheLocation="localstorage"
     >
+      <Navbar></Navbar>
       <App />
     </Auth0Provider>
   </BrowserRouter>

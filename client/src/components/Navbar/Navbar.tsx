@@ -100,12 +100,20 @@ const Navbar = () => {
 
           <ul className={listClassName}>
             <li className="nav-item" data-text="ATLAS">
-              <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
+              <NavLink
+                to="/atlas"
+                className="nav-link"
+                onClick={closeMobileMenu}
+              >
                 ATLAS
               </NavLink>
             </li>
             <li className="nav-item" data-text="ABOUT">
-              <NavLink to="/" className="nav-link" onClick={closeMobileMenu}>
+              <NavLink
+                to="/about"
+                className="nav-link"
+                onClick={closeMobileMenu}
+              >
                 ABOUT
               </NavLink>
             </li>

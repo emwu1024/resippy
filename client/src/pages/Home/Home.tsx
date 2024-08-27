@@ -1,12 +1,10 @@
 import React from "react";
 import "./home.css";
-import Navbar from "../../components/Navbar/Navbar";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 
 const Home = () => {
   return (
     <div>
-      <Navbar></Navbar>
       <div className="content-container">
         <div className="hero-image">
           <div className="hero-text">
