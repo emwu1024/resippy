@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap");
+
+.card-img {
+  height: 270px;
+  width: 270px;
+  border-radius: 5px;
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+
+.card-container {
+  background-color: #e1dcd6;
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px #08080824;
+  padding: 2rem 0.5rem;
+  margin: 0.75rem;
+  text-align: center;
+  max-width: 17rem;
+  display: inline-block;
+
+  font-family: "Reenie Beanie", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: #414141;
+  transition: 0.3s ease-out transform;
+  cursor: pointer;
+}
+
+.card-container:hover {
+  transform: scale(1.02);
+}
+
+.card-heading {
+  font-size: 2rem;
+  margin: 1rem 0rem 0rem 0rem;
+}
+
+.card-desc {
+  font-size: 1.1rem;
+  margin: 0rem;
+}
+
+.card-date {
+  font-size: 1.2rem;
+  margin: 0.5rem;
+  float: left;
+}
+
+.card-author {
+  font-size: 1.2rem;
+  margin: 0.5rem;
+  float: right;
+}
+
+.img-tape {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  margin: 20px auto 10px;
+}
+
+.img-tape:before {
+  background: rgba(255, 255, 235, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  content: "";
+  display: block;
+  height: 30px;
+  position: absolute;
+  margin: auto;
+  width: 100px;
+
+  top: 10px;
+  left: 0;
+  transform: rotate(-35deg);
+  z-index: 10000;
+}
+
+.img-tape:after {
+  background: rgba(255, 255, 235, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  content: "";
+  display: block;
+  height: 30px;
+  position: absolute;
+  margin: auto;
+  width: 100px;
+
+  bottom: 8px;
+  right: -20px;
+  transform: rotate(-40deg);
+}

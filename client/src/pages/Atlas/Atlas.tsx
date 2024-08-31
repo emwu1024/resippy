@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
+import WipComponent from "../../components/WipComponent/WipComponent";
 
 import "./Atlas.css";
 
@@ -8,6 +9,7 @@ const Atlas = () => {
     <div>
       <PageContentContainer>
         <h1 className="heading page-margin-top">Atlas</h1>
+        <WipComponent />
       </PageContentContainer>
     </div>
   );

@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
-import PageContentContainer from "../components/PageContentContainer/PageContentContainer";
+import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
+import Card from "../../components/Card/Card";
+import examplePic from "../../assets/example-pic.webp";
 
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([]);
@@ -21,8 +23,51 @@ const RecipesIndex = () => {
 
   return (
     <div>
-      <PageContentContainer>
-        <h1 className="text-3xl my-8">Recipes List</h1>
+      <PageContentContainer width="85%">
+        <h1 className="heading page-margin-top">Recipe Index</h1>
+        <Card
+          recipeName="Tentacle Gnocchi"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeImg={examplePic}
+          recipeDate="31.08.24"
+          recipeAuthor="Senshi"
+        ></Card>
+        <Card
+          recipeName="Tentacle Gnocchi"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeImg={examplePic}
+          recipeDate="31.08.24"
+          recipeAuthor="Senshi"
+        ></Card>
+        <Card
+          recipeName="Tentacle Gnocchi"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeImg={examplePic}
+          recipeDate="31.08.24"
+          recipeAuthor="Senshi"
+        ></Card>
+        <Card
+          recipeName="Tentacle Gnocchi"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeImg={examplePic}
+          recipeDate="31.08.24"
+          recipeAuthor="Senshi"
+        ></Card>
+        <Card
+          recipeName="Tentacle Gnocchi"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeImg={examplePic}
+          recipeDate="31.08.24"
+          recipeAuthor="Senshi"
+        ></Card>
+        <Card
+          recipeName="Tentacle Gnocchi"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeImg={examplePic}
+          recipeDate="31.08.24"
+          recipeAuthor="Senshi"
+        ></Card>
+        <hr />
         <table className="w-full border-separate border-spacing-2">
           <thead>
             <tr>
