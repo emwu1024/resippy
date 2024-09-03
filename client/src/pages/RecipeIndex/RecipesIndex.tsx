@@ -27,7 +27,7 @@ const RecipesIndex = () => {
         <h1 className="heading page-margin-top">Recipe Index</h1>
         <Card
           recipeName="Tentacle Gnocchi"
-          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles. This is an example of a longer description to see how it gets handled"
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"
@@ -48,7 +48,7 @@ const RecipesIndex = () => {
         ></Card>
         <Card
           recipeName="Tentacle Gnocchi"
-          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles. lorem ispum dolor blah blah blah blah balh aksjdgfhlsjfks aksf ksdhg ksdlf jsld jlshdf gshg shgfl hiosahf id hilahslhdhlsbhsldgsl jls js js os "
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"
@@ -62,7 +62,7 @@ const RecipesIndex = () => {
         ></Card>
         <Card
           recipeName="Tentacle Gnocchi"
-          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
+          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles alsfj al jasdl fjsl glds lsdfj vd gdf dkl js kdjsdlgd   d jldkg lsj d gdgj d dl  jdsf jldkj ldjg d kdj kf dg sj so s dkl dj gd jfos;jopfj  kd s jlsk glksjf ls"
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"

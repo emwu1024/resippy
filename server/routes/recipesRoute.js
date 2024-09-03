@@ -37,6 +37,7 @@ router.post('/', async (request, response) => {
       (!request.body.name ||
       !request.body.description ||
       !request.body.author ||
+      !request.body.thumbnail ||
       !request.body.steps ||
       !request.body.ingredients)
     ) {
@@ -50,6 +51,7 @@ router.post('/', async (request, response) => {
     (!request.body.name ||
     !request.body.description ||
     !request.body.author ||
+    !request.body.thumbnail ||
     !request.body.editorHtml )) {
       console.log(request.body);
       return response.status(400).send({
@@ -71,6 +73,7 @@ router.post('/', async (request, response) => {
       name: request.body.name,
       author: request.body.author,
       description: request.body.description,
+      thumbnail: request.body.thumbnail,
       steps: stepsArray,
       ingredients: ingredientsArray,
       editorHtml: request.body.editorHtml,

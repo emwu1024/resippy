@@ -9,6 +9,9 @@ import ToggleButton from "../../components/Buttons/ToggleButton/ToggleButton";
 import CreateRecipeForm from "../../components/CreateRecipeForm/CreateRecipeForm";
 import Button from "../../components/Buttons/Button/Button";
 
+import { LuImagePlus } from "react-icons/lu";
+import { IconContext } from "react-icons";
+
 import "./CreateRecipe.css";
 
 const CreateRecipe = () => {
@@ -17,6 +20,7 @@ const CreateRecipe = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [images, setImages] = useState<Array<string>>([]);
@@ -30,11 +34,21 @@ const CreateRecipe = () => {
 
   const navigate = useNavigate();
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const base64 = await convertToBase64(file);
+      setThumbnail(base64);
+    }
+  };
+
   const handleSaveRecipe = async () => {
     const data = {
       name,
       author,
       description,
+      thumbnail,
       steps,
       ingredients,
       editorHtml,
@@ -122,6 +136,34 @@ const CreateRecipe = () => {
               value={author}
             />
           </div>
+
+          <div className="form-field-container">
+            <label className="form-label" htmlFor="image-upload-input">
+              <p>*Thumbnail</p>
+            </label>
+
+            <label
+              className="form-label btn-upload-image vertical-centre"
+              htmlFor="image-upload-input"
+            >
+              <IconContext.Provider value={{ color: "#e1be96", size: "30px" }}>
+                <LuImagePlus />
+              </IconContext.Provider>
+              {thumbnail != "" ? (
+                <span className="upload-desc">1 File Uploaded</span>
+              ) : (
+                <span className="upload-desc">Upload Image Here</span>
+              )}
+            </label>
+
+            <input
+              type="file"
+              name="images"
+              id="image-upload-input"
+              accept=".jpeg, .png, .jpg"
+              onChange={(e) => handleFileUpload(e)}
+            />
+          </div>
         </div>
 
         <Tabs
@@ -131,9 +173,6 @@ const CreateRecipe = () => {
         />
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
           <Button btnText="Save" onClick={handleSaveRecipe}></Button>
-          {/* <button className="p-2 bg-sky-300 m-8" onClick={handleSaveRecipe}>
-            Save
-          </button> */}
         </div>
 
         {/* Preview To Be Added Later - Not part of MVP */}
@@ -148,3 +187,17 @@ const CreateRecipe = () => {
 };
 
 export default CreateRecipe;
+
+function convertToBase64(file: File): Promise<string | ArrayBuffer | null> {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    // Reads into Base64
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
+}
