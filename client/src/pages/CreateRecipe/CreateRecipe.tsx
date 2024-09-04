@@ -21,6 +21,8 @@ const CreateRecipe = () => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+  const [tags, setTags] = useState<Array<string>>([]);
+  const [difficulty, setDifficulty] = useState("5 Mins");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [images, setImages] = useState<Array<string>>([]);
@@ -33,6 +35,18 @@ const CreateRecipe = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const navigate = useNavigate();
+
+  const difficultyList = [
+    "5 Mins",
+    "15 Mins",
+    "30 Mins",
+    "1 Hour",
+    "2 Hours",
+    "4 Hours",
+    "8 Hours",
+    "1 Day",
+    "VERY HARD",
+  ];
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -49,6 +63,7 @@ const CreateRecipe = () => {
       author,
       description,
       thumbnail,
+      tags,
       steps,
       ingredients,
       editorHtml,
@@ -135,6 +150,23 @@ const CreateRecipe = () => {
               className="form-field input-text"
               value={author}
             />
+          </div>
+
+          <div className="form-field-container">
+            <label className="form-label">*Difficulty Rating</label>
+            <select
+              value={difficulty}
+              onChange={(e) => setDifficulty(e.target.value)}
+              className="form-field"
+            >
+              {difficultyList.map((rating, index) => {
+                return (
+                  <option key={index} value={rating}>
+                    {rating}
+                  </option>
+                );
+              })}
+            </select>
           </div>
 
           <div className="form-field-container">
