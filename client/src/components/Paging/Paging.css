@@ -1,0 +1,8 @@
+.pagination-container {
+  height: 100%;
+}
+
+a,
+button {
+  color: var(--body-text-color) !important;
+}

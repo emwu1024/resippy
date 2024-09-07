@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
+
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
+import Paging from "../../components/Paging/Paging";
 import Card from "../../components/Card/Card";
+
 import examplePic from "../../assets/example-pic.webp";
 
 const RecipesIndex = () => {
@@ -86,6 +89,7 @@ const RecipesIndex = () => {
           recipeAuthor="Senshi"
           recipeTags={["tag1", "tag2", "tag3", "tag4"]}
         ></Card>
+        <Paging></Paging>
         <hr />
         <table className="w-full border-separate border-spacing-2">
           <thead>

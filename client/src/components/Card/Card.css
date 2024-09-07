@@ -1,6 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap");
 /* 6 different types of handwritten fonts  */
-@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Indie+Flower&family=Nanum+Pen+Script&family=Patrick+Hand+SC&family=Walter+Turncoat&family=Yomogi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&family=Walter+Turncoat&family=Yomogi&display=swap");
 
 .card-img {
   height: 270px;
@@ -20,13 +19,9 @@
   max-width: 17rem;
   display: inline-block;
 
-  /* font-family: "Architects Daughter", system-ui; */
-  /* font-family: "Indie Flower", system-ui; */
-  /* font-family: "Nanum Pen Script", system-ui; Not this one */
-  font-family: "Patrick Hand SC", system-ui;
+  /* font-family: "Patrick Hand SC", system-ui; */
   /* font-family: "Walter Turncoat", system-ui; */
-  /* font-family: "Yomogi", system-ui; */
-  /* font-family: "Reenie Beanie", cursive; */
+  font-family: "Yomogi", system-ui;
   font-weight: 400;
   font-style: normal;
   color: #414141;
@@ -39,23 +34,23 @@
 }
 
 .card-heading {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 1rem 0rem 0rem 0rem;
 }
 
 .card-desc {
-  font-size: 1.1rem;
+  font-size: 0.75rem;
   margin: 0.25rem;
 }
 
 .card-date {
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   margin: 0.5rem;
   float: left;
 }
 
 .card-author {
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   margin: 0.5rem;
   float: right;
 }
