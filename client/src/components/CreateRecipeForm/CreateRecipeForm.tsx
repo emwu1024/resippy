@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-// import { MdOutlineFileUpload } from "react-icons/md";
 import { LuImagePlus } from "react-icons/lu";
 import { IconContext } from "react-icons";
 import "./CreateRecipeForm.css";
+import { convertToBase64 } from "../../utils/utils";
 
 interface CreateRecipeFormProps {
   steps: string;
@@ -16,7 +16,10 @@ interface CreateRecipeFormProps {
 const CreateRecipeForm = (props: CreateRecipeFormProps) => {
   const [fileNames, setFileNames] = useState<File[]>([]);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMultipleFileUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    console.log("HERE!!!");
     const filesArray = Array.from(e.target.files || []);
     setFileNames(filesArray);
     for (let i = 0; i < filesArray.length; i++) {
@@ -26,6 +29,7 @@ const CreateRecipeForm = (props: CreateRecipeFormProps) => {
         console.log(`${i} IMAGE:`, updatedImages[i]);
         return updatedImages;
       });
+      console.log("inside for loop " + i);
     }
   };
 
@@ -53,18 +57,18 @@ const CreateRecipeForm = (props: CreateRecipeFormProps) => {
           <p className="help-text">Separate ingredients with a new line</p>
         </div>
         <div className="form-field-container">
-          <label className="form-label" htmlFor="image-upload-input">
+          <label className="form-label" htmlFor="image-upload-input-multiple">
             <p>Images</p>
           </label>
 
           <label
             className="form-label btn-upload-image vertical-centre"
-            htmlFor="image-upload-input"
+            htmlFor="image-upload-input-multiple"
           >
             <IconContext.Provider value={{ color: "#e1be96", size: "30px" }}>
               <LuImagePlus />
             </IconContext.Provider>
-            {fileNames.length != 0 ? (
+            {fileNames.length > 0 ? (
               <span className="upload-desc">
                 {fileNames.length} files uploaded
               </span>
@@ -83,9 +87,9 @@ const CreateRecipeForm = (props: CreateRecipeFormProps) => {
           <input
             type="file"
             name="images"
-            id="image-upload-input"
+            id="image-upload-input-multiple"
             accept=".jpeg, .png, .jpg"
-            onChange={(e) => handleFileUpload(e)}
+            onChange={(e) => handleMultipleFileUpload(e)}
             multiple
           />
         </div>
@@ -95,17 +99,3 @@ const CreateRecipeForm = (props: CreateRecipeFormProps) => {
 };
 
 export default CreateRecipeForm;
-
-function convertToBase64(file: File): Promise<string | ArrayBuffer | null> {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    // Reads into Base64
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    };
-    fileReader.onerror = (error) => {
-      reject(error);
-    };
-  });
-}

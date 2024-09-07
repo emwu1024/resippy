@@ -61,12 +61,17 @@ router.post('/', async (request, response) => {
       });
     }
 
-    // Since steps and ingredients are arrays they will be processed differently
+    // Since steps, ingredients, and tags are arrays they will be processed differently
     let stepsString = request.body.steps;
     let stepsArray = stepsString.split('\n');
 
     let ingredientsString = request.body.ingredients;
     let ingredientsArray = ingredientsString.split('\n');
+
+    let tagsString = request.body.tags;
+    console.log('TAG STRING: '+tagsString);
+    let tagsArray = tagsString.replaceAll(' ', '').split(',');
+    console.log('END RESULT: ' + tagsArray);
 
     // Images are optional and are for the custom format option, this will be an array of base 64 strings
     // const newImage = req.body.images
@@ -76,7 +81,7 @@ router.post('/', async (request, response) => {
       author: request.body.author,
       description: request.body.description,
       thumbnail: request.body.thumbnail,
-      tags: request.body.tags,
+      tags: tagsArray,
       difficulty: request.body.difficulty,
       steps: stepsArray,
       ingredients: ingredientsArray,

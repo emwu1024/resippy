@@ -26,17 +26,6 @@ const Card = (props: CardProps) => {
         )}
         <span className="card-date">{props.recipeDate}</span>
         <span className="card-author">{props.recipeAuthor}</span>
-        {/* To do: 
-      - maybe make a helper function to format date
-      - edit database so created date and mandatory display image are added
-      - Clean database of old data so ready for new data
-      - Add some actual data to DB
-      - Implement tagging system:
-            - Difficulty rating
-                - Difficulty will be a picklist (single) which has a finite number of options (populated with Array from frontend)
-            - Types of food - array of tags?
-            - Geographic location? - backlog
-       */}
       </div>
     </div>
   );

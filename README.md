@@ -122,6 +122,7 @@ The backupdb.sh script attached just needs to be modified with your details and 
    2. Look into a tagging system / possible solutions for categorising recipes
 3. Create Recipes Page:
    1. Preview Section
+   2. Create chip input component for tags
 4. Recipes:
    1. Add toggle for displayRecipe - to check if it is ready to be published
    2. Editors can see all recipe views

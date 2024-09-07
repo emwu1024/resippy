@@ -8,9 +8,11 @@ import Tabs from "../../components/Tabs/Tabs";
 import ToggleButton from "../../components/Buttons/ToggleButton/ToggleButton";
 import CreateRecipeForm from "../../components/CreateRecipeForm/CreateRecipeForm";
 import Button from "../../components/Buttons/Button/Button";
+import { convertToBase64 } from "../../utils/utils";
 
 import { LuImagePlus } from "react-icons/lu";
 import { IconContext } from "react-icons";
+import Chip from "@mui/material/Chip";
 
 import "./CreateRecipe.css";
 
@@ -21,7 +23,7 @@ const CreateRecipe = () => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
-  const [tags, setTags] = useState<Array<string>>([]);
+  const [tags, setTags] = useState("");
   const [difficulty, setDifficulty] = useState("5 Mins");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
@@ -65,6 +67,7 @@ const CreateRecipe = () => {
       thumbnail,
       tags,
       steps,
+      difficulty,
       ingredients,
       editorHtml,
       isStandardised,
@@ -151,6 +154,21 @@ const CreateRecipe = () => {
               value={author}
             />
           </div>
+          <div className="form-field-container">
+            <label className="form-label">*Tags</label>
+            <input
+              type="text"
+              onChange={(e) => setTags(e.target.value)}
+              className="form-field input-text"
+              value={tags}
+            />
+            <p className="help-text">
+              Separate tags with a comma and use hyphens for multiword tags
+            </p>
+            <p className="help-text">
+              e.g. lunch, vegetarian, sandwich, air-fryer
+            </p>
+          </div>
 
           <div className="form-field-container">
             <label className="form-label">*Difficulty Rating</label>
@@ -219,17 +237,3 @@ const CreateRecipe = () => {
 };
 
 export default CreateRecipe;
-
-function convertToBase64(file: File): Promise<string | ArrayBuffer | null> {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    // Reads into Base64
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    };
-    fileReader.onerror = (error) => {
-      reject(error);
-    };
-  });
-}
