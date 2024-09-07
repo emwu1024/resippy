@@ -31,6 +31,20 @@ const RecipesIndex = () => {
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"
+          recipeTags={[
+            "tag1",
+            "tag2",
+            "tag3",
+            "tag4",
+            "tag5",
+            "tag6",
+            "tag1",
+            "tag2",
+            "tag3",
+            "tag4",
+            "tag5",
+            "tag6",
+          ]}
         ></Card>
         <Card
           recipeName="Tentacle Gnocchi"
@@ -38,6 +52,7 @@ const RecipesIndex = () => {
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"
+          recipeTags={["tag1", "tag2", "tag3", "tag4", "tag5", "tag6"]}
         ></Card>
         <Card
           recipeName="Tentacle Gnocchi"
@@ -45,6 +60,7 @@ const RecipesIndex = () => {
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"
+          recipeTags={["tag1"]}
         ></Card>
         <Card
           recipeName="Tentacle Gnocchi"
@@ -52,6 +68,7 @@ const RecipesIndex = () => {
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"
+          recipeTags={["tag1", "tag2"]}
         ></Card>
         <Card
           recipeName="Tentacle Gnocchi"
@@ -59,6 +76,7 @@ const RecipesIndex = () => {
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"
+          recipeTags={["tag1", "tag2", "tag3"]}
         ></Card>
         <Card
           recipeName="Tentacle Gnocchi"
@@ -66,6 +84,7 @@ const RecipesIndex = () => {
           recipeImg={examplePic}
           recipeDate="31.08.24"
           recipeAuthor="Senshi"
+          recipeTags={["tag1", "tag2", "tag3", "tag4"]}
         ></Card>
         <hr />
         <table className="w-full border-separate border-spacing-2">

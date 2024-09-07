@@ -7,6 +7,7 @@ interface CardProps {
   recipeDesc: string;
   recipeDate: string;
   recipeAuthor: string;
+  recipeTags?: Array<string>;
 }
 
 const Card = (props: CardProps) => {
@@ -26,6 +27,10 @@ const Card = (props: CardProps) => {
         )}
         <span className="card-date">{props.recipeDate}</span>
         <span className="card-author">{props.recipeAuthor}</span>
+        {/* Only display the first 3 tags otherwise it looks ugly */}
+        {props.recipeTags?.map(
+          (tag, index) => index < 3 && <span className="tag-text">#{tag} </span>
+        )}
       </div>
     </div>
   );
