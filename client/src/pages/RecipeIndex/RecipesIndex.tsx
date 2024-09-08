@@ -18,16 +18,47 @@ import { useQuery } from "../../utils/utils";
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
-  const [stags, setTags] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [loading, setLoading] = useState(false);
   const query = useQuery();
   // Tutorial uses useHistory which has been replaced with useNavigate as of react-router-dom v6
   const navigate = useNavigate();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
 
-  const searchPost = () => {
-    if (search.trim()) {
-      // Fetch the posts based on search
+  const searchPost = async () => {
+    if (search.trim() || tags.length > 0) {
+      try {
+        setLoading(true);
+
+        // Logging the parameters before sending the request
+        console.log("Search Query:", search);
+        console.log("Tags:", tags.join(","));
+
+        const response = await axios.get(
+          `http://localhost:8000/recipes/search`,
+          {
+            params: {
+              searchQuery: search || "none",
+              tags: tags.join(","),
+            },
+          }
+        );
+
+        console.log("Full response: ", response);
+
+        setRecipes(response.data.data);
+        setLoading(false);
+
+        navigate(
+          `/recipes/search?searchQuery=${search || "none"}&tags=${tags.join(
+            ","
+          )}`
+        );
+      } catch (err) {
+        console.log("Search error: ", err);
+        setLoading(false);
+      }
     } else {
       navigate("/recipes");
     }
