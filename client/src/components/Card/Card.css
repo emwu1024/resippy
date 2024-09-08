@@ -19,9 +19,9 @@
   max-width: 17rem;
   display: inline-block;
 
-  /* font-family: "Patrick Hand SC", system-ui; */
+  font-family: "Patrick Hand SC", system-ui;
   /* font-family: "Walter Turncoat", system-ui; */
-  font-family: "Yomogi", system-ui;
+  /* font-family: "Yomogi", system-ui; */
   font-weight: 400;
   font-style: normal;
   color: #414141;

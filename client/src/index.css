@@ -29,7 +29,7 @@
 
 body {
   margin: 0px;
-  background-color: var(--primary-bg-color);
+  /* background-color: var(--primary-bg-color); */
   color: var(--body-text-color);
 }
 

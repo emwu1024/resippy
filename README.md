@@ -66,6 +66,7 @@ The backupdb.sh script attached just needs to be modified with your details and 
 6. Values in .env get injected back into the code in production env so additional security measured need to be considered: 8:00 - https://www.youtube.com/watch?v=pAzqscDx580
 7. Wow really cool website about folding CSS effect! https://www.joshwcomeau.com/react/folding-the-dom/
 8. So apple TCC policy means cron jobs and launchd jobs can't run scripts that are in protected folders (Desktop, Documents, Downloads) and providing full disk access doesn't seem like the wisest security decision so the suggestion is to move the script into another folder where TCC doesn't apply: https://stackoverflow.com/questions/64419734/macos-catalina-launchd-cant-open-input-file-error
+9. React router dom has some key changes between v5 and v6, notably switch->routes and redirect->navigate: https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb
 
 ## Work Log
 

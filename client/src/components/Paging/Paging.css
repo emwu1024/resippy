@@ -2,7 +2,7 @@
   height: 100%;
 }
 
-a,
-button {
+/* Targets any a element with an li parent with a parent with the class pagination-container */
+.pagination-container li a {
   color: var(--body-text-color) !important;
 }

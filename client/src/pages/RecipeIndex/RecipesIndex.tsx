@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
@@ -8,11 +8,38 @@ import { MdOutlineDelete } from "react-icons/md";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import Paging from "../../components/Paging/Paging";
 import Card from "../../components/Card/Card";
+import Searchbar from "../../components/Search/Searchbar";
+import ChipInput from "../../components/Search/ChipInput";
+import Button from "../../components/Buttons/Button/Button";
 
 import examplePic from "../../assets/example-pic.webp";
+import { useQuery } from "../../utils/utils";
 
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([]);
+  const [search, setSearch] = useState("");
+  const [stags, setTags] = useState([]);
+  const query = useQuery();
+  // Tutorial uses useHistory which has been replaced with useNavigate as of react-router-dom v6
+  const navigate = useNavigate();
+  const page = query.get("page") || 1;
+  const searchQuery = query.get("searchQuery");
+
+  const searchPost = () => {
+    if (search.trim()) {
+      // Fetch the posts based on search
+    } else {
+      navigate("/recipes");
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      searchPost();
+      console.log("enter button was pressed!");
+    }
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/recipes")
@@ -89,7 +116,14 @@ const RecipesIndex = () => {
           recipeAuthor="Senshi"
           recipeTags={["tag1", "tag2", "tag3", "tag4"]}
         ></Card>
-        <Paging></Paging>
+        <Searchbar
+          search={search}
+          setSearch={setSearch}
+          handleKeyPress={handleKeyPress}
+        />
+        <ChipInput />
+        <Button btnText="Search" onClick={searchPost}></Button>
+        <Paging />
         <hr />
         <table className="w-full border-separate border-spacing-2">
           <thead>
