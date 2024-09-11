@@ -19,48 +19,50 @@ export const getRecipes = async (req, res) => {
 }
 
 // Get recipes by search query
+// export const getRecipeBySearch = async (req, res) => {
+//     const { searchQuery, tags } = req.query;
+//     try {
+//         let query = {};
+
+//         if (searchQuery) {
+//         // i is a flag for ignoring case sensitivity
+//         const name = new RegExp(searchQuery, "i");
+//         query.name = name;
+//         }
+
+//         if (tags) {
+//             console.log('tags: '+typeof(tags));
+//             const tagsArray = tags.split(',').filter(tag => tag);
+//             console.log('tags array: ' + typeof(tagsArray));
+//             if (tagsArray.length > 0) {
+//                 query.tags = { $in: tagsArray };
+//             }
+//         }
+        
+//         console.log("Constructed Query:", query);
+
+//         // Execute the query
+//         const recipes = await Recipe.find(query);
+        
+//         res.json({ data: recipes });
+//     } catch (error) {    
+//         res.status(404).json({ message: error.message });
+//     }
+// }
+
 export const getRecipeBySearch = async (req, res) => {
     const { searchQuery, tags } = req.query;
+
     try {
-        let query = {};
-
-        if (searchQuery) {
-        // i is a flag for ignoring case sensitivity
         const name = new RegExp(searchQuery, "i");
-        query.name = name;
-        }
 
-        if (tags) {
-        const tagsArray = tags.split(',').filter(tag => tag);
-        if (tagsArray.length > 0) {
-            query.tags = { $in: tagsArray };
-        }
-        }
-        
-        console.log("Constructed Query:", query);
+        const recipes = await Recipe.find({ $or: [ { name }, { tags: { $in: tags.split(',') } } ]});
 
-        // Execute the query
-        const recipes = await Recipe.find(query);
-        
         res.json({ data: recipes });
     } catch (error) {    
         res.status(404).json({ message: error.message });
     }
 }
-
-// export const getPostsBySearch = async (req, res) => {
-//     const { searchQuery, tags } = req.query;
-
-//     try {
-//         const title = new RegExp(searchQuery, "i");
-
-//         const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});
-
-//         res.json({ data: posts });
-//     } catch (error) {    
-//         res.status(404).json({ message: error.message });
-//     }
-// }
 
 // Get single recipe by ID
 export const getRecipe = async (req, res) => { 

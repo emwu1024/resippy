@@ -1,7 +1,10 @@
 import React from "react";
 import "./Card.css";
+import { Link } from "react-router-dom";
+import { TbEdit } from "react-icons/tb";
 
 interface CardProps {
+  recipeId: string;
   recipeImg: string;
   recipeName: string;
   recipeDesc: string;
@@ -25,12 +28,20 @@ const Card = (props: CardProps) => {
         ) : (
           <p className="card-desc">{props.recipeDesc}</p>
         )}
-        <span className="card-date">{props.recipeDate}</span>
-        <span className="card-author">{props.recipeAuthor}</span>
+        <p className="card-date">{props.recipeDate}</p>
+        <p className="card-author">{props.recipeAuthor}</p>
         {/* Only display the first 3 tags otherwise it looks ugly */}
-        {props.recipeTags?.map(
-          (tag, index) => index < 3 && <span className="tag-text">#{tag} </span>
-        )}
+        <div className="tag-container">
+          {props.recipeTags?.map(
+            (tag, index) =>
+              index < 3 && <span className="tag-text">#{tag} </span>
+          )}
+        </div>
+        <span className="edit-icon">
+          <Link to={`/recipes/edit/${props.recipeId}`}>
+            <TbEdit color="green" size="1.75rem" />
+          </Link>
+        </span>
       </div>
     </div>
   );

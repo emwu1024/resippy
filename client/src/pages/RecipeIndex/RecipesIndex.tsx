@@ -13,12 +13,12 @@ import ChipInput from "../../components/Search/ChipInput";
 import Button from "../../components/Buttons/Button/Button";
 
 import examplePic from "../../assets/example-pic.webp";
-import { useQuery } from "../../utils/utils";
+import { useQuery, formatDate } from "../../utils/utils";
 
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState<Array<string>>([]);
   const [loading, setLoading] = useState(false);
   const query = useQuery();
   // Tutorial uses useHistory which has been replaced with useNavigate as of react-router-dom v6
@@ -86,28 +86,22 @@ const RecipesIndex = () => {
     <div>
       <PageContentContainer width="85%">
         <h1 className="heading page-margin-top">Recipe Index</h1>
+        {recipes.map((recipe, index) => (
+          <Link to={`/recipes/${recipe._id}`}>
+            <Card
+              recipeId={recipe._id}
+              recipeName={recipe.name}
+              recipeDesc={recipe.description}
+              recipeImg={recipe.thumbnail}
+              recipeDate={formatDate(new Date(recipe.createdAt))}
+              recipeAuthor={recipe.author}
+              recipeTags={recipe.tags}
+            ></Card>
+          </Link>
+        ))}
+
         <Card
-          recipeName="Tentacle Gnocchi"
-          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles. This is an example of a longer description to see how it gets handled"
-          recipeImg={examplePic}
-          recipeDate="31.08.24"
-          recipeAuthor="Senshi"
-          recipeTags={[
-            "tag1",
-            "tag2",
-            "tag3",
-            "tag4",
-            "tag5",
-            "tag6",
-            "tag1",
-            "tag2",
-            "tag3",
-            "tag4",
-            "tag5",
-            "tag6",
-          ]}
-        ></Card>
-        <Card
+          recipeId={"123"}
           recipeName="Tentacle Gnocchi"
           recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
           recipeImg={examplePic}
@@ -115,47 +109,16 @@ const RecipesIndex = () => {
           recipeAuthor="Senshi"
           recipeTags={["tag1", "tag2", "tag3", "tag4", "tag5", "tag6"]}
         ></Card>
-        <Card
-          recipeName="Tentacle Gnocchi"
-          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
-          recipeImg={examplePic}
-          recipeDate="31.08.24"
-          recipeAuthor="Senshi"
-          recipeTags={["tag1"]}
-        ></Card>
-        <Card
-          recipeName="Tentacle Gnocchi"
-          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles. lorem ispum dolor blah blah blah blah balh aksjdgfhlsjfks aksf ksdhg ksdlf jsld jlshdf gshg shgfl hiosahf id hilahslhdhlsbhsldgsl jls js js os "
-          recipeImg={examplePic}
-          recipeDate="31.08.24"
-          recipeAuthor="Senshi"
-          recipeTags={["tag1", "tag2"]}
-        ></Card>
-        <Card
-          recipeName="Tentacle Gnocchi"
-          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles"
-          recipeImg={examplePic}
-          recipeDate="31.08.24"
-          recipeAuthor="Senshi"
-          recipeTags={["tag1", "tag2", "tag3"]}
-        ></Card>
-        <Card
-          recipeName="Tentacle Gnocchi"
-          recipeDesc="A hearty pasta dish made with flour from the orc village and foraged tentacles alsfj al jasdl fjsl glds lsdfj vd gdf dkl js kdjsdlgd   d jldkg lsj d gdgj d dl  jdsf jldkj ldjg d kdj kf dg sj so s dkl dj gd jfos;jopfj  kd s jlsk glksjf ls"
-          recipeImg={examplePic}
-          recipeDate="31.08.24"
-          recipeAuthor="Senshi"
-          recipeTags={["tag1", "tag2", "tag3", "tag4"]}
-        ></Card>
         <Searchbar
           search={search}
           setSearch={setSearch}
           handleKeyPress={handleKeyPress}
         />
-        <ChipInput />
+        <ChipInput tags={tags} setTags={setTags} />
         <Button btnText="Search" onClick={searchPost}></Button>
         <Paging />
         <hr />
+
         <table className="w-full border-separate border-spacing-2">
           <thead>
             <tr>
@@ -205,7 +168,6 @@ const RecipesIndex = () => {
             ))}
           </tbody>
         </table>
-        <Link to="/recipes/create"></Link>
       </PageContentContainer>
     </div>
   );

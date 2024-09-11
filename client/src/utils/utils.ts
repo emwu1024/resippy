@@ -18,3 +18,22 @@ export function useQuery() {
     return new URLSearchParams(useLocation().search)
   }
   
+  export function formatDate(date : Date): string {
+    let day: number | string = date.getDate();
+    let month: number | string = date.getMonth();
+
+    if (day < 10 ) {
+        day = '0' + day;
+    }
+
+    if (month < 10 ) {
+        month = '0' + month;
+    }
+
+    let formattedDate = day + '.' + month + '.' + date.getFullYear();
+    console.log('DATE INFO!!!');
+    console.log(date.getMonth());
+    console.log(date.getFullYear());
+    console.log(date.getDate());
+    return formattedDate.toString()
+  }

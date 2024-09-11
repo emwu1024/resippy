@@ -1,25 +1,29 @@
 import React from "react";
 import { Autocomplete, Chip, TextField } from "@mui/material";
 
-interface SearchbarProps {
+interface ChipInputProps {
   tags: Array<string>;
   setTags: React.Dispatch<React.SetStateAction<Array<string>>>;
 }
 
-const ChipInput = () => {
+const ChipInput = (props: ChipInputProps) => {
   return (
     <div>
       <Autocomplete
         multiple
         id="tags-filled"
         options={popularTags.map((option) => option.title)}
-        // defaultValue={[top100Films[12].title]}
         freeSolo
         renderTags={(value: string[], getTagProps) =>
           value.map((option: string, index: number) => (
             <Chip label={option} {...getTagProps({ index })} />
           ))
         }
+        onChange={(event, newValue) => {
+          console.log(newValue);
+          props.setTags(newValue);
+          console.log("tags: ", props.tags);
+        }}
         renderInput={(params) => (
           <TextField
             {...params}
