@@ -5,48 +5,46 @@ const router = express.Router();
 
 // Get all recipes
 export const getRecipes = async (req, res) => { 
-    try {
-        console.log('working >:D');
-        const recipes = await Recipe.find({});
-        return res.status(200).json({
-        count: recipes.length,
-        data: recipes,
-      });
-    } catch (error) {
-        res.status(500).send({ message: error.message });
-        console.log('hmm it failed');
-    }
+  const { page } = req.query;
+  try {
+    // Can change limit later
+    const LIMIT = 5;
+    const startIndex = (Number(page) - 1) * LIMIT
+    const total = await Recipe.countDocuments({});
+
+      console.log('working >:D');
+
+      const recipes = await Recipe.find({}).sort({_id: -1}).limit(LIMIT).skip(startIndex);
+
+      // Testing:
+      // console.log('PAGE:' + page)
+      // console.log('START INDEX:' + startIndex)
+      // console.log(recipes);
+
+      return res.status(200).json({
+      count: recipes.length,
+      data: recipes,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total/LIMIT)
+    });
+  } catch (error) {
+      res.status(500).send({ message: error.message });
+      console.log('hmm it failed');
+  }
 }
 
-// Get recipes by search query
-// export const getRecipeBySearch = async (req, res) => {
-//     const { searchQuery, tags } = req.query;
+// Old code: break in case of emergency
+// export const getRecipes = async (req, res) => { 
 //     try {
-//         let query = {};
-
-//         if (searchQuery) {
-//         // i is a flag for ignoring case sensitivity
-//         const name = new RegExp(searchQuery, "i");
-//         query.name = name;
-//         }
-
-//         if (tags) {
-//             console.log('tags: '+typeof(tags));
-//             const tagsArray = tags.split(',').filter(tag => tag);
-//             console.log('tags array: ' + typeof(tagsArray));
-//             if (tagsArray.length > 0) {
-//                 query.tags = { $in: tagsArray };
-//             }
-//         }
-        
-//         console.log("Constructed Query:", query);
-
-//         // Execute the query
-//         const recipes = await Recipe.find(query);
-        
-//         res.json({ data: recipes });
-//     } catch (error) {    
-//         res.status(404).json({ message: error.message });
+//         console.log('working >:D');
+//         const recipes = await Recipe.find({});
+//         return res.status(200).json({
+//         count: recipes.length,
+//         data: recipes,
+//       });
+//     } catch (error) {
+//         res.status(500).send({ message: error.message });
+//         console.log('hmm it failed');
 //     }
 // }
 
