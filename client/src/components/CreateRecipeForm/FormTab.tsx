@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { LuImagePlus } from "react-icons/lu";
 import { IconContext } from "react-icons";
-import "./CreateRecipeForm.css";
+import "./FormTab.css";
 import { convertToBase64 } from "../../utils/utils";
 
-interface CreateRecipeFormProps {
+interface FormTabProps {
   steps: string;
   ingredients: string;
   images: Array<string>;
@@ -13,7 +13,7 @@ interface CreateRecipeFormProps {
   setImages: React.Dispatch<React.SetStateAction<Array<string>>>;
 }
 
-const CreateRecipeForm = (props: CreateRecipeFormProps) => {
+const FormTab = (props: FormTabProps) => {
   const [fileNames, setFileNames] = useState<File[]>([]);
 
   const handleMultipleFileUpload = async (
@@ -98,4 +98,4 @@ const CreateRecipeForm = (props: CreateRecipeFormProps) => {
   );
 };
 
-export default CreateRecipeForm;
+export default FormTab;
