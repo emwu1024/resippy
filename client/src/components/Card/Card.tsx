@@ -42,11 +42,6 @@ const Card = (props: CardProps) => {
             </Link>
           </span>
         )}
-        {/* <span className="edit-icon">
-          <Link to={`/recipes/edit/${props.recipeId}`}>
-            <TbEdit color="green" size="1.75rem" />
-          </Link>
-        </span> */}
       </div>
     </div>
   );

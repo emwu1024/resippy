@@ -1,46 +1,29 @@
 .book-container {
   background: url("https://i.imgur.com/0kjMcUe.png");
-  filter: brightness(0.95) sepia(30%) saturate(80%);
-  /* border-radius: 30px; */
-  height: 100%;
-  clip-path: polygon(
-    0% 0%,
-    0% 93%,
-    5% 98%,
-    6% 99%,
-    8% 95%,
-    12% 94%,
-    15% 97%,
-    17% 93%,
-    20% 98%,
-    22% 97%,
-    25% 99%,
-    31% 94%,
-    35% 93%,
-    39% 96%,
-    43% 93%,
-    45% 94%,
-    47% 95%,
-    50% 92%,
-    52% 96%,
-    54% 93%,
-    58% 92%,
-    60% 95%,
-    62% 93%,
-    65% 96%,
-    69% 93%,
-    72% 93%,
-    75% 94%,
-    79% 97%,
-    81% 94%,
-    85% 93%,
-    88% 92%,
-    90% 95%,
-    93% 93%,
-    95% 92%,
-    97% 95%,
-    100% 97%,
-    100% 0%
-  );
+  /* filter: brightness(0.95) sepia(30%) saturate(80%);
+   */
+  filter: brightness(0.95) sepia(30%) saturate(100%) hue-rotate(-10deg);
+  height: 100vh;
   overflow: auto;
+}
+
+.book-content-container {
+  background-image: linear-gradient(#5c5c5c, #d3d3d3);
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  display: grid;
+}
+
+.book-left-page {
+}
+
+.book-right-page {
+}
+
+@media (min-width: 850px) {
+  .book-content-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

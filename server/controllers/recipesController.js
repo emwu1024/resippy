@@ -145,9 +145,6 @@ export const createRecipe = async (req, res) => {
         let ingredientsString = req.body.ingredients;
         let ingredientsArray = ingredientsString.split('\n');
     
-        let tagsString = req.body.tags;
-        let tagsArray = tagsString.replaceAll(' ', '').split(',');
-    
         // Images are optional and are for the custom format option, this will be an array of base 64 strings
         // const newImage = req.body.images
     
@@ -156,7 +153,7 @@ export const createRecipe = async (req, res) => {
           author: req.body.author,
           description: req.body.description,
           thumbnail: req.body.thumbnail,
-          tags: tagsArray,
+          tags: req.body.tags,
           difficulty: req.body.difficulty,
           steps: stepsArray,
           ingredients: ingredientsArray,
