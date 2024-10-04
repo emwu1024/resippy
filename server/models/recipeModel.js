@@ -4,21 +4,27 @@ const recipeSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: function() {
-        return this.isStandardised;
-      },
+      required: true,
     },
     author: {
       type: String,
-      required: function() {
-        return this.isStandardised;
-      },
+      required: true,
+    },
+    thumbnail: {
+      type: String,
+      required: true,
+    },
+    difficulty: {
+      type: String,
+      required: true,
     },
     description: {
       type: String,
-      required: function() {
-        return this.isStandardised;
-      },
+      required: true,
+    },
+    tags: {
+      type: Array,
+      required: false,
     },
     steps: {
       type: Array,

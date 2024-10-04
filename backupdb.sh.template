@@ -1,0 +1,12 @@
+#! /bin/zsh
+
+# Variables
+URI="<REPLACE_WITH_YOUR_CONNECTION_STRING>"
+BACKUP_DIR="<REPLACE_WITH_YOUR_BACKUPS_ABSOLUTE_PATH>"
+DATE=$(date +"%Y-%m-%d")
+
+DEST_DIR="${BACKUP_DIR}/${DATE}"
+mkdir -p "$DEST_DIR"
+
+mongodump --uri="$URI" --out="$DEST_DIR"
+echo "Backup of resippy-cluster completed successfully. Backup stored in $DEST_DIR."

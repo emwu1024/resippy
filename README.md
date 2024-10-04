@@ -22,18 +22,39 @@ This project is a repository for recipes I have previously made so I can remembe
 
 ### Frontend
 
-1. Navigate to the 'client' folder.
-2. Run `npm run dev`
-3. Frontend URLs:
-4. Homepage: http://localhost:5173
-5. Index: http://localhost:5173/recipes
-6. Create Recipe: http://localhost:5173/recipes/create
+1. If running project from scratch:
+   1. Create .npmrc file from .npmrc.template with your tiptap auth token
+   2. Create .env file from .env.template with your auth0 domain and clientID
+   3. Run `npm install` in client folder
+2. Navigate to the 'client' folder.
+3. Run `npm run dev`
+4. Frontend URLs:
+   1. Homepage: http://localhost:5173
+   2. Index: http://localhost:5173/recipes
+   3. Create Recipe: http://localhost:5173/recipes/create
 
 ### Backend
 
-1. Navigate to the 'server' folder.
-2. Run `npm run dev`
-3. Check Backend by navigating to this URL: http://localhost:8000/recipes
+1. If running project from scratch:
+   1. Create config.js file from config.js.template with your mongoDB information
+   2. Run `npm install` in server folder
+2. Navigate to the 'server' folder.
+3. Run `npm run dev`
+4. Check Backend by navigating to this URL: http://localhost:8000/recipes
+
+#### Mongo Backups
+
+The project runs on mongoDB and this iteration uses the M0 cluster which can't take advantage of mongoDBs autobackup functionality.
+The backupdb.sh script attached just needs to be modified with your details and moved to whatever directory you want
+
+1. Create backupdb.sh from backupdb.sh.template file and add your connection string and absolute paths to work
+2. Ensure the script has permission to run - `chmod +x backupdb.sh`
+3. (optional) Set up a cron job so backups are made incrementally and automatically
+   1. IF setting up a cron job and on mac you will likely need to move the the script to you /Users/username folder
+   2. Open terminal and type `crontab -e`
+   3. Enter your cron job - I used this `00 18 * * 0,3 "/Users/username/backupdb.sh" > "/Users/username/your/project/path/here/cronjob.log" 2>1`
+   4. Considerations: If the device you are running the cron job is off / asleep the cron job will not run.
+4. Should you need to rollback to a previous backup run this command: `mongorestore <YOUR_CONNECTION_STRING> backups/<DATED_FOLDER>\`
 
 ## Findings Log
 
@@ -42,6 +63,10 @@ This project is a repository for recipes I have previously made so I can remembe
 3. Typescript doesn't like some of the things Javascript accepts e.g. react-icons doesn't like the use of 'className' instead of attributes like 'color' etc.
 4. Tiptap is working as expected, some fonts do not have italics.
 5. Good website for creating css animations: https://webcode.tools/css-generator/keyframe-animation
+6. Values in .env get injected back into the code in production env so additional security measured need to be considered: 8:00 - https://www.youtube.com/watch?v=pAzqscDx580
+7. Wow really cool website about folding CSS effect! https://www.joshwcomeau.com/react/folding-the-dom/
+8. So apple TCC policy means cron jobs and launchd jobs can't run scripts that are in protected folders (Desktop, Documents, Downloads) and providing full disk access doesn't seem like the wisest security decision so the suggestion is to move the script into another folder where TCC doesn't apply: https://stackoverflow.com/questions/64419734/macos-catalina-launchd-cant-open-input-file-error
+9. React router dom has some key changes between v5 and v6, notably switch->routes and redirect->navigate: https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb
 
 ## Work Log
 
@@ -72,6 +97,21 @@ This project is a repository for recipes I have previously made so I can remembe
 21. Followed this tutorial to get be able to upload images for standardised format: https://www.youtube.com/watch?v=pfxd7L1kzio
 22. Created an MVP Plan, currently finalising UI on Create Recipes Page
 23. Buttons: not for MVP but will be looking into the handdrawn button design for the cookbook style here: https://css-tricks.com/a-complete-guide-to-links-and-buttons/
+24. 11.08.24: Working on Auth + Auth using Auth0:
+    1. https://www.youtube.com/watch?v=pAzqscDx580
+    2. https://auth0.com/docs
+25. Making a component to lightly hide signin button
+    1. https://www.geeksforgeeks.org/how-to-create-border-animation-using-css/
+    2. https://codepen.io/lomojean/pen/XWNNyx
+    3. https://www.joshwcomeau.com/react/folding-the-dom/#our-mvp-5
+26. Looked into RBAC amd there was a useful example here:
+    1. https://developer.auth0.com/resources/code-samples/full-stack/hello-world/basic-role-based-access-control/spa/react-typescript/express-javascript
+    2. https://community.auth0.com/t/how-to-integrate-authentication-in-mern-app-using-auth0/104582/2
+27. Due to time limitations RBAC implementation is in the backlog and deletion will only be available directly through mongodb - authentication will proceed as expected
+28. Fixed refresh login persistence issue with solutions here: https://stackoverflow.com/questions/63537913/auth0-does-not-persist-login-on-page-refresh-for-email-password
+29. 26.08.24: Looked into version control and backups available with mongodb, created a script which runs mongodump for backups and implemented a cron job that runs twice a week
+30. Add scotch tape effect for card: https://codepen.io/binarykiwi/pen/BbOoPy
+31. 16.09.24: Added pagination, tags, and search functionality by extending this tutorial: https://www.youtube.com/watch?v=LYWgPSbPDfQ
 
 ## Back Log
 
@@ -84,3 +124,10 @@ This project is a repository for recipes I have previously made so I can remembe
    2. Look into a tagging system / possible solutions for categorising recipes
 3. Create Recipes Page:
    1. Preview Section
+   2. Create chip input component for tags
+4. Recipes:
+   1. Add toggle for displayRecipe - to check if it is ready to be published
+   2. Editors can see all recipe views
+   3. Users can only see recipes that are published
+5. Auth:
+   1. RBAC using the example

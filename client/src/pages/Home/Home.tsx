@@ -1,12 +1,12 @@
 import React from "react";
 import "./home.css";
-import Navbar from "../../components/Navbar/Navbar";
+
+import Button from "../../components/Buttons/Button/Button";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 
 const Home = () => {
   return (
     <div>
-      <Navbar></Navbar>
       <div className="content-container">
         <div className="hero-image">
           <div className="hero-text">
@@ -14,27 +14,21 @@ const Home = () => {
           </div>
         </div>
         <br />
-        <PageContentContainer>
+        <PageContentContainer width="50%">
           <h1 className="heading">Welcome to Resippys!</h1>
-          <p>
-            This is a website I made to help me keep track of the recipes that
-            I've made as I keep forgetting which recipes I know everytime I step
-            into the kitchen.
+          <hr className="decorative-hr" />
+          <p className="body-text margin-top-3">
+            Ever step into the kitchen and completely forget <i>every</i> single
+            recipe you've made in the past year?
           </p>
-          <p>
-            I also made this website so that I could practice my coding skills
+          <p className="body-text">Same.</p>
+          <p className="body-text">
+            This is a website I made to help me keep track of them all
           </p>
+          <p className="body-text">and to practice coding</p>
           <br />
           <br />
-          <h2 className="subheading-1">How do I use this website?</h2>
-          <p>
-            Asides from using it like a normal website through, idk clicking
-            through stuff till you find what your looking for. You'll be able to
-            find an index of all of the recipes in the recipes section. You'll
-            be able to find an atlas of recipes (once i've made that feature)
-            through the atlas navlink, and you can look through the about page
-            for some great lorem ipsum text.
-          </p>
+          <Button btnText="Randomise Recipe Time!"></Button>
         </PageContentContainer>
       </div>
     </div>

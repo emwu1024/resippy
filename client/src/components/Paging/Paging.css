@@ -1,0 +1,13 @@
+.pagination-container {
+  height: 100%;
+  padding-top: 5rem;
+}
+
+.pagination-container li a {
+  color: var(--body-text-color) !important;
+}
+
+.pagination-styling {
+  justify-content: center !important;
+  display: flex !important;
+}
