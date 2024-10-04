@@ -5,7 +5,7 @@ import CreateRecipe from "./pages/CreateRecipe/CreateRecipe";
 import RecipesIndex from "./pages/RecipeIndex/RecipesIndex";
 import UpdateRecipe from "./pages/UpdateRecipe";
 // import DeleteRecipe from './pages/DeleteRecipe';
-import ShowRecipe from "./pages/ShowRecipe";
+import ShowRecipe from "./pages/ShowRecipe/ShowRecipe.tsx";
 import { AuthenticationGuard } from "./components/AuthenticationGuard/AuthenticationGuard";
 import About from "./pages/About/About";
 import Atlas from "./pages/Atlas/Atlas";

@@ -12,7 +12,7 @@ const CreateRecipe = () => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState<Array<string>>([]);
   const [difficulty, setDifficulty] = useState("5 Mins");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");

@@ -8,9 +8,9 @@ import Paging from "../../components/Paging/Paging";
 import Card from "../../components/Card/Card";
 import Searchbar from "../../components/Search/Searchbar";
 import ChipInput from "../../components/Search/ChipInput";
-import Button from "../../components/Buttons/Button/Button";
 
 import examplePic from "../../assets/example-pic.webp";
+import "./RecipeIndex.css";
 import { useQuery, formatDate } from "../../utils/utils";
 
 interface Recipe {
@@ -34,7 +34,13 @@ const RecipesIndex = () => {
   const searchQuery = query.get("searchQuery");
 
   const searchPost = async () => {
-    if (search.trim() || tags.length > 0) {
+    console.log("IN SEARCH POST");
+    console.log(tags);
+    if (
+      search.trim() ||
+      tags.length > 0 ||
+      (tags[0] != "" && tags[0] != undefined)
+    ) {
       try {
         setLoading(true);
         const response = await axios.get(
@@ -61,6 +67,7 @@ const RecipesIndex = () => {
       }
     } else {
       navigate("/recipes");
+      fetchRecipes(page);
     }
   };
 
@@ -94,17 +101,28 @@ const RecipesIndex = () => {
     <div>
       <PageContentContainer width="85%">
         <h1 className="heading page-margin-top">Recipe Index</h1>
-        <Searchbar
-          search={search}
-          setSearch={setSearch}
-          handleKeyPress={handleKeyPress}
-        />
-        <ChipInput tags={tags} setTags={setTags} />
-        <Button btnText="Search" onClick={searchPost}></Button>
+        <div className="search-container">
+          <div className="searchbar-container">
+            <Searchbar
+              search={search}
+              setSearch={setSearch}
+              handleKeyPress={handleKeyPress}
+              searchPost={searchPost}
+            />
+          </div>
+          <div className="chip-container">
+            <ChipInput
+              tags={tags}
+              setTags={setTags}
+              searchPost={searchPost}
+              handleKeyPress={handleKeyPress}
+            />
+          </div>
+        </div>
         {loading ? (
           <CircularProgress color="success" size="5rem" />
         ) : (
-          <div>
+          <div className="cards-container">
             {recipes.map((recipe, index) => (
               <Link to={`/recipes/${recipe._id}`} key={recipe._id}>
                 <Card

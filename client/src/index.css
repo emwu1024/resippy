@@ -11,11 +11,13 @@
   --secondary-text-color: #3d1308;
   --primary-bg-color: #0e1309;
   --secondary-bg-color: #283618;
+  --form-bg-color: #89975c;
   /* --secondary-bg-color: #1b2511; */
 
   --heading-text-size: 50px;
   --subheading-1-text-size: 36px;
   --subheading-2-text-size: 30px;
+  --body-text-size: 18px;
 
   --heading-font: "Philosopher", sans-serif;
   --body-font: "Quicksand", sans-serif;
@@ -25,6 +27,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: unset;
 }
 
 body {
@@ -55,6 +58,11 @@ body {
   margin-bottom: 0.25rem;
 }
 
+.body-text {
+  font-size: var(--body-text-size);
+  font-weight: 500;
+}
+
 .horizontal-centre {
   text-align: center;
   align-items: center;
@@ -67,6 +75,10 @@ body {
 
 .page-margin-top {
   margin-top: 10rem;
+}
+
+.margin-top-3 {
+  margin-top: 3rem;
 }
 
 .decorative-hr {

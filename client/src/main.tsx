@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import "./index.css";
 
 let domain = "";
@@ -24,6 +26,21 @@ if (import.meta.env.VITE_RESIPPY_APP_AUTH0_CLIENT_ID) {
   );
 }
 
+const theme = createTheme({
+  palette: {
+    background: {
+      default: "#0e1309",
+      // default: "white",
+    },
+    text: {
+      primary: "#e1be96",
+    },
+  },
+  typography: {
+    fontFamily: '"Quicksand"',
+  },
+});
+
 // JS and TS differ slightly here
 // JS version:
 // ReactDOM.createRoot(document.getElementById('root')).render(
@@ -42,7 +59,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       useRefreshTokens={true}
       cacheLocation="localstorage"
     >
-      <App />
+      <ThemeProvider theme={theme}>
+        <CssBaseline /> {/* Normalize CSS across browsers */}
+        <App />
+      </ThemeProvider>
     </Auth0Provider>
   </BrowserRouter>
 );

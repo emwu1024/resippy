@@ -111,6 +111,7 @@ The backupdb.sh script attached just needs to be modified with your details and 
 28. Fixed refresh login persistence issue with solutions here: https://stackoverflow.com/questions/63537913/auth0-does-not-persist-login-on-page-refresh-for-email-password
 29. 26.08.24: Looked into version control and backups available with mongodb, created a script which runs mongodump for backups and implemented a cron job that runs twice a week
 30. Add scotch tape effect for card: https://codepen.io/binarykiwi/pen/BbOoPy
+31. 16.09.24: Added pagination, tags, and search functionality by extending this tutorial: https://www.youtube.com/watch?v=LYWgPSbPDfQ
 
 ## Back Log
 

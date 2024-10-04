@@ -1,8 +1,13 @@
 .pagination-container {
   height: 100%;
+  padding-top: 5rem;
 }
 
-/* Targets any a element with an li parent with a parent with the class pagination-container */
 .pagination-container li a {
   color: var(--body-text-color) !important;
+}
+
+.pagination-styling {
+  justify-content: center !important;
+  display: flex !important;
 }

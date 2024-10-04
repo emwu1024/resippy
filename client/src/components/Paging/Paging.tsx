@@ -31,14 +31,12 @@ const Paging = ({ page }: PagingProps) => {
   return (
     <div className="pagination-container">
       <Pagination
+        className="pagination-styling"
         count={numberOfPages}
-        color="primary"
+        color="success"
         showFirstButton
         showLastButton
         page={page || 1}
-        // renderItem={(item) => {
-        //   <PaginationItem {...item} component={Link} to={`/posts?page=${1}`} />;
-        // }}
         renderItem={(item) => (
           <PaginationItem
             {...item}

@@ -14,11 +14,19 @@
 .form-field {
   width: 100%;
   border: none;
-  background: #89975c;
+  background: var(--form-bg-color);
   margin-top: 0.4rem;
-  border-radius: 12px;
+  border-radius: 25px;
   padding: 0.5rem;
   font-family: "Quicksand", sans-serif;
+  transition: 0.4s;
+  box-sizing: border-box;
+}
+
+.form-field-container select {
+  /* text-align-last: center;
+  text-align: center; */
+  padding-left: 20px;
 }
 
 .input-text {
@@ -33,7 +41,6 @@
 }
 
 .form-field-container {
-  margin: 0.75rem;
   margin-bottom: 1.25rem;
 }
 

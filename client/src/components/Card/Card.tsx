@@ -2,6 +2,7 @@ import React from "react";
 import "./Card.css";
 import { Link } from "react-router-dom";
 import { TbEdit } from "react-icons/tb";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface CardProps {
   recipeId: string;
@@ -14,6 +15,7 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
+  const { isAuthenticated } = useAuth0();
   return (
     <div className="img-tape img-tape-3">
       <div className="card-container">
@@ -22,26 +24,29 @@ const Card = (props: CardProps) => {
           src={props.recipeImg}
           alt={`Preview image of ${props.recipeName} `}
         />
-        <p className="card-heading">{props.recipeName}</p>
-        {props.recipeDesc.length > 80 ? (
-          <p className="card-desc">{props.recipeDesc.slice(0, 79)}...</p>
-        ) : (
-          <p className="card-desc">{props.recipeDesc}</p>
-        )}
-        <p className="card-date">{props.recipeDate}</p>
-        <p className="card-author">{props.recipeAuthor}</p>
+        <p className="card-heading truncate">{props.recipeName}</p>
+        <p className="card-desc truncate">{props.recipeDesc}</p>
+        <p className="card-date truncate">{props.recipeDate}</p>
+        <p className="card-author truncate">{props.recipeAuthor}</p>
         {/* Only display the first 3 tags otherwise it looks ugly */}
         <div className="tag-container">
           {props.recipeTags?.map(
             (tag, index) =>
-              index < 3 && <span className="tag-text">#{tag} </span>
+              tag && index < 3 && <span className="tag-text">#{tag} </span>
           )}
         </div>
-        <span className="edit-icon">
+        {isAuthenticated && (
+          <span className="edit-icon">
+            <Link to={`/recipes/edit/${props.recipeId}`}>
+              <TbEdit color="green" size="1.75rem" />
+            </Link>
+          </span>
+        )}
+        {/* <span className="edit-icon">
           <Link to={`/recipes/edit/${props.recipeId}`}>
             <TbEdit color="green" size="1.75rem" />
           </Link>
-        </span>
+        </span> */}
       </div>
     </div>
   );

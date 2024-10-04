@@ -8,7 +8,7 @@ export const getRecipes = async (req, res) => {
   const { page } = req.query;
   try {
     // Can change limit later
-    const LIMIT = 4;
+    const LIMIT = 7;
     const startIndex = (Number(page) - 1) * LIMIT
     const total = await Recipe.countDocuments({});
 
@@ -53,6 +53,21 @@ export const getRecipeBySearch = async (req, res) => {
 
     try {
         const name = new RegExp(searchQuery, "i");
+        // let query = { name }; // Base query that searches by name
+
+        // if (tags) {
+        //   const tagArray = tags.split(',');
+        //   if (tagArray.length > 0 && tagArray[0] !== "") {
+        //     query = {
+        //       $or: [
+        //         { name },
+        //         { tags: { $in: tagArray } }
+        //       ]
+        //     };
+        //   }
+        // }
+
+        // const recipes = await Recipe.find(query);
 
         const recipes = await Recipe.find({ $or: [ { name }, { tags: { $in: tags.split(',') } } ]});
 
@@ -60,6 +75,25 @@ export const getRecipeBySearch = async (req, res) => {
     } catch (error) {    
         res.status(404).json({ message: error.message });
     }
+}
+
+export const getAllTags = async (req, res) => {
+  try {
+    const result = await Recipe.aggregate([
+      { $unwind: "$tags" },
+      { $match: { tags: { $ne: "" } } },
+      { $group: { _id: null, uniqueTags: { $addToSet: "$tags" } } },
+      { $project: { _id: 0, uniqueTags: 1 } }
+    ]);
+    const sortedTags = result[0]?.uniqueTags.sort();
+    if (sortedTags) {
+      res.json(sortedTags);
+    } else {
+      res.status(404).json({ message: 'No tags found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
 
 // Get single recipe by ID

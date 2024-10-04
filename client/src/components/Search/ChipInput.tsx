@@ -1,18 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Autocomplete, Chip, TextField } from "@mui/material";
+import axios from "axios";
+import "./ChipInpux.css";
 
 interface ChipInputProps {
   tags: Array<string>;
   setTags: React.Dispatch<React.SetStateAction<Array<string>>>;
+  searchPost?: () => void;
+  handleKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const ChipInput = (props: ChipInputProps) => {
+  const [tagSet, setTagSet] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/recipes/tags");
+        setTagSet(response.data);
+      } catch (error) {
+        console.error("Error fetching tags:", error);
+      }
+    };
+    fetchTags();
+  }, []);
+
+  useEffect(() => {
+    if (props.searchPost) {
+      props.searchPost();
+      console.log("Done!!!");
+    }
+  }, [props.tags]);
+
   return (
     <div>
       <Autocomplete
+        className="chipinput-styling"
         multiple
         id="tags-filled"
-        options={popularTags.map((option) => option.tag)}
+        options={tagSet.map((option) => option)}
         freeSolo
         renderTags={(value: string[], getTagProps) =>
           value.map((option: string, index: number) => (
@@ -20,9 +46,10 @@ const ChipInput = (props: ChipInputProps) => {
           ))
         }
         onChange={(event, newValue) => {
-          console.log(newValue);
           props.setTags(newValue);
-          console.log("tags: ", props.tags);
+          // if (props.searchPost) {
+          //   props.searchPost();
+          // }
         }}
         renderInput={(params) => (
           <TextField
@@ -30,6 +57,20 @@ const ChipInput = (props: ChipInputProps) => {
             variant="filled"
             label="Tags"
             placeholder="Add your tags here"
+            sx={{
+              "& .MuiFilledInput-root": {
+                backgroundColor: "transparent",
+              },
+              "& .MuiFilledInput-underline:before": {
+                borderBottom: "none",
+              },
+              "& .MuiFilledInput-underline:after": {
+                borderBottom: "none",
+              },
+              "& .MuiFilledInput-root:hover:not(.Mui-disabled):before": {
+                borderBottom: "none",
+              },
+            }}
           />
         )}
       />
@@ -38,27 +79,3 @@ const ChipInput = (props: ChipInputProps) => {
 };
 
 export default ChipInput;
-
-const popularTags = [
-  { tag: "air-fryer" },
-  { tag: "appetiser" },
-  { tag: "beverage" },
-  { tag: "blender" },
-  { tag: "breakfast" },
-  { tag: "brunch" },
-  { tag: "dessert" },
-  { tag: "dinner" },
-  { tag: "gluten-free" },
-  { tag: "lunch" },
-  { tag: "midnight-snack" },
-  { tag: "oven" },
-  { tag: "pescatarian" },
-  { tag: "picnic" },
-  { tag: "sandwich" },
-  { tag: "slow-cooker" },
-  { tag: "snack" },
-  { tag: "soup" },
-  { tag: "themed" },
-  { tag: "vegan" },
-  { tag: "vegetarian" },
-];

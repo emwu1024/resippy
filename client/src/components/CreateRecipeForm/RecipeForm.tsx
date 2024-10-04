@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Tiptap from "../../components/TextEditor/Tiptap";
 import ToggleButton from "../Buttons/ToggleButton/ToggleButton";
+import ChipInput from "../Search/ChipInput";
 import Tabs from "../Tabs/Tabs";
 import Button from "../Buttons/Button/Button";
 import FormTab from "./FormTab";
@@ -15,7 +16,7 @@ interface RecipeFormProps {
   author: string;
   description: string;
   thumbnail: string;
-  tags: string;
+  tags: Array<string>;
   difficulty: string;
   steps: string;
   ingredients: string;
@@ -26,7 +27,7 @@ interface RecipeFormProps {
   setAuthor: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   setThumbnail: React.Dispatch<React.SetStateAction<string>>;
-  setTags: React.Dispatch<React.SetStateAction<string>>;
+  setTags: React.Dispatch<React.SetStateAction<Array<string>>>;
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   setSteps: React.Dispatch<React.SetStateAction<string>>;
   setIngredients: React.Dispatch<React.SetStateAction<string>>;
@@ -126,7 +127,12 @@ const RecipeForm = (props: RecipeFormProps) => {
             value={props.author}
           />
         </div>
+
         <div className="form-field-container">
+          <label className="form-label">Tags</label>
+          <ChipInput tags={props.tags} setTags={props.setTags} />
+        </div>
+        {/* <div className="form-field-container">
           <label className="form-label">*Tags</label>
           <input
             type="text"
@@ -140,7 +146,7 @@ const RecipeForm = (props: RecipeFormProps) => {
           <p className="help-text">
             e.g. lunch, vegetarian, sandwich, air-fryer
           </p>
-        </div>
+        </div> */}
 
         <div className="form-field-container">
           <label className="form-label">*Difficulty Rating</label>
