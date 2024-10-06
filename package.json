@@ -5,6 +5,7 @@
     "@tiptap/extension-color": "^2.3.0",
     "@tiptap/extension-image": "^2.3.2",
     "@tiptap/extension-list-item": "^2.3.0",
+    "@tiptap/extension-text-align": "^2.8.0",
     "@tiptap/extension-text-style": "^2.3.0",
     "@tiptap/extension-underline": "^2.3.0",
     "@tiptap/pm": "^2.3.0",
@@ -12,7 +13,8 @@
     "@tiptap/starter-kit": "^2.3.0",
     "html-react-parser": "^5.1.10",
     "react-icons": "^5.0.1",
-    "react-responsive": "^9.0.2"
+    "react-responsive": "^9.0.2",
+    "tiptap-extension-resize-image": "^1.1.9"
   },
   "devDependencies": {
     "@types/node": "^22.2.0"

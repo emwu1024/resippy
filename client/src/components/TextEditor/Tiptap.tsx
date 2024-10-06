@@ -7,6 +7,12 @@ import { EditorProvider, useCurrentEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import FileHandler from "@tiptap-pro/extension-file-handler";
 import Image from "@tiptap/extension-image";
+import TextAlign from "@tiptap/extension-text-align";
+
+// npm extension made by third party
+import ImageResize from "tiptap-extension-resize-image";
+
+import { LuHeading1, LuHeading2 } from "react-icons/lu";
 
 import {
   FaBold,
@@ -20,6 +26,10 @@ import {
   FaUndo,
   FaRedo,
   FaUnderline,
+  FaAlignLeft,
+  FaAlignRight,
+  FaAlignCenter,
+  FaAlignJustify,
 } from "react-icons/fa";
 import { GoHorizontalRule } from "react-icons/go";
 
@@ -35,6 +45,26 @@ const MenuBar = () => {
   return (
     <div className="menubar-container">
       <div>
+        <button
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
+          }
+          className={
+            editor.isActive("heading", { level: 1 }) ? "is-active" : ""
+          }
+        >
+          <LuHeading1 />
+        </button>
+        <button
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 2 }).run()
+          }
+          className={
+            editor.isActive("heading", { level: 2 }) ? "is-active" : ""
+          }
+        >
+          <LuHeading2 />
+        </button>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -62,16 +92,6 @@ const MenuBar = () => {
           className={editor.isActive("code") ? "is-active" : ""}
         >
           <FaCode />
-        </button>
-        <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          className={
-            editor.isActive("heading", { level: 1 }) ? "is-active" : ""
-          }
-        >
-          <FaHeading />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -103,6 +123,35 @@ const MenuBar = () => {
         >
           <GoHorizontalRule />
         </button>
+
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("left").run()}
+          className={editor.isActive({ textAlign: "left" }) ? "is-active" : ""}
+        >
+          <FaAlignLeft />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("center").run()}
+          className={
+            editor.isActive({ textAlign: "center" }) ? "is-active" : ""
+          }
+        >
+          <FaAlignCenter />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("right").run()}
+          className={editor.isActive({ textAlign: "right" }) ? "is-active" : ""}
+        >
+          <FaAlignRight />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("justify").run()}
+          className={
+            editor.isActive({ textAlign: "justify" }) ? "is-active" : ""
+          }
+        >
+          <FaAlignJustify />
+        </button>
       </div>
       <div>
         <button
@@ -126,7 +175,11 @@ const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
   TextStyle.configure({ types: [ListItem.name] }),
   Underline.configure({}),
+  ImageResize,
   StarterKit.configure({
+    heading: {
+      levels: [1, 2],
+    },
     bulletList: {
       keepMarks: true,
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
@@ -135,6 +188,9 @@ const extensions = [
       keepMarks: true,
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
     },
+  }),
+  TextAlign.configure({
+    types: ["heading", "paragraph"],
   }),
   Image.configure({}),
   FileHandler.configure({
