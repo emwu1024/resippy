@@ -26,7 +26,7 @@ const ShowRecipe = () => {
 
   return (
     <div className="book-container">
-      <PageContentContainer>
+      <PageContentContainer width="95%">
         {recipe.isStandardised ? (
           <ShowForm
             name={recipe.name}

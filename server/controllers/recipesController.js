@@ -8,7 +8,7 @@ export const getRecipes = async (req, res) => {
   const { page } = req.query;
   try {
     // Can change limit later
-    const LIMIT = 7;
+    const LIMIT = 8;
     const startIndex = (Number(page) - 1) * LIMIT
     const total = await Recipe.countDocuments({});
 
