@@ -12,6 +12,18 @@
   display: grid;
 }
 
+.stain-img {
+  position: absolute;
+  width: 700px;
+  z-index: -1;
+  right: 10%;
+  top: -20px;
+}
+
+.paperclip-page-icon {
+  display: none;
+}
+
 .book-left-page {
 }
 
@@ -32,9 +44,23 @@
   line-height: 3rem;
 }
 
+.paperclip-page-text {
+  line-height: 27px;
+  margin-left: 30px;
+}
+
 .steps-container {
   display: inline-block;
   justify-content: center;
+}
+
+.paperclip-page {
+  display: inline-block;
+  text-align: left;
+}
+
+.paperclip-page-header {
+  text-align: center;
 }
 
 @media (min-width: 850px) {
@@ -50,16 +76,18 @@
   .paperclip-page {
     width: 400px;
     transform: rotate(-5deg);
-    /* float: right; */
-    top: -20px;
+    top: 0px;
     right: 20px;
     position: absolute;
+    box-shadow: 5px 5px 10px;
   }
 
   .paperclip-page-header {
-    height: 36px;
-    background: linear-gradient(white, white 33px, pink 35px, pink 36px);
+    height: 34px;
+    background: linear-gradient(white, white 40px, pink 41px, pink 40px);
     margin-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0.5rem;
   }
 
   .paperclip-page-content {
@@ -79,14 +107,15 @@
   .paperclip-page-text {
     font-size: 18px;
     margin: 0 20px;
-    line-height: 27px;
-    padding-left: 30px;
+    /* line-height: 27px;
+    margin-left: 30px; */
   }
 
   .paperclip-page-icon {
     position: absolute;
     right: -30px;
     top: 200px;
+    display: block;
   }
 
   .steps-header {

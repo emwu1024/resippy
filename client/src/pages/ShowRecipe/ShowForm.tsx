@@ -5,6 +5,7 @@ import "./ShowRecipe.css";
 
 import Recipe from "../RecipeIndex/RecipesIndex";
 import { GiPaperClip } from "react-icons/gi";
+import Stain from "../../assets/coffeestain.png";
 
 interface ShowFormProps {
   name: string;
@@ -24,15 +25,16 @@ const ShowForm = (props: ShowFormProps) => {
         <div className="book-left-page">
           <h1 className="heading page-margin-top">{props.name}</h1>
           <hr className="decorative-hr" />
-          <p>{props.author}</p>
+          <p>By: {props.author}</p>
           <p>{props.description}</p>
           {props.images.map((image, index) => (
             <img className="recipe-img" src={image} alt="" />
           ))}
         </div>
+        <img className="stain-img" src={Stain} alt="" />
         <div className="book-right-page">
           <div className="page-margin-top paperclip-page">
-            <h2 className=" paperclip-page-header">Ingredients</h2>
+            <h2 className="subheading-2 paperclip-page-header">Ingredients</h2>
             <ul className="paperclip-page-content">
               {props.ingredients.map((ingredient, index) => (
                 <li className="paperclip-page-text">{ingredient}</li>
@@ -43,8 +45,9 @@ const ShowForm = (props: ShowFormProps) => {
             </div>
           </div>
           <br />
+          <br />
           <div className="steps-container">
-            <h2 className="steps-header">Steps</h2>
+            <h2 className="subheading-2 steps-header">Steps</h2>
             <ol className="steps-list">
               {props.steps.map((step, index) => (
                 <li>{step}</li>

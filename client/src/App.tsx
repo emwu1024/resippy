@@ -10,11 +10,12 @@ import { AuthenticationGuard } from "./components/AuthenticationGuard/Authentica
 import About from "./pages/About/About";
 import Atlas from "./pages/Atlas/Atlas";
 import Navbar from "./components/Navbar/Navbar.tsx";
+import Footer from "./components/Footer/Footer.tsx";
 
 function App() {
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipes" element={<RecipesIndex />} />
@@ -31,6 +32,7 @@ function App() {
         <Route path="/atlas" element={<Atlas />} />
         {/* <Route path="/recipes/delete/:id" element={<DeleteRecipe />} /> */}
       </Routes>
+      <Footer />
     </div>
   );
 }
