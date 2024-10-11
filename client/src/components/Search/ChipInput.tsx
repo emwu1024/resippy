@@ -7,7 +7,6 @@ interface ChipInputProps {
   tags: Array<string>;
   setTags: React.Dispatch<React.SetStateAction<Array<string>>>;
   searchPost?: () => void;
-  handleKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const ChipInput = (props: ChipInputProps) => {

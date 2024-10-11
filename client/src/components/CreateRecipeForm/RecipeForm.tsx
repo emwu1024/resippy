@@ -132,21 +132,6 @@ const RecipeForm = (props: RecipeFormProps) => {
           <label className="form-label">Tags</label>
           <ChipInput tags={props.tags} setTags={props.setTags} />
         </div>
-        {/* <div className="form-field-container">
-          <label className="form-label">*Tags</label>
-          <input
-            type="text"
-            onChange={(e) => props.setTags(e.target.value)}
-            className="form-field input-text"
-            value={props.tags}
-          />
-          <p className="help-text">
-            Separate tags with a comma and use hyphens for multiword tags
-          </p>
-          <p className="help-text">
-            e.g. lunch, vegetarian, sandwich, air-fryer
-          </p>
-        </div> */}
 
         <div className="form-field-container">
           <label className="form-label">*Difficulty Rating</label>

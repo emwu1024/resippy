@@ -19,7 +19,7 @@ const Home = () => {
           <hr className="decorative-hr" />
           <p className="body-text margin-top-3">
             Ever step into the kitchen and completely forget <i>every</i> single
-            recipe you've made in the past year?
+            recipe you've ever made?
           </p>
           <p className="body-text">Same.</p>
           <p className="body-text">

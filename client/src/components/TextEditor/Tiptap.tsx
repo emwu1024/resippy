@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
@@ -8,9 +8,10 @@ import StarterKit from "@tiptap/starter-kit";
 import FileHandler from "@tiptap-pro/extension-file-handler";
 import Image from "@tiptap/extension-image";
 import TextAlign from "@tiptap/extension-text-align";
-
-// npm extension made by third party
 import ImageResize from "tiptap-extension-resize-image";
+import Link from "@tiptap/extension-link";
+
+import DOMPurify from "dompurify";
 
 import { LuHeading1, LuHeading2 } from "react-icons/lu";
 
@@ -30,6 +31,7 @@ import {
   FaAlignRight,
   FaAlignCenter,
   FaAlignJustify,
+  FaLink,
 } from "react-icons/fa";
 import { GoHorizontalRule } from "react-icons/go";
 
@@ -37,6 +39,31 @@ import "./TipTap.css";
 
 const MenuBar = () => {
   const { editor } = useCurrentEditor();
+
+  const setLink = useCallback(() => {
+    const previousUrl = editor?.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
+
+    // cancelled
+    if (url === null) {
+      return;
+    }
+
+    // empty
+    if (url === "") {
+      editor?.chain().focus().extendMarkRange("link").unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    editor
+      ?.chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: url })
+      .run();
+  }, [editor]);
 
   if (!editor) {
     return null;
@@ -92,6 +119,12 @@ const MenuBar = () => {
           className={editor.isActive("code") ? "is-active" : ""}
         >
           <FaCode />
+        </button>
+        <button
+          onClick={setLink}
+          className={editor.isActive("link") ? "is-active" : ""}
+        >
+          <FaLink />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -176,6 +209,11 @@ const extensions = [
   TextStyle.configure({ types: [ListItem.name] }),
   Underline.configure({}),
   ImageResize,
+  Link.configure({
+    openOnClick: false,
+    autolink: true,
+    defaultProtocol: "https",
+  }),
   StarterKit.configure({
     heading: {
       levels: [1, 2],
@@ -251,8 +289,12 @@ export default ({ setEditorHtml, editorHtml }) => {
         extensions={extensions}
         content={editorHtml}
         onUpdate={({ editor }) => {
-          const html = editor.getHTML();
-          setEditorHtml(html);
+          const rawHtml = editor.getHTML();
+          const sanitizedHTML = DOMPurify.sanitize(rawHtml);
+          console.log(
+            "Removed the following during sanitation: " + DOMPurify.removed
+          );
+          setEditorHtml(sanitizedHTML);
         }}
       ></EditorProvider>
     </div>
