@@ -40,9 +40,9 @@ input:checked + .slider {
   background-color: var(--body-text-color);
 }
 
-input:focus + .slider {
+/* input:focus + .slider {
   box-shadow: 0 0 1px var(--body-text-color);
-}
+} */
 
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
@@ -72,10 +72,8 @@ input:checked + .slider:before {
 
 .toggle-container > div {
   display: inline-block;
-  /* height: 100px; */
   width: 30%;
   font-size: initial;
-  /* animation: anime 2s infinite linear alternate; */
 }
 
 .toggle-text {

@@ -97,6 +97,14 @@
       #9198e5 26px,
       #9198e5 27px
     );
+    /* background-size: 40px 40px;
+    background-image: linear-gradient(
+        to right,
+        rgb(183, 183, 183) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgb(196, 196, 196) 1px, transparent 1px);
+    background-color: white; */
     height: 100%;
     min-height: 200px;
     text-align: left;
@@ -107,8 +115,6 @@
   .paperclip-page-text {
     font-size: 18px;
     margin: 0 20px;
-    /* line-height: 27px;
-    margin-left: 30px; */
   }
 
   .paperclip-page-icon {

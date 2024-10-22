@@ -17,6 +17,7 @@ const ChipInput = (props: ChipInputProps) => {
       try {
         const response = await axios.get("http://localhost:8000/recipes/tags");
         setTagSet(response.data);
+        console.log(props.tags);
       } catch (error) {
         console.error("Error fetching tags:", error);
       }
@@ -44,11 +45,9 @@ const ChipInput = (props: ChipInputProps) => {
             <Chip label={option} {...getTagProps({ index })} />
           ))
         }
+        value={props.tags}
         onChange={(event, newValue) => {
           props.setTags(newValue);
-          // if (props.searchPost) {
-          //   props.searchPost();
-          // }
         }}
         renderInput={(params) => (
           <TextField

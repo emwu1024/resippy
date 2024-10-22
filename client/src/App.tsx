@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import CreateRecipe from "./pages/CreateRecipe/CreateRecipe";
 import RecipesIndex from "./pages/RecipeIndex/RecipesIndex";
-import UpdateRecipe from "./pages/UpdateRecipe";
+import UpdateRecipe from "./pages/UpdateRecipe/UpdateRecipe.tsx";
 // import DeleteRecipe from './pages/DeleteRecipe';
 import ShowRecipe from "./pages/ShowRecipe/ShowRecipe.tsx";
 import { AuthenticationGuard } from "./components/AuthenticationGuard/AuthenticationGuard";
@@ -19,8 +19,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipes" element={<RecipesIndex />} />
-        {/* I don't think the line of code below is necessary? */}
-        {/* <Route path="/recipes" element={<Navigate to="/posts" />} /> */}
         <Route path="/recipes/search" element={<RecipesIndex />} />
         <Route
           path="/recipes/create"
