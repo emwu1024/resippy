@@ -55,15 +55,6 @@ const RecipeForm = (props: RecipeFormProps) => {
 
   const tabSections = [
     {
-      label: "Text Editor",
-      content: (
-        <Tiptap
-          editorHtml={props.editorHtml}
-          setEditorHtml={props.setEditorHtml}
-        />
-      ),
-    },
-    {
       label: "Form",
       content: (
         <FormTab
@@ -74,6 +65,15 @@ const RecipeForm = (props: RecipeFormProps) => {
           setIngredients={props.setIngredients}
           setImages={props.setImages}
         ></FormTab>
+      ),
+    },
+    {
+      label: "Text Editor",
+      content: (
+        <Tiptap
+          editorHtml={props.editorHtml}
+          setEditorHtml={props.setEditorHtml}
+        />
       ),
     },
   ];

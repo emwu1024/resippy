@@ -31,9 +31,5 @@ export function useQuery() {
     }
 
     let formattedDate = day + '.' + month + '.' + date.getFullYear();
-    console.log('DATE INFO!!!');
-    console.log(date.getMonth());
-    console.log(date.getFullYear());
-    console.log(date.getDate());
     return formattedDate.toString()
   }

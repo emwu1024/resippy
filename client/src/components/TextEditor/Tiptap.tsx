@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
@@ -36,6 +36,11 @@ import {
 import { GoHorizontalRule } from "react-icons/go";
 
 import "./TipTap.css";
+
+interface EditorProps {
+  editorHtml: string;
+  setEditorHtml: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const MenuBar = () => {
   const { editor } = useCurrentEditor();
@@ -206,7 +211,8 @@ const MenuBar = () => {
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  TextStyle.configure({ types: [ListItem.name] }),
+  // TextStyle.configure({ types: [ListItem.name] }),  - resulting in TS error, may have changed but might need to uncomment when implementing colour functionality
+  TextStyle.configure({}),
   Underline.configure({}),
   ImageResize,
   Link.configure({
@@ -281,7 +287,7 @@ const extensions = [
   }),
 ];
 
-export default ({ setEditorHtml, editorHtml }) => {
+export default ({ setEditorHtml, editorHtml }: EditorProps) => {
   return (
     <div className="editor-container">
       <EditorProvider

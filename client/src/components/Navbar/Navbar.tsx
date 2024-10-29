@@ -27,11 +27,8 @@ const Navbar = () => {
 
   const onTripleClick = async (e: React.MouseEvent<HTMLImageElement>) => {
     if (e.detail > 3) {
-      console.log("Triple Clicked! :)");
       setIsSigninDisplayed(true);
     } else {
-      console.log("Not Triple Clicked...");
-      console.log(isAuthenticated);
     }
   };
 

@@ -34,8 +34,6 @@ const RecipesIndex = () => {
   const searchQuery = query.get("searchQuery");
 
   const searchPost = async () => {
-    console.log("IN SEARCH POST");
-    console.log(tags);
     if (
       search.trim() ||
       tags.length > 0 ||
@@ -74,7 +72,6 @@ const RecipesIndex = () => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       searchPost();
-      console.log("enter button was pressed!");
     }
   };
 
@@ -84,7 +81,6 @@ const RecipesIndex = () => {
       const { data } = await axios.get("http://localhost:8000/recipes", {
         params: { page },
       });
-      console.log("Recipes fetched for page:", page, data.data);
       setRecipes(data.data); // Set fetched recipes to state
     } catch (error) {
       console.error("Error fetching recipes:", error);

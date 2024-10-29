@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./home.css";
 
 import Button from "../../components/Buttons/Button/Button";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
+import axios from "axios";
 
 const Home = () => {
+  const [randomId, setRandomId] = useState("");
+  const navigate = useNavigate();
+
+  const randomiseRecipe = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/recipes/random");
+      const randomId = response.data;
+      setRandomId(randomId);
+      navigate(`/recipes/${randomId}`);
+    } catch (error) {
+      console.error("Error fetching random ID:", error);
+    }
+  };
+
   return (
     <div>
       <div className="content-container">
@@ -28,7 +44,10 @@ const Home = () => {
           <p className="body-text">and to practice coding</p>
           <br />
           <br />
-          <Button btnText="Randomise Recipe Time!"></Button>
+          <Button
+            btnText="Randomise Recipe Time!"
+            onClick={randomiseRecipe}
+          ></Button>
         </PageContentContainer>
       </div>
     </div>

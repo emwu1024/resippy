@@ -15,12 +15,6 @@ export const getRecipes = async (req, res) => {
       console.log('working >:D');
 
       const recipes = await Recipe.find({}).sort({_id: -1}).limit(LIMIT).skip(startIndex);
-
-      // Testing:
-      // console.log('PAGE:' + page)
-      // console.log('START INDEX:' + startIndex)
-      // console.log(recipes);
-
       return res.status(200).json({
       count: recipes.length,
       data: recipes,
@@ -107,6 +101,16 @@ export const getRecipe = async (req, res) => {
     }
 }
 
+// Get a random recipe
+export const getRandomRecipe = async (req, res) => {
+  try {
+    const randomRecipe = await Recipe.aggregate([{"$sample": {"size": 1}}])
+    res.json(randomRecipe[0]._id || { message: "No recipe found" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 //   Create recipe
 export const createRecipe = async (req, res) => {
     try {
@@ -170,19 +174,35 @@ export const createRecipe = async (req, res) => {
 }
 
 // Update recipe
-// This one needs work!!! Check older commits if it isn't working
 export const updateRecipe = async (req, res) => {
     try {
-        if (
-          !req.body.name ||
-          !req.body.author ||
-          !req.body.steps ||
-          !req.body.ingredients
-        ) {
-          return res.status(400).send({
-            message: 'You forgot a field :(',
-          });
-        }
+      if ((req.body.isStandardised === true) && 
+      (!req.body.name ||
+      !req.body.description ||
+      !req.body.author ||
+      !req.body.thumbnail ||
+      !req.body.difficulty ||
+      !req.body.steps ||
+      !req.body.ingredients)
+    ) {
+      console.log(req.body);
+      return res.status(400).send({
+        message: 'You forgot a field: \n You selected the Standardised format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Steps, Ingredients',
+      });
+    }
+
+    else if ((req.body.isStandardised === false) && 
+    (!req.body.name ||
+    !req.body.description ||
+    !req.body.author ||
+    !req.body.thumbnail ||
+    !req.body.difficulty ||
+    !req.body.editorHtml )) {
+      console.log(req.body);
+      return res.status(400).send({
+        message: 'You forgot a field: \n You selected the Rich Text format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Text Editor Content',
+      });
+    }
     
         req.body.steps = req.body.steps.trim().split('\n');
     

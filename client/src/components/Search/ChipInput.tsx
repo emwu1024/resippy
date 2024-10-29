@@ -7,6 +7,7 @@ interface ChipInputProps {
   tags: Array<string>;
   setTags: React.Dispatch<React.SetStateAction<Array<string>>>;
   searchPost?: () => void;
+  handleKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const ChipInput = (props: ChipInputProps) => {
@@ -17,7 +18,6 @@ const ChipInput = (props: ChipInputProps) => {
       try {
         const response = await axios.get("http://localhost:8000/recipes/tags");
         setTagSet(response.data);
-        console.log(props.tags);
       } catch (error) {
         console.error("Error fetching tags:", error);
       }
@@ -28,7 +28,6 @@ const ChipInput = (props: ChipInputProps) => {
   useEffect(() => {
     if (props.searchPost) {
       props.searchPost();
-      console.log("Done!!!");
     }
   }, [props.tags]);
 

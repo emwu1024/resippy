@@ -9,8 +9,24 @@ import PageContentContainer from "../../components/PageContentContainer/PageCont
 import ShowEditor from "./ShowEditor";
 import ShowForm from "./ShowForm";
 
+import { RecipeObject } from "../../types";
+
 const ShowRecipe = () => {
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState<RecipeObject>({
+    _id: "",
+    name: "",
+    description: "",
+    author: "",
+    createdAt: "",
+    thumbnail: "",
+    tags: [],
+    ingredients: [],
+    steps: [],
+    images: [],
+    isStandardised: false,
+    difficulty: "",
+    editorHtml: "",
+  });
   const { id } = useParams();
 
   useEffect(() => {

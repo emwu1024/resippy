@@ -10,8 +10,8 @@ interface ShowEditorProps {
   wysiwygHtml: string;
   author: string;
   description: string;
-  tags: string;
-  difficulty: Array<string>;
+  tags: Array<string>;
+  difficulty: string;
 }
 
 const ShowEditor = (props: ShowEditorProps) => {
