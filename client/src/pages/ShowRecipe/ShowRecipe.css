@@ -1,46 +1,152 @@
 .book-container {
   background: url("https://i.imgur.com/0kjMcUe.png");
-  filter: brightness(0.95) sepia(30%) saturate(80%);
-  /* border-radius: 30px; */
-  height: 100%;
-  clip-path: polygon(
-    0% 0%,
-    0% 93%,
-    5% 98%,
-    6% 99%,
-    8% 95%,
-    12% 94%,
-    15% 97%,
-    17% 93%,
-    20% 98%,
-    22% 97%,
-    25% 99%,
-    31% 94%,
-    35% 93%,
-    39% 96%,
-    43% 93%,
-    45% 94%,
-    47% 95%,
-    50% 92%,
-    52% 96%,
-    54% 93%,
-    58% 92%,
-    60% 95%,
-    62% 93%,
-    65% 96%,
-    69% 93%,
-    72% 93%,
-    75% 94%,
-    79% 97%,
-    81% 94%,
-    85% 93%,
-    88% 92%,
-    90% 95%,
-    93% 93%,
-    95% 92%,
-    97% 95%,
-    100% 97%,
-    100% 0%
-  );
+  filter: brightness(0.95) sepia(30%) saturate(100%) hue-rotate(-10deg);
+  /* height: 100vh; */
   overflow: auto;
+  /* Prevents paperclip from creating horizontal scroll */
+  overflow-x: hidden;
+  color: var(--secondary-text-color);
+  min-height: 100vh;
+}
+
+.editor-content-container {
+  width: 50%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.editor-content-container img {
+  width: 100%;
+}
+
+.editor-content-container hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+}
+
+.book-content-container {
+  display: grid;
+}
+
+.stain-img {
+  position: absolute;
+  width: 700px;
+  z-index: -1;
+  right: 10%;
+  top: -20px;
+}
+
+.paperclip-page-icon {
+  display: none;
+}
+
+.book-left-page {
+}
+
+.book-right-page {
+  margin-left: 2rem;
+}
+
+.recipe-img {
+  width: 75%;
+  object-fit: cover;
+  max-height: 700px;
+}
+
+.steps-list {
+  list-style: decimal inside;
+  text-align: left;
+  max-width: 600px;
+  padding: 0;
+  line-height: 3rem;
+}
+
+.paperclip-page-text {
+  line-height: 27px;
+  margin-left: 30px;
+}
+
+.steps-container {
+  display: inline-block;
+  justify-content: center;
+}
+
+.paperclip-page {
+  display: inline-block;
+  text-align: left;
+}
+
+.paperclip-page-header {
+  text-align: center;
+}
+
+@media (min-width: 850px) {
+  .book-content-container {
+    grid-template-columns: repeat(2, 1fr);
+
+    background-image: linear-gradient(#5c5c5c, #d3d3d3);
+    background-size: 1px 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .paperclip-page {
+    width: 400px;
+    transform: rotate(-5deg);
+    top: 0px;
+    right: 20px;
+    position: absolute;
+    box-shadow: 5px 5px 10px;
+  }
+
+  .paperclip-page-header {
+    height: 34px;
+    background: linear-gradient(white, white 40px, pink 41px, pink 40px);
+    margin-bottom: 0px !important;
+    margin-top: 0px;
+    padding-top: 0.5rem;
+  }
+
+  .paperclip-page-content {
+    background: repeating-linear-gradient(
+      white,
+      white 25px,
+      #9198e5 26px,
+      #9198e5 27px
+    );
+    /* background-size: 40px 40px;
+    background-image: linear-gradient(
+        to right,
+        rgb(183, 183, 183) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgb(196, 196, 196) 1px, transparent 1px);
+    background-color: white; */
+    height: 100%;
+    min-height: 200px;
+    text-align: left;
+    padding-top: 27px;
+    margin: 0px;
+  }
+
+  .paperclip-page-text {
+    font-size: 18px;
+    margin: 0 20px;
+  }
+
+  .paperclip-page-icon {
+    position: absolute;
+    right: -30px;
+    top: 200px;
+    display: block;
+  }
+
+  .steps-header {
+    margin-top: 25rem;
+  }
 }

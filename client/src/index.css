@@ -17,7 +17,7 @@
   --heading-text-size: 50px;
   --subheading-1-text-size: 36px;
   --subheading-2-text-size: 30px;
-  --body-text-size: 18px;
+  --body-text-size: 24px;
 
   --heading-font: "Philosopher", sans-serif;
   --body-font: "Quicksand", sans-serif;
@@ -61,6 +61,16 @@ body {
 .body-text {
   font-size: var(--body-text-size);
   font-weight: 500;
+  font-family: "Nunito", sans-serif;
+}
+
+.descriptive-text {
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0px;
+  margin-top: 0.25rem;
+  font-family: "Nunito", sans-serif;
+  color: var(--faded-body-text-color);
 }
 
 .horizontal-centre {

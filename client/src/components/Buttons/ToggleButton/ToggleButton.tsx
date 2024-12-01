@@ -23,6 +23,7 @@ const ToggleButton = (props: ToggleButtonProps) => {
           <label className="switch">
             <input
               type="checkbox"
+              checked={props.isStandardised}
               onChange={() => props.setIsStandardised(!props.isStandardised)}
             />
             <span className="slider round"></span>

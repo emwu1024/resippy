@@ -53,14 +53,14 @@
 }
 
 .nav-item {
-  display: inline;
+  display: inline-block;
   position: relative;
   margin-left: 2rem;
   margin-right: 2rem;
-  /* margin-left: 10%;
-  margin-right: 10%; */
   font-size: 1.35rem;
   font-weight: 900;
+  text-align: center;
+  overflow: hidden;
 }
 
 .nav-item::before {

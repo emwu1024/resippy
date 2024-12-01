@@ -1,14 +1,32 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import DOMPurify from "dompurify";
+
 import "./ShowRecipe.css";
-
 import Recipe from "../RecipeIndex/RecipesIndex";
-
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
+import ShowEditor from "./ShowEditor";
+import ShowForm from "./ShowForm";
+
+import { RecipeObject } from "../../types";
 
 const ShowRecipe = () => {
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState<RecipeObject>({
+    _id: "",
+    name: "",
+    description: "",
+    author: "",
+    createdAt: "",
+    thumbnail: "",
+    tags: [],
+    ingredients: [],
+    steps: [],
+    images: [],
+    isStandardised: false,
+    difficulty: "",
+    editorHtml: "",
+  });
   const { id } = useParams();
 
   useEffect(() => {
@@ -24,30 +42,28 @@ const ShowRecipe = () => {
 
   return (
     <div className="book-container">
-      <PageContentContainer>
-        <h1 className="heading page-margin-top">{recipe.name}</h1>
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Id</span>
-            <span>{recipe._id}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Title</span>
-            <span>{recipe.title}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Author</span>
-            <span>{recipe.author}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Create Time</span>
-            <span>{new Date(recipe.createdAt).toString()}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
-            <span>{new Date(recipe.updatedAt).toString()}</span>
-          </div>
-        </div>
+      <PageContentContainer width="95%">
+        {recipe.isStandardised ? (
+          <ShowForm
+            name={recipe.name}
+            description={recipe.description}
+            author={recipe.author}
+            difficulty={recipe.difficulty}
+            tags={recipe.tags}
+            steps={recipe.steps}
+            ingredients={recipe.ingredients}
+            images={recipe.images}
+          />
+        ) : (
+          <ShowEditor
+            name={recipe.name}
+            description={recipe.description}
+            tags={recipe.tags}
+            wysiwygHtml={DOMPurify.sanitize(recipe.editorHtml)}
+            author={recipe.author}
+            difficulty={recipe.difficulty}
+          />
+        )}
       </PageContentContainer>
     </div>
   );

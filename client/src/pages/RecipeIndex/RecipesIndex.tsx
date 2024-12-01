@@ -34,8 +34,6 @@ const RecipesIndex = () => {
   const searchQuery = query.get("searchQuery");
 
   const searchPost = async () => {
-    console.log("IN SEARCH POST");
-    console.log(tags);
     if (
       search.trim() ||
       tags.length > 0 ||
@@ -74,7 +72,6 @@ const RecipesIndex = () => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       searchPost();
-      console.log("enter button was pressed!");
     }
   };
 
@@ -84,7 +81,6 @@ const RecipesIndex = () => {
       const { data } = await axios.get("http://localhost:8000/recipes", {
         params: { page },
       });
-      console.log("Recipes fetched for page:", page, data.data);
       setRecipes(data.data); // Set fetched recipes to state
     } catch (error) {
       console.error("Error fetching recipes:", error);
@@ -120,7 +116,10 @@ const RecipesIndex = () => {
           </div>
         </div>
         {loading ? (
-          <CircularProgress color="success" size="5rem" />
+          <div className="loading-icon">
+            {/* Value in color doesn't seem to matter as it is being set by CSS, but the attribute still needs to be there otherwise it defaults to the default color */}
+            <CircularProgress color="#c17d42" size="4rem" />
+          </div>
         ) : (
           <div className="cards-container">
             {recipes.map((recipe, index) => (
@@ -137,6 +136,10 @@ const RecipesIndex = () => {
               </Link>
             ))}
           </div>
+        )}
+
+        {recipes.length < 1 && !loading && (
+          <p className="descriptive-text">No results found</p>
         )}
 
         {!searchQuery && !tags.length && <Paging page={Number(page)} />}

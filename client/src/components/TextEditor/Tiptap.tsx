@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
@@ -7,6 +7,13 @@ import { EditorProvider, useCurrentEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import FileHandler from "@tiptap-pro/extension-file-handler";
 import Image from "@tiptap/extension-image";
+import TextAlign from "@tiptap/extension-text-align";
+import ImageResize from "tiptap-extension-resize-image";
+import Link from "@tiptap/extension-link";
+
+import DOMPurify from "dompurify";
+
+import { LuHeading1, LuHeading2 } from "react-icons/lu";
 
 import {
   FaBold,
@@ -20,13 +27,48 @@ import {
   FaUndo,
   FaRedo,
   FaUnderline,
+  FaAlignLeft,
+  FaAlignRight,
+  FaAlignCenter,
+  FaAlignJustify,
+  FaLink,
 } from "react-icons/fa";
 import { GoHorizontalRule } from "react-icons/go";
 
 import "./TipTap.css";
 
+interface EditorProps {
+  editorHtml: string;
+  setEditorHtml: React.Dispatch<React.SetStateAction<string>>;
+}
+
 const MenuBar = () => {
   const { editor } = useCurrentEditor();
+
+  const setLink = useCallback(() => {
+    const previousUrl = editor?.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
+
+    // cancelled
+    if (url === null) {
+      return;
+    }
+
+    // empty
+    if (url === "") {
+      editor?.chain().focus().extendMarkRange("link").unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    editor
+      ?.chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: url })
+      .run();
+  }, [editor]);
 
   if (!editor) {
     return null;
@@ -35,6 +77,26 @@ const MenuBar = () => {
   return (
     <div className="menubar-container">
       <div>
+        <button
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
+          }
+          className={
+            editor.isActive("heading", { level: 1 }) ? "is-active" : ""
+          }
+        >
+          <LuHeading1 />
+        </button>
+        <button
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 2 }).run()
+          }
+          className={
+            editor.isActive("heading", { level: 2 }) ? "is-active" : ""
+          }
+        >
+          <LuHeading2 />
+        </button>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -64,14 +126,10 @@ const MenuBar = () => {
           <FaCode />
         </button>
         <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          className={
-            editor.isActive("heading", { level: 1 }) ? "is-active" : ""
-          }
+          onClick={setLink}
+          className={editor.isActive("link") ? "is-active" : ""}
         >
-          <FaHeading />
+          <FaLink />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -103,6 +161,35 @@ const MenuBar = () => {
         >
           <GoHorizontalRule />
         </button>
+
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("left").run()}
+          className={editor.isActive({ textAlign: "left" }) ? "is-active" : ""}
+        >
+          <FaAlignLeft />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("center").run()}
+          className={
+            editor.isActive({ textAlign: "center" }) ? "is-active" : ""
+          }
+        >
+          <FaAlignCenter />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("right").run()}
+          className={editor.isActive({ textAlign: "right" }) ? "is-active" : ""}
+        >
+          <FaAlignRight />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("justify").run()}
+          className={
+            editor.isActive({ textAlign: "justify" }) ? "is-active" : ""
+          }
+        >
+          <FaAlignJustify />
+        </button>
       </div>
       <div>
         <button
@@ -124,9 +211,19 @@ const MenuBar = () => {
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  TextStyle.configure({ types: [ListItem.name] }),
+  // TextStyle.configure({ types: [ListItem.name] }),  - resulting in TS error, may have changed but might need to uncomment when implementing colour functionality
+  TextStyle.configure({}),
   Underline.configure({}),
+  ImageResize,
+  Link.configure({
+    openOnClick: false,
+    autolink: true,
+    defaultProtocol: "https",
+  }),
   StarterKit.configure({
+    heading: {
+      levels: [1, 2],
+    },
     bulletList: {
       keepMarks: true,
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
@@ -135,6 +232,9 @@ const extensions = [
       keepMarks: true,
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
     },
+  }),
+  TextAlign.configure({
+    types: ["heading", "paragraph"],
   }),
   Image.configure({}),
   FileHandler.configure({
@@ -187,7 +287,7 @@ const extensions = [
   }),
 ];
 
-export default ({ setEditorHtml, editorHtml }) => {
+export default ({ setEditorHtml, editorHtml }: EditorProps) => {
   return (
     <div className="editor-container">
       <EditorProvider
@@ -195,8 +295,12 @@ export default ({ setEditorHtml, editorHtml }) => {
         extensions={extensions}
         content={editorHtml}
         onUpdate={({ editor }) => {
-          const html = editor.getHTML();
-          setEditorHtml(html);
+          const rawHtml = editor.getHTML();
+          const sanitizedHTML = DOMPurify.sanitize(rawHtml);
+          console.log(
+            "Removed the following during sanitation: " + DOMPurify.removed
+          );
+          setEditorHtml(sanitizedHTML);
         }}
       ></EditorProvider>
     </div>

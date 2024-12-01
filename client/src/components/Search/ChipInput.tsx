@@ -7,7 +7,7 @@ interface ChipInputProps {
   tags: Array<string>;
   setTags: React.Dispatch<React.SetStateAction<Array<string>>>;
   searchPost?: () => void;
-  handleKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const ChipInput = (props: ChipInputProps) => {
@@ -28,7 +28,6 @@ const ChipInput = (props: ChipInputProps) => {
   useEffect(() => {
     if (props.searchPost) {
       props.searchPost();
-      console.log("Done!!!");
     }
   }, [props.tags]);
 
@@ -45,11 +44,9 @@ const ChipInput = (props: ChipInputProps) => {
             <Chip label={option} {...getTagProps({ index })} />
           ))
         }
+        value={props.tags}
         onChange={(event, newValue) => {
           props.setTags(newValue);
-          // if (props.searchPost) {
-          //   props.searchPost();
-          // }
         }}
         renderInput={(params) => (
           <TextField

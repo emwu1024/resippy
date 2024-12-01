@@ -20,41 +20,6 @@ const Searchbar = (props: SearchbarProps) => {
         className="icon-btn"
         onClick={props.searchPost}
       >
-        {/* <div id={`${sizzle ? "steam-container" : ""} `}> */}
-        <div id="steam-container">
-          <div className="steam" id={`${sizzle ? "steam1" : ""}`}>
-            {" "}
-          </div>
-          <div className="steam" id={`${sizzle ? "steam2" : ""}`}>
-            {" "}
-          </div>
-          <div className="steam" id={`${sizzle ? "steam3" : ""}`}>
-            {" "}
-          </div>
-          <div className="steam" id={`${sizzle ? "steam4" : ""}`}>
-            {" "}
-          </div>
-          <div className="steam" id={`${sizzle ? "steam5" : ""}`}>
-            {" "}
-          </div>
-
-          {/* <div className={`steam ${sizzle ? "visible" : ""}`} id="steam1">
-            {" "}
-          </div>
-          <div className={`steam ${sizzle ? "visible" : ""}`} id="steam2">
-            {" "}
-          </div>
-          <div className={`steam ${sizzle ? "visible" : ""}`} id="steam3">
-            {" "}
-          </div>
-          <div className={`steam ${sizzle ? "visible" : ""}`} id="steam4">
-            {" "}
-          </div>
-          <div className={`steam ${sizzle ? "visible" : ""}`} id="steam5">
-            {" "}
-          </div> */}
-        </div>
-        {/* className= {`search-icon ${sizzle ? "" : "sizzle"} `} */}
         <IconContext.Provider
           value={{ className: `search-icon ${sizzle ? "sizzle" : ""} ` }}
         >
@@ -69,6 +34,23 @@ const Searchbar = (props: SearchbarProps) => {
         onKeyDown={props.handleKeyPress}
         placeholder="Search here"
       />
+      <div id="steam-container">
+        <div className="steam" id={`${sizzle ? "steam1" : ""}`}>
+          {" "}
+        </div>
+        <div className="steam" id={`${sizzle ? "steam2" : ""}`}>
+          {" "}
+        </div>
+        <div className="steam" id={`${sizzle ? "steam3" : ""}`}>
+          {" "}
+        </div>
+        <div className="steam" id={`${sizzle ? "steam4" : ""}`}>
+          {" "}
+        </div>
+        <div className="steam" id={`${sizzle ? "steam5" : ""}`}>
+          {" "}
+        </div>
+      </div>
     </div>
   );
 };

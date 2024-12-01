@@ -19,17 +19,14 @@ const FormTab = (props: FormTabProps) => {
   const handleMultipleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log("HERE!!!");
     const filesArray = Array.from(e.target.files || []);
     setFileNames(filesArray);
     for (let i = 0; i < filesArray.length; i++) {
       let base64File = await convertToBase64(filesArray[i]);
       props.setImages((prevImages) => {
         const updatedImages = [...prevImages, base64File as string];
-        console.log(`${i} IMAGE:`, updatedImages[i]);
         return updatedImages;
       });
-      console.log("inside for loop " + i);
     }
   };
 
