@@ -33,7 +33,7 @@ const Paging = ({ page }: PagingProps) => {
       <Pagination
         className="pagination-styling"
         count={numberOfPages}
-        color="success"
+        // color="success"
         showFirstButton
         showLastButton
         page={page || 1}

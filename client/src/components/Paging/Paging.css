@@ -5,9 +5,19 @@
 
 .pagination-container li a {
   color: var(--body-text-color) !important;
+  font-weight: 700;
 }
 
 .pagination-styling {
   justify-content: center !important;
   display: flex !important;
+}
+
+/* .pagination-icon {
+  margin-top: 5rem;
+  color: #c17d42;
+} */
+
+.Mui-selected {
+  background-color: #c17d42 !important;
 }
