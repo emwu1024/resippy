@@ -64,6 +64,15 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+.descriptive-text {
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0px;
+  margin-top: 0.25rem;
+  font-family: "Nunito", sans-serif;
+  color: var(--faded-body-text-color);
+}
+
 .horizontal-centre {
   text-align: center;
   align-items: center;

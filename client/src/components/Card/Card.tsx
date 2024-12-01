@@ -1,7 +1,9 @@
 import React from "react";
 import "./Card.css";
+
 import { Link } from "react-router-dom";
 import { TbEdit } from "react-icons/tb";
+import { IconContext } from "react-icons";
 import { useAuth0 } from "@auth0/auth0-react";
 
 interface CardProps {
@@ -38,7 +40,15 @@ const Card = (props: CardProps) => {
         {isAuthenticated && (
           <span className="edit-icon">
             <Link to={`/recipes/edit/${props.recipeId}`}>
-              <TbEdit color="green" size="1.75rem" />
+              <IconContext.Provider
+                value={{
+                  color: "#dda15e",
+                  size: "1.75rem",
+                  className: "edit-icon",
+                }}
+              >
+                <TbEdit />
+              </IconContext.Provider>
             </Link>
           </span>
         )}

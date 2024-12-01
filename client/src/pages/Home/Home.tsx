@@ -40,8 +40,8 @@ const Home = () => {
             </strong>{" "}
             recipe you've ever made?
           </p>
-          <p className="body-text">Same.</p>
-          <p className="body-text">
+          <p className="body-text margin-top-3">Same.</p>
+          <p className="body-text margin-top-3">
             This is a website I made to keep track of them all!
           </p>
           <br />
