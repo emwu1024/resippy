@@ -34,20 +34,19 @@ const Home = () => {
           <h1 className="heading">Welcome to Resippys!</h1>
           <hr className="decorative-hr" />
           <p className="body-text margin-top-3">
-            Ever step into the kitchen and completely forget <i>every</i> single
+            Stepped in the kitchen and forgotten{" "}
+            <strong>
+              <i>every</i>
+            </strong>{" "}
             recipe you've ever made?
           </p>
           <p className="body-text">Same.</p>
           <p className="body-text">
-            This is a website I made to help me keep track of them all
+            This is a website I made to keep track of them all!
           </p>
-          <p className="body-text">and to practice coding</p>
           <br />
           <br />
-          <Button
-            btnText="Randomise Recipe Time!"
-            onClick={randomiseRecipe}
-          ></Button>
+          <Button btnText="Gimme a recipe!" onClick={randomiseRecipe}></Button>
         </PageContentContainer>
       </div>
     </div>

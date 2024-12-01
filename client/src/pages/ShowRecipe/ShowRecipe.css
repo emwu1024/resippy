@@ -1,11 +1,32 @@
 .book-container {
   background: url("https://i.imgur.com/0kjMcUe.png");
   filter: brightness(0.95) sepia(30%) saturate(100%) hue-rotate(-10deg);
-  height: 100vh;
+  /* height: 100vh; */
   overflow: auto;
   /* Prevents paperclip from creating horizontal scroll */
   overflow-x: hidden;
   color: var(--secondary-text-color);
+  min-height: 100vh;
+}
+
+.editor-content-container {
+  width: 50%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.editor-content-container img {
+  width: 100%;
+}
+
+.editor-content-container hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
 }
 
 .book-content-container {
@@ -28,6 +49,7 @@
 }
 
 .book-right-page {
+  margin-left: 2rem;
 }
 
 .recipe-img {

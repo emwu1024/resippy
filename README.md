@@ -54,7 +54,8 @@ The backupdb.sh script attached just needs to be modified with your details and 
    2. Open terminal and type `crontab -e`
    3. Enter your cron job - I used this `00 18 * * 0,3 "/Users/username/backupdb.sh" > "/Users/username/your/project/path/here/cronjob.log" 2>1`
    4. Considerations: If the device you are running the cron job is off / asleep the cron job will not run.
-4. Should you need to rollback to a previous backup run this command: `mongorestore <YOUR_CONNECTION_STRING> backups/<DATED_FOLDER>\`
+   5. Troubleshooting: this doesn't with with some networks, mobile hotspot threw a DNS error for me when I tried to run the script. You can try the solution in Findings Log 10. or switch networks
+4. Should you need to rollback to a presvious backup run this command: `mongorestore <YOUR_CONNECTION_STRING> backups/<DATED_FOLDER>\`
 
 ## Findings Log
 
@@ -67,6 +68,7 @@ The backupdb.sh script attached just needs to be modified with your details and 
 7. Wow really cool website about folding CSS effect! https://www.joshwcomeau.com/react/folding-the-dom/
 8. So apple TCC policy means cron jobs and launchd jobs can't run scripts that are in protected folders (Desktop, Documents, Downloads) and providing full disk access doesn't seem like the wisest security decision so the suggestion is to move the script into another folder where TCC doesn't apply: https://stackoverflow.com/questions/64419734/macos-catalina-launchd-cant-open-input-file-error
 9. React router dom has some key changes between v5 and v6, notably switch->routes and redirect->navigate: https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb
+10. DNS Mongodump issues can apparently be resolved by adding new DNS namespaces: https://stackoverflow.com/questions/60541611/mongodb-dump-fails-with-cannot-unmarshal-dns-message
 
 ## Work Log
 
@@ -113,6 +115,7 @@ The backupdb.sh script attached just needs to be modified with your details and 
 30. Add scotch tape effect for card: https://codepen.io/binarykiwi/pen/BbOoPy
 31. 16.09.24: Added pagination, tags, and search functionality by extending this tutorial: https://www.youtube.com/watch?v=LYWgPSbPDfQ
 32. 11.10.24: UI for individual recipe page and search index are mostly finished, now working on edit page
+33. 01.12.24: UI adjustment for individual recipe and wip improved design for homepage and about page
 
 ## Back Log
 

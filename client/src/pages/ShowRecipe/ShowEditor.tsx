@@ -18,7 +18,10 @@ const ShowEditor = (props: ShowEditorProps) => {
   return (
     <div>
       <h1 className="heading page-margin-top">{props.name}</h1>
-      <div dangerouslySetInnerHTML={{ __html: props.wysiwygHtml }}></div>
+      <div
+        className="editor-content-container"
+        dangerouslySetInnerHTML={{ __html: props.wysiwygHtml }}
+      ></div>
     </div>
   );
 };
