@@ -43,27 +43,33 @@ export const getRecipes = async (req, res) => {
 // }
 
 export const getRecipeBySearch = async (req, res) => {
-    const { searchQuery, tags } = req.query;
+    const { searchQuery, tags, rating } = req.query;
 
     try {
         const name = new RegExp(searchQuery, "i");
-        // let query = { name }; // Base query that searches by name
+        // const recipes = await Recipe.find({ $or: [ { name }, { tags: { $in: tags.split(',') } } ]});
+        // const recipes = await Recipe.find({ $and: [{difficulty: "8 Hours"}, {$or: [ { name }, { tags: { $in: tags.split(',') } } ]}]});
 
-        // if (tags) {
-        //   const tagArray = tags.split(',');
-        //   if (tagArray.length > 0 && tagArray[0] !== "") {
-        //     query = {
-        //       $or: [
-        //         { name },
-        //         { tags: { $in: tagArray } }
-        //       ]
-        //     };
-        //   }
-        // }
+        let recipes;
+        console.log('Length of Tags ' + tags.length);
+        console.log('Search Query: '+searchQuery)
+        console.log('Search Query Length: ' + searchQuery.length);
+        console.log('Rating: '+ rating);
+        if (rating=="none" || rating==undefined || rating=="all") {
+          recipes = await Recipe.find({ $or: [ { name }, { tags: { $in: tags.split(',') } } ]});
+          console.log("Searched WITHOUT rating");
+        }
+        // else if (rating != "all" && (tags.length!=0 ||  searchQuery.length != 0)) {
+        else if ((tags.length!=0 ||  searchQuery != "none")) {
+          recipes = await Recipe.find({ $and: [{difficulty: rating}, {$or: [ { name }, { tags: { $in: tags.split(',') } } ]}]});
+          console.log("Searched WITH rating");
+        }
+        else {
+          console.log("Searched WITH ONLY rating");
+          recipes = await Recipe.find({difficulty: rating});
+        }
 
-        // const recipes = await Recipe.find(query);
-
-        const recipes = await Recipe.find({ $or: [ { name }, { tags: { $in: tags.split(',') } } ]});
+        console.log("Done?");
 
         res.json({ data: recipes });
     } catch (error) {    

@@ -27,6 +27,7 @@ interface Recipe {
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [search, setSearch] = useState("");
+  const [rating, setRating] = useState("all");
   const [tags, setTags] = useState<Array<string>>([]);
   const [loading, setLoading] = useState(false);
   const query = useQuery();
@@ -34,11 +35,25 @@ const RecipesIndex = () => {
   const page = Number(query.get("page")) || 1;
   const searchQuery = query.get("searchQuery");
 
+  const difficultyList = [
+    "all",
+    "5 Mins",
+    "15 Mins",
+    "30 Mins",
+    "1 Hour",
+    "2 Hours",
+    "4 Hours",
+    "8 Hours",
+    "1 Day",
+    "VERY HARD",
+  ];
+
   const searchPost = async () => {
     if (
       search.trim() ||
       tags.length > 0 ||
-      (tags[0] != "" && tags[0] != undefined)
+      (tags[0] != "" && tags[0] != undefined) ||
+      rating != "all"
     ) {
       try {
         setLoading(true);
@@ -48,6 +63,7 @@ const RecipesIndex = () => {
             params: {
               searchQuery: search || "none",
               tags: tags.join(","),
+              rating: rating || "all",
             },
           }
         );
@@ -58,7 +74,7 @@ const RecipesIndex = () => {
         navigate(
           `/recipes/search?searchQuery=${search || "none"}&tags=${tags.join(
             ","
-          )}`
+          )}&rating=${rating || "all"}`
         );
       } catch (err) {
         console.log("Search error: ", err);
@@ -114,6 +130,22 @@ const RecipesIndex = () => {
               searchPost={searchPost}
               handleKeyPress={handleKeyPress}
             />
+          </div>
+          <div className="form-field-container">
+            <label className="form-label">Difficulty Rating</label>
+            <select
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              className="form-field"
+            >
+              {difficultyList.map((rating, index) => {
+                return (
+                  <option key={index} value={rating}>
+                    {rating}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </div>
         {loading ? (
