@@ -18,6 +18,7 @@ interface Recipe {
   name: string;
   description: string;
   author: string;
+  difficulty: string;
   createdAt: string;
   thumbnail: string;
   tags: string[];
@@ -131,6 +132,7 @@ const RecipesIndex = () => {
                   recipeImg={recipe.thumbnail}
                   recipeDate={formatDate(new Date(recipe.createdAt))}
                   recipeAuthor={recipe.author}
+                  recipeDifficulty={recipe.difficulty}
                   recipeTags={recipe.tags}
                 ></Card>
               </Link>
