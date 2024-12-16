@@ -5,16 +5,37 @@ import "./home.css";
 import Button from "../../components/Buttons/Button/Button";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import axios from "axios";
-import { difficultyList } from "../../constants";
 
 const Home = () => {
   const [randomId, setRandomId] = useState("");
   const [rating, setRating] = useState("all");
+  const [usedRatings, setUsedRatings] = useState<string[]>([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/recipes/ratings"
+        );
+        setUsedRatings(response.data);
+      } catch (error) {
+        console.error("Error fetching tags:", error);
+      }
+    };
+    fetchTags();
+  }, []);
 
   const randomiseRecipe = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/recipes/random");
+      // const response = await axios.get("http://localhost:8000/recipes/random");
+      const response = await axios.get(`http://localhost:8000/recipes/random`, {
+        params: {
+          rating: rating || "all",
+        },
+      });
+
       const randomId = response.data;
       setRandomId(randomId);
       navigate(`/recipes/${randomId}`);
@@ -55,7 +76,7 @@ const Home = () => {
               onChange={(e) => setRating(e.target.value)}
               className="difficulty-search"
             >
-              {difficultyList.map((rating, index) => {
+              {usedRatings.map((rating, index) => {
                 return (
                   <option key={index} value={rating}>
                     {rating}

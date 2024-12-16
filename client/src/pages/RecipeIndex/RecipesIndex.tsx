@@ -97,6 +97,10 @@ const RecipesIndex = () => {
     fetchRecipes(page);
   }, [page]);
 
+  useEffect(() => {
+    searchPost();
+  }, [rating]);
+
   return (
     <div>
       <PageContentContainer width="85%">
@@ -113,7 +117,9 @@ const RecipesIndex = () => {
               <label className="help-text">Difficulty Filter</label>
               <select
                 value={rating}
-                onChange={(e) => setRating(e.target.value)}
+                onChange={async (e) => {
+                  setRating(e.target.value);
+                }}
                 className="difficulty-search"
               >
                 {difficultyList.map((rating, index) => {
