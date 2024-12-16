@@ -5,9 +5,11 @@ import "./home.css";
 import Button from "../../components/Buttons/Button/Button";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import axios from "axios";
+import { difficultyList } from "../../constants";
 
 const Home = () => {
   const [randomId, setRandomId] = useState("");
+  const [rating, setRating] = useState("all");
   const navigate = useNavigate();
 
   const randomiseRecipe = async () => {
@@ -46,6 +48,22 @@ const Home = () => {
           </p>
           <br />
           <br />
+          <div className="filter-container">
+            <label className="help-text">Difficulty Filter</label>
+            <select
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              className="difficulty-search"
+            >
+              {difficultyList.map((rating, index) => {
+                return (
+                  <option key={index} value={rating}>
+                    {rating}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <Button btnText="Gimme a recipe!" onClick={randomiseRecipe}></Button>
         </PageContentContainer>
       </div>

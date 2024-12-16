@@ -9,7 +9,7 @@ import Card from "../../components/Card/Card";
 import Searchbar from "../../components/Search/Searchbar";
 import ChipInput from "../../components/Search/ChipInput";
 
-import examplePic from "../../assets/example-pic.webp";
+import { difficultyList } from "../../constants";
 import "./RecipeIndex.css";
 import { useQuery, formatDate } from "../../utils/utils";
 
@@ -34,19 +34,6 @@ const RecipesIndex = () => {
   const navigate = useNavigate();
   const page = Number(query.get("page")) || 1;
   const searchQuery = query.get("searchQuery");
-
-  const difficultyList = [
-    "all",
-    "5 Mins",
-    "15 Mins",
-    "30 Mins",
-    "1 Hour",
-    "2 Hours",
-    "4 Hours",
-    "8 Hours",
-    "1 Day",
-    "VERY HARD",
-  ];
 
   const searchPost = async () => {
     if (
@@ -122,6 +109,22 @@ const RecipesIndex = () => {
               handleKeyPress={handleKeyPress}
               searchPost={searchPost}
             />
+            <div className="filter-container">
+              <label className="help-text">Difficulty Filter</label>
+              <select
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                className="difficulty-search"
+              >
+                {difficultyList.map((rating, index) => {
+                  return (
+                    <option key={index} value={rating}>
+                      {rating}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
           <div className="chip-container">
             <ChipInput
@@ -130,22 +133,6 @@ const RecipesIndex = () => {
               searchPost={searchPost}
               handleKeyPress={handleKeyPress}
             />
-          </div>
-          <div className="form-field-container">
-            <label className="form-label">Difficulty Rating</label>
-            <select
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-              className="form-field"
-            >
-              {difficultyList.map((rating, index) => {
-                return (
-                  <option key={index} value={rating}>
-                    {rating}
-                  </option>
-                );
-              })}
-            </select>
           </div>
         </div>
         {loading ? (

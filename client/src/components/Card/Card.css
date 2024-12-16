@@ -63,8 +63,8 @@
 .card-difficulty {
   font-size: 0.9rem;
   margin: 0.5rem;
-  float: inline-start;
-  /* margin-top: 0rem; */
+  /* float: inline-start; */
+  margin-top: 0.75rem;
 }
 
 .card-date {

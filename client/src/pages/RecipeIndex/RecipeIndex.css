@@ -9,6 +9,27 @@
   width: 35%;
 }
 
+.filter-container {
+  display: inline-flex;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.difficulty-search {
+  padding-left: 20px;
+  width: 100%;
+  border: 2px solid var(--body-text-color);
+  /* background: var(--form-bg-color); */
+  color: var(--body-text-color);
+  background: transparent;
+  /* margin-top: 1rem; */
+  border-radius: 25px;
+  padding: 0.5rem;
+  font-family: "Quicksand", sans-serif;
+  transition: 0.4s;
+  box-sizing: border-box;
+}
+
 .searchbar-container {
   width: 55%;
   align-items: center;
