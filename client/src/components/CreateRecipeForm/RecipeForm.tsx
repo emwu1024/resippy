@@ -10,6 +10,7 @@ import { convertToBase64 } from "../../utils/utils";
 
 import { IconContext } from "react-icons";
 import { LuImagePlus } from "react-icons/lu";
+import { CircularProgress } from "@mui/material";
 
 interface RecipeFormProps {
   name: string;
@@ -23,6 +24,7 @@ interface RecipeFormProps {
   images: Array<string>;
   editorHtml: string;
   isStandardised: boolean;
+  loading: boolean;
   setName: React.Dispatch<React.SetStateAction<string>>;
   setAuthor: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
@@ -184,7 +186,18 @@ const RecipeForm = (props: RecipeFormProps) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <Button btnText="Save" onClick={props.handleSaveRecipe}></Button>
+      <Button
+        btnText={props.loading ? "Saving..." : "Save"}
+        onClick={props.handleSaveRecipe}
+        disabled={props.loading}
+      ></Button>
+      {props.loading && (
+        <div className="loading-icon">
+          {/* Value in color doesn't seem to matter as it is being set by CSS, but the attribute still needs to be there otherwise it defaults to the default color */}
+          <CircularProgress color="#c17d42" size="2rem" />
+        </div>
+      )}
+
       {/* Preview To Be Added Later - Not part of MVP */}
       {/* <h2>Preview</h2>
         <div className="preview-container">

@@ -4,7 +4,8 @@
   position: relative;
   top: 4rem;
   font-family: var(--heading-font);
-  color: var(--secondary-bg-color);
+  /* color: var(--secondary-bg-color); */
+  color: var(--secondary-text-color);
   font-weight: 700;
   font-size: 1.5rem;
   cursor: pointer;

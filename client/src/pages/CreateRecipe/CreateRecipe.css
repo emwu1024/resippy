@@ -11,7 +11,8 @@
 
 .desc-container {
   margin: 0 auto;
-  font-size: 1.15rem;
+  /* font-size: 1.15rem; */
+  font-size: var(--description-text-size);
   width: 75%;
   line-height: 2rem;
   margin-top: 3.75rem;
@@ -21,4 +22,20 @@
 .list-heading {
   font-size: 1.3rem;
   font-weight: 700;
+}
+
+@media (max-width: 715px) {
+  .create-recipe-page .page-content {
+    width: 90% !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .create-recipe-page .page-content {
+    width: 90% !important;
+  }
+
+  .desc-container {
+    font-size: var(--description-text-size-mobile);
+  }
 }

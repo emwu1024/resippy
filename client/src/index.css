@@ -15,9 +15,13 @@
   /* --secondary-bg-color: #1b2511; */
 
   --heading-text-size: 50px;
+  --heading-text-size-mobile: 40px;
   --subheading-1-text-size: 36px;
   --subheading-2-text-size: 30px;
+  --description-text-size: 18px;
+  --description-text-size-mobile: 15px;
   --body-text-size: 24px;
+  --body-text-size-mobile: 20px;
 
   --heading-font: "Philosopher", sans-serif;
   --body-font: "Quicksand", sans-serif;
@@ -116,6 +120,16 @@ body {
   margin-top: 0.25rem;
   font-family: "Nunito", sans-serif;
   color: var(--faded-body-text-color);
+}
+
+@media (max-width: 715px) {
+  .heading {
+    font-size: var(--heading-text-size-mobile);
+  }
+
+  .body-text {
+    font-size: var(--body-text-size-mobile);
+  }
 }
 
 /* @media (prefers-color-scheme: light) {

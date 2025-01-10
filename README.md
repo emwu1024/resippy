@@ -116,6 +116,7 @@ The backupdb.sh script attached just needs to be modified with your details and 
 31. 16.09.24: Added pagination, tags, and search functionality by extending this tutorial: https://www.youtube.com/watch?v=LYWgPSbPDfQ
 32. 11.10.24: UI for individual recipe page and search index are mostly finished, now working on edit page
 33. 01.12.24: UI adjustment for individual recipe and wip improved design for homepage and about page
+34. 05.01.25: Bug fixes and populating the website with recipes.
 
 ## Back Log
 

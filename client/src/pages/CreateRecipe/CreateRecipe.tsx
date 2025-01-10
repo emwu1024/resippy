@@ -20,6 +20,8 @@ const CreateRecipe = () => {
   const [isStandardised, setIsStandardised] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSaveRecipe = async () => {
@@ -36,19 +38,28 @@ const CreateRecipe = () => {
       isStandardised,
       images,
     };
+
+    setLoading(true);
+
     axios
       .post("http://localhost:8000/recipes", data)
       .then(() => {
+        setLoading(false);
         navigate("/recipes");
       })
       .catch((error) => {
-        alert("You probably missed a field, check the console for more deets");
+        setLoading(false);
+        if (error.response) {
+          alert(`Error: ${error.response.data.message}`);
+        } else {
+          alert("An unexpected error occurred. Please try again.");
+        }
         console.log(error);
       });
   };
 
   return (
-    <div>
+    <div className="create-recipe-page">
       <PageContentContainer>
         <h1 className="heading page-margin-top">Let's get cooking!</h1>
         <div className="desc-container">
@@ -82,6 +93,7 @@ const CreateRecipe = () => {
           editorHtml={editorHtml}
           setEditorHtml={setEditorHtml}
           handleSaveRecipe={handleSaveRecipe}
+          loading={loading}
         />
       </PageContentContainer>
     </div>

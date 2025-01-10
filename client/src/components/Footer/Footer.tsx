@@ -3,6 +3,7 @@ import "./Footer.css";
 
 import { IconContext } from "react-icons";
 import { FaGithub } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -21,6 +22,12 @@ const Footer = () => {
         </a>
       </span>
       <span className="footer-text">© 2024 · Resippys</span>
+      <span className="footer-text">
+        {/* <a href="https://github.com/emwu1024"></a> */}
+        <Link className="attribution-text" to={`/attributions`}>
+          Attributions
+        </Link>
+      </span>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import "./Navbar.css";
 // import logo from '../../assets/resippy-logo-v2.png';
-import logo from "../../assets/stamp-logo-red-round-2.png";
+import logo from "../../assets/newlogo-transparent.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

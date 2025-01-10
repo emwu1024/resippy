@@ -2,7 +2,9 @@
   /* height: 500px; */
   border-radius: 15px;
   width: 90%;
-  min-width: 200px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  min-width: 275px;
 }
 
 .about-author-container {
@@ -17,4 +19,18 @@
   flex: 50%;
   text-align: left;
   margin-left: 6rem;
+}
+
+@media (max-width: 900px) {
+  .about-container {
+    display: inline;
+  }
+
+  .about-author-img {
+    margin-top: 10rem;
+  }
+
+  .about-text-container {
+    margin-left: 0rem;
+  }
 }

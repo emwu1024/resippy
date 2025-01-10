@@ -16,20 +16,20 @@ return new Promise((resolve, reject) => {
 
 export function useQuery() {
     return new URLSearchParams(useLocation().search)
-  }
+}
   
-  export function formatDate(date : Date): string {
-    let day: number | string = date.getDate();
-    let month: number | string = date.getMonth();
+export function formatDate(date : Date): string {
+let day: number | string = date.getDate();
+let month: number | string = date.getMonth()+1;
 
-    if (day < 10 ) {
-        day = '0' + day;
-    }
+if (day < 10 ) {
+    day = '0' + day;
+}
 
-    if (month < 10 ) {
-        month = '0' + month;
-    }
+if (month < 10 ) {
+    month = '0' + month;
+}
 
-    let formattedDate = day + '.' + month + '.' + date.getFullYear();
-    return formattedDate.toString()
-  }
+let formattedDate = day + '.' + month + '.' + date.getFullYear();
+return formattedDate.toString()
+}

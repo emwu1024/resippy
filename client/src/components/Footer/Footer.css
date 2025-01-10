@@ -9,10 +9,29 @@
 
 .footer-text {
   padding-left: 3rem;
+  font-weight: 500;
+}
+
+.attribution-text {
+  color: var(--body-text-color) !important;
+  text-decoration: none;
+}
+
+.attribution-text:hover {
+  transform: scale(1.1);
+  color: var(--decoration-text-color) !important;
+  transition: 0.6s;
 }
 
 .footer-icon:hover {
   transform: scale(1.1);
   color: var(--decoration-text-color) !important;
   transition: 0.6s;
+}
+
+@media (max-width: 550px) {
+  .footer-text {
+    font-size: 0.85rem;
+    padding-left: 24px;
+  }
 }

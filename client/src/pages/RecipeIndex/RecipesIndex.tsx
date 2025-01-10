@@ -9,7 +9,7 @@ import Card from "../../components/Card/Card";
 import Searchbar from "../../components/Search/Searchbar";
 import ChipInput from "../../components/Search/ChipInput";
 
-import examplePic from "../../assets/example-pic.webp";
+import { difficultyList } from "../../constants";
 import "./RecipeIndex.css";
 import { useQuery, formatDate } from "../../utils/utils";
 
@@ -18,6 +18,7 @@ interface Recipe {
   name: string;
   description: string;
   author: string;
+  difficulty: string;
   createdAt: string;
   thumbnail: string;
   tags: string[];
@@ -26,6 +27,7 @@ interface Recipe {
 const RecipesIndex = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [search, setSearch] = useState("");
+  const [rating, setRating] = useState("all");
   const [tags, setTags] = useState<Array<string>>([]);
   const [loading, setLoading] = useState(false);
   const query = useQuery();
@@ -37,7 +39,8 @@ const RecipesIndex = () => {
     if (
       search.trim() ||
       tags.length > 0 ||
-      (tags[0] != "" && tags[0] != undefined)
+      (tags[0] != "" && tags[0] != undefined) ||
+      rating != "all"
     ) {
       try {
         setLoading(true);
@@ -47,6 +50,7 @@ const RecipesIndex = () => {
             params: {
               searchQuery: search || "none",
               tags: tags.join(","),
+              rating: rating || "all",
             },
           }
         );
@@ -57,7 +61,7 @@ const RecipesIndex = () => {
         navigate(
           `/recipes/search?searchQuery=${search || "none"}&tags=${tags.join(
             ","
-          )}`
+          )}&rating=${rating || "all"}`
         );
       } catch (err) {
         console.log("Search error: ", err);
@@ -93,6 +97,10 @@ const RecipesIndex = () => {
     fetchRecipes(page);
   }, [page]);
 
+  useEffect(() => {
+    searchPost();
+  }, [rating]);
+
   return (
     <div>
       <PageContentContainer width="85%">
@@ -105,6 +113,24 @@ const RecipesIndex = () => {
               handleKeyPress={handleKeyPress}
               searchPost={searchPost}
             />
+            <div className="filter-container">
+              <label className="help-text">Difficulty Filter</label>
+              <select
+                value={rating}
+                onChange={async (e) => {
+                  setRating(e.target.value);
+                }}
+                className="difficulty-search"
+              >
+                {difficultyList.map((rating, index) => {
+                  return (
+                    <option key={index} value={rating}>
+                      {rating}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
           <div className="chip-container">
             <ChipInput
@@ -131,6 +157,7 @@ const RecipesIndex = () => {
                   recipeImg={recipe.thumbnail}
                   recipeDate={formatDate(new Date(recipe.createdAt))}
                   recipeAuthor={recipe.author}
+                  recipeDifficulty={recipe.difficulty}
                   recipeTags={recipe.tags}
                 ></Card>
               </Link>

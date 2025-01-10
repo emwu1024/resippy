@@ -100,23 +100,6 @@
   perspective: 500px;
 }
 
-/* WOOD GRAIN PANEL */
-/* .hidey-panel {
-  transform: rotateX(90deg);
-  visibility: hidden;
-  transform-origin: top;
-  will-change: transform;
-  width: 100px;
-  height: 50px;
-  background-size: 100px 50px;
-  background-image: url("../../assets/woodgrain.jpg");
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  border-radius: 3px;
-  position: absolute;
-  box-shadow: 0 3px 1px 1px #1f0904;
-} */
-
 /* HANDDRAWN WOOD PANEL */
 .hidey-panel {
   transform: rotateX(90deg);

@@ -82,3 +82,55 @@ input[type="file"] {
   font-family: "Nunito", sans-serif;
   color: var(--faded-body-text-color);
 }
+
+.uploaded-image {
+  /* max-width: 150px;
+  max-height: 150px; */
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  display: inline;
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+
+.uploaded-image-container {
+  display: inline-block;
+}
+
+.remove-icon {
+  /* cursor: pointer; */
+}
+
+.remove-icon:hover {
+  transform: scale(1.1);
+  color: var(--decoration-text-color) !important;
+  transition: 0.6s;
+}
+
+.remove-icon-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  top: -120px;
+  left: 30px;
+}
+
+@media (max-width: 550px) {
+  .btn-upload-image {
+    /* margin-top: 4rem; */
+    /* margin-bottom: 4rem; */
+    padding: 0.5rem 2rem;
+    font-size: 12px;
+  }
+
+  .form-tab-container {
+    width: 100%;
+  }
+
+  .editor-container {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}

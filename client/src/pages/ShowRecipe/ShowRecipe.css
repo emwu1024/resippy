@@ -98,10 +98,14 @@ h6 {
   .paperclip-page {
     width: 400px;
     transform: rotate(-5deg);
-    top: 0px;
+    /* top: 0px;
     right: 20px;
-    position: absolute;
+    position: absolute; */
+    top: 0px;
+    right: -30px;
+    position: relative;
     box-shadow: 5px 5px 10px;
+    float: right;
   }
 
   .paperclip-page-header {
@@ -147,6 +151,6 @@ h6 {
   }
 
   .steps-header {
-    margin-top: 25rem;
+    margin-top: 8rem;
   }
 }

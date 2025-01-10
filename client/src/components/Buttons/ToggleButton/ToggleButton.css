@@ -87,3 +87,16 @@ input:checked + .slider:before {
 .desc-text {
   margin-top: 1.5rem;
 }
+
+@media (max-width: 550px) {
+  .toggle-container {
+    width: 100%;
+  }
+
+  .switch {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+}
