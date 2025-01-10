@@ -1,0 +1,13 @@
+.attribution-container {
+  height: 40vh;
+}
+
+.attribution-list {
+  display: inline-block;
+  text-align: left;
+}
+
+.attribution-list-item {
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}

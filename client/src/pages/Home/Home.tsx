@@ -29,7 +29,6 @@ const Home = () => {
 
   const randomiseRecipe = async () => {
     try {
-      // const response = await axios.get("http://localhost:8000/recipes/random");
       const response = await axios.get(`http://localhost:8000/recipes/random`, {
         params: {
           rating: rating || "all",
@@ -45,7 +44,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="home-page">
       <div className="content-container">
         <div className="hero-image">
           <div className="hero-text">
@@ -67,6 +66,7 @@ const Home = () => {
           <p className="body-text margin-top-3">
             This is a website I made to keep track of them all!
           </p>
+          <br />
           <br />
           <br />
           <div className="filter-container">

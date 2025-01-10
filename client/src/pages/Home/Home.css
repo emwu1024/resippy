@@ -22,3 +22,17 @@
   font-family: "flood-std", sans-serif;
   font-size: 4rem;
 }
+
+@media (max-width: 550px) {
+  .home-page .page-content {
+    width: 80% !important;
+  }
+
+  .hero-text {
+    font-size: 2rem;
+  }
+
+  .desc-container {
+    font-size: var(--description-text-size-mobile);
+  }
+}

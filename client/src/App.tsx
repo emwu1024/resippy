@@ -10,6 +10,7 @@ import About from "./pages/About/About";
 import Atlas from "./pages/Atlas/Atlas";
 import Navbar from "./components/Navbar/Navbar.tsx";
 import Footer from "./components/Footer/Footer.tsx";
+import Attribution from "./pages/Attribution/Attribution.tsx";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/recipes/:id" element={<ShowRecipe />} />
         <Route path="/about" element={<About />} />
         <Route path="/atlas" element={<Atlas />} />
+        <Route path="/attributions" element={<Attribution />} />
         {/* <Route path="/recipes/delete/:id" element={<DeleteRecipe />} /> */}
       </Routes>
       <Footer />

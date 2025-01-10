@@ -26,6 +26,7 @@ const ShowForm = (props: ShowFormProps) => {
           <h1 className="heading page-margin-top">{props.name}</h1>
           <hr className="decorative-hr" />
           <p>By: {props.author}</p>
+          <p>Difficulty: {props.difficulty}</p>
           <p>{props.description}</p>
           {props.images.map((image, index) => (
             <img className="recipe-img" src={image} alt="" />

@@ -6,10 +6,6 @@ import PageContentContainer from "../../components/PageContentContainer/PageCont
 import RecipeForm from "../../components/CreateRecipeForm/RecipeForm";
 import "./UpdateRecipe.css";
 
-// TO DO:
-// Make isStandardised button in alignment with currentStatus
-// Make tags populate
-
 const UpdateRecipe = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
@@ -17,11 +13,15 @@ const UpdateRecipe = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [tags, setTags] = useState<Array<string>>([]);
   const [difficulty, setDifficulty] = useState("5 Mins");
+  // const [steps, setSteps] = useState<Array<string>>([]);
+  // const [ingredients, setIngredients] = useState<Array<string>>([]);
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [images, setImages] = useState<Array<string>>([]);
   const [isStandardised, setIsStandardised] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -37,6 +37,8 @@ const UpdateRecipe = () => {
         setTags(response.data.tags);
         setDifficulty(response.data.difficulty);
         setImages(response.data.images);
+        console.log("images:  ");
+        console.log(images);
         setIsStandardised(response.data.isStandardised);
         setEditorHtml(response.data.editorHtml);
         setSteps(formatArray(response.data.steps));
@@ -50,14 +52,17 @@ const UpdateRecipe = () => {
       });
   }, []);
 
-  const formatArray = (recipeArray: string[] | string) => {
-    const recipeString = recipeArray.toString().split(",");
-    let returnString = "";
+  const formatArray = (recipeArray: string[]) => {
+    // const recipeString = recipeArray.toString().split(",");
+    const recipeString = recipeArray.join("\n");
+    console.log("HERE: ");
+    console.log(recipeArray);
+    // let returnString = "";
 
-    recipeString.forEach((item: string) => {
-      returnString += item + "\n";
-    });
-    return returnString;
+    // recipeString.forEach((item: string) => {
+    //   returnString += item + "\n";
+    // });
+    return recipeString;
   };
 
   const handleEditRecipe = () => {
@@ -74,13 +79,22 @@ const UpdateRecipe = () => {
       isStandardised,
       images,
     };
+
+    setLoading(true);
+
     axios
       .put(`http://localhost:8000/recipes/${id}`, data)
       .then(() => {
+        setLoading(false);
         navigate("/recipes");
       })
       .catch((error) => {
-        alert("You probably missed a field, check the console for more deets");
+        setLoading(false);
+        if (error.response) {
+          alert(`Error: ${error.response.data.message}`);
+        } else {
+          alert("An unexpected error occurred. Please try again.");
+        }
         console.log(error);
       });
   };
@@ -120,6 +134,7 @@ const UpdateRecipe = () => {
           editorHtml={editorHtml}
           setEditorHtml={setEditorHtml}
           handleSaveRecipe={handleEditRecipe}
+          loading={loading}
         />
       </PageContentContainer>
     </div>

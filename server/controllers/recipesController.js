@@ -12,7 +12,7 @@ export const getRecipes = async (req, res) => {
     const startIndex = (Number(page) - 1) * LIMIT;
     const total = await Recipe.countDocuments({});
 
-    console.log("working >:D");
+    console.log("Server Working!");
 
     const recipes = await Recipe.find({})
       .sort({ _id: -1 })
@@ -26,7 +26,7 @@ export const getRecipes = async (req, res) => {
     });
   } catch (error) {
     res.status(500).send({ message: error.message });
-    console.log("hmm it failed");
+    console.log("Server NOT working. Check network?");
   }
 };
 
@@ -54,31 +54,23 @@ export const getRecipeBySearch = async (req, res) => {
     // const recipes = await Recipe.find({ $and: [{difficulty: "8 Hours"}, {$or: [ { name }, { tags: { $in: tags.split(',') } } ]}]});
 
     let recipes;
-    console.log("Length of Tags " + tags.length);
-    console.log("Search Query: " + searchQuery);
-    console.log("Search Query Length: " + searchQuery.length);
-    console.log("Rating: " + rating);
     if (rating == "none" || rating == undefined || rating == "all") {
       recipes = await Recipe.find({
         $or: [{ name }, { tags: { $in: tags.split(",") } }],
       });
-      console.log("Searched WITHOUT rating");
-    }
-    // else if (rating != "all" && (tags.length!=0 ||  searchQuery.length != 0)) {
-    else if (tags.length != 0 || searchQuery != "none") {
+      // console.log("Searched WITHOUT rating");
+    } else if (tags.length != 0 || searchQuery != "none") {
       recipes = await Recipe.find({
         $and: [
           { difficulty: rating },
           { $or: [{ name }, { tags: { $in: tags.split(",") } }] },
         ],
       });
-      console.log("Searched WITH rating");
+      // console.log("Searched WITH rating");
     } else {
-      console.log("Searched WITH ONLY rating");
+      // console.log("Searched WITH ONLY rating");
       recipes = await Recipe.find({ difficulty: rating });
     }
-
-    console.log("Done?");
 
     res.json({ data: recipes });
   } catch (error) {
@@ -108,7 +100,6 @@ export const getAllTags = async (req, res) => {
 export const getAllUsedDifficulty = async (req, res) => {
   try {
     const distinctDifficulties = await Recipe.distinct("difficulty");
-    console.log("Distinct Difficulty Ratings: " + distinctDifficulties);
     if (distinctDifficulties) {
       res.json(distinctDifficulties);
     } else {
@@ -135,11 +126,8 @@ export const getRandomRecipe = async (req, res) => {
   const { rating } = req.query;
   try {
     let randomRecipe;
-
-    console.log("RATING: " + rating);
     if (rating == "all") {
       randomRecipe = await Recipe.aggregate([{ $sample: { size: 1 } }]);
-      console.log("NOT filtering by difficulty");
     } else {
       randomRecipe = await Recipe.aggregate([
         {
@@ -147,7 +135,6 @@ export const getRandomRecipe = async (req, res) => {
         },
         { $sample: { size: 1 } },
       ]);
-      console.log("FILTERING by difficulty");
     }
 
     res.json(randomRecipe[0]._id || { message: "No recipe found" });

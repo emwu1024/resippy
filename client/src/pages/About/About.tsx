@@ -15,14 +15,14 @@ import "./About.css";
 const About = () => {
   return (
     <div>
-      <PageContentContainer>
+      <PageContentContainer width="75%">
         <div className="about-container page-margin-top">
           <div className="about-author-container">
             <img
               className="about-author-img"
               src={AuthorPic}
               // src="../../assets/authorimage3.HEIC"
-              alt={`Picture of a cat`}
+              alt={`A brown mug and a metal bowl of mango sago on a table with plants in the background.`}
             />
           </div>
           <div className="about-text-container">
