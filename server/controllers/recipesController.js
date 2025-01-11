@@ -1,8 +1,6 @@
 import express from "express";
 import { Recipe } from "../models/recipeModel.js";
 
-const router = express.Router();
-
 // Get all recipes
 export const getRecipes = async (req, res) => {
   const { page } = req.query;
@@ -273,5 +271,3 @@ export const deleteRecipe = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
-
-export default router;
