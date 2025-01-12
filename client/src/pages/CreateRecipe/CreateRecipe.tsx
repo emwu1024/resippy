@@ -11,7 +11,7 @@ const CreateRecipe = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnailImage, setThumbnailImage] = useState<File | null>(null);
   const [tags, setTags] = useState<Array<string>>([]);
   const [difficulty, setDifficulty] = useState("5 Mins");
   const [steps, setSteps] = useState("");
@@ -24,7 +24,42 @@ const CreateRecipe = () => {
 
   const navigate = useNavigate();
 
+  const uploadThumbnail = async () => {
+    if (!thumbnailImage) {
+      alert("No thumbnail was selected");
+      return null;
+    }
+
+    const data = new FormData();
+    data.append("file", thumbnailImage);
+    data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_PRESET);
+    console.log(data);
+    console.log(import.meta.env.VITE_CLOUDINARY_PRESET);
+    console.log(typeof import.meta.env.VITE_CLOUDINARY_PRESET);
+    console.log(thumbnailImage);
+
+    try {
+      // NOTE: might fail here? 19:37 uses process.env instead but idt that works with vite
+      let cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+      let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+      console.log(apiUrl);
+      const res = await axios.post(apiUrl, data);
+      console.log("Res Output: ");
+      console.log(res.data.secure_url);
+      const secureUrl = res.data.secure_url;
+      console.log("Secure URL: " + secureUrl);
+      return secureUrl;
+    } catch (error) {
+      // console.log("Thumbnail upload to Cloudinary failed. Logging Error.");
+      alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+      console.log(error);
+    }
+  };
+
   const handleSaveRecipe = async () => {
+    // Upload to cloudinary and st ore secure url in below variable,then send secure cloudinary URL to backend
+    const thumbnail = await uploadThumbnail();
+
     const data = {
       name,
       author,
@@ -76,8 +111,8 @@ const CreateRecipe = () => {
           setAuthor={setAuthor}
           description={description}
           setDescription={setDescription}
-          thumbnail={thumbnail}
-          setThumbnail={setThumbnail}
+          thumbnail={thumbnailImage}
+          setThumbnail={setThumbnailImage}
           tags={tags}
           setTags={setTags}
           difficulty={difficulty}
