@@ -10,7 +10,8 @@ const UpdateRecipe = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [newThumbnailImage, setNewThumbnailImage] = useState<File | null>(null);
+  const [oldThumbnail, setOldThumbnail] = useState("");
   const [tags, setTags] = useState<Array<string>>([]);
   const [difficulty, setDifficulty] = useState("5 Mins");
   // const [steps, setSteps] = useState<Array<string>>([]);
@@ -33,12 +34,10 @@ const UpdateRecipe = () => {
         setName(response.data.name);
         setDescription(response.data.description);
         setAuthor(response.data.author);
-        setThumbnail(response.data.thumbnail);
+        setOldThumbnail(response.data.thumbnail);
         setTags(response.data.tags);
         setDifficulty(response.data.difficulty);
         setImages(response.data.images);
-        console.log("images:  ");
-        console.log(images);
         setIsStandardised(response.data.isStandardised);
         setEditorHtml(response.data.editorHtml);
         setSteps(formatArray(response.data.steps));
@@ -52,20 +51,41 @@ const UpdateRecipe = () => {
       });
   }, []);
 
-  const formatArray = (recipeArray: string[]) => {
-    // const recipeString = recipeArray.toString().split(",");
-    const recipeString = recipeArray.join("\n");
-    console.log("HERE: ");
-    console.log(recipeArray);
-    // let returnString = "";
+  const uploadThumbnail = async () => {
+    if (!newThumbnailImage) {
+      alert("No thumbnail was selected");
+      return null;
+    }
 
-    // recipeString.forEach((item: string) => {
-    //   returnString += item + "\n";
-    // });
+    const data = new FormData();
+    data.append("file", newThumbnailImage);
+    data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_PRESET);
+
+    try {
+      let cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+      let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+      const res = await axios.post(apiUrl, data);
+      const secureUrl = res.data.secure_url;
+      return secureUrl;
+    } catch (error) {
+      alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+    }
+  };
+
+  const formatArray = (recipeArray: string[]) => {
+    const recipeString = recipeArray.join("\n");
     return recipeString;
   };
 
-  const handleEditRecipe = () => {
+  const handleEditRecipe = async () => {
+    setLoading(true);
+    let thumbnail = "";
+    if (newThumbnailImage != null) {
+      thumbnail = await uploadThumbnail();
+    } else {
+      thumbnail = oldThumbnail;
+    }
+
     const data = {
       name,
       author,
@@ -79,8 +99,6 @@ const UpdateRecipe = () => {
       isStandardised,
       images,
     };
-
-    setLoading(true);
 
     axios
       .put(`http://localhost:8000/recipes/${id}`, data)
@@ -117,8 +135,9 @@ const UpdateRecipe = () => {
           setAuthor={setAuthor}
           description={description}
           setDescription={setDescription}
-          thumbnail={thumbnail}
-          setThumbnail={setThumbnail}
+          thumbnail={newThumbnailImage}
+          oldThumbNail={oldThumbnail}
+          setThumbnail={setNewThumbnailImage}
           tags={tags}
           setTags={setTags}
           difficulty={difficulty}

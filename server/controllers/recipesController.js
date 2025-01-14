@@ -28,6 +28,43 @@ export const getRecipes = async (req, res) => {
   }
 };
 
+// Get all recipes without images
+export const getRecipesShort = async (req, res) => {
+  const { page } = req.query;
+  try {
+    // Can change limit later
+    const LIMIT = 8;
+    const startIndex = (Number(page) - 1) * LIMIT;
+    const total = await Recipe.countDocuments({});
+
+    console.log("Server Working!");
+
+    const recipes = await Recipe.find({})
+      .select({
+        name: 1,
+        author: 1,
+        thumbnail: 1,
+        difficulty: 1,
+        description: 1,
+        tags: 1,
+        createdAt: 1,
+      })
+      .sort({ _id: -1 })
+      .limit(LIMIT)
+      .skip(startIndex);
+    return res.status(200).json({
+      count: recipes.length,
+      data: recipes,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total / LIMIT),
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+    console.log("Server NOT working. Check network?");
+    console.log(error);
+  }
+};
+
 // Old code: break in case of emergency
 // export const getRecipes = async (req, res) => {
 //     try {

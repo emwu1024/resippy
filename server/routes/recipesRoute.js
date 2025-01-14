@@ -9,11 +9,13 @@ import {
   getAllTags,
   getRandomRecipe,
   getAllUsedDifficulty,
+  getRecipesShort,
 } from "../controllers/recipesController.js";
 
 const router = express.Router();
 
 router.get("/", getRecipes);
+router.get("/short", getRecipesShort);
 router.get("/search", getRecipeBySearch);
 router.get("/tags", getAllTags);
 router.get("/ratings", getAllUsedDifficulty);

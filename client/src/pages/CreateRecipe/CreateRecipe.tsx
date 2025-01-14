@@ -33,21 +33,13 @@ const CreateRecipe = () => {
     const data = new FormData();
     data.append("file", thumbnailImage);
     data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_PRESET);
-    console.log(data);
-    console.log(import.meta.env.VITE_CLOUDINARY_PRESET);
-    console.log(typeof import.meta.env.VITE_CLOUDINARY_PRESET);
-    console.log(thumbnailImage);
 
     try {
       // NOTE: might fail here? 19:37 uses process.env instead but idt that works with vite
       let cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
       let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
-      console.log(apiUrl);
       const res = await axios.post(apiUrl, data);
-      console.log("Res Output: ");
-      console.log(res.data.secure_url);
       const secureUrl = res.data.secure_url;
-      console.log("Secure URL: " + secureUrl);
       return secureUrl;
     } catch (error) {
       // console.log("Thumbnail upload to Cloudinary failed. Logging Error.");

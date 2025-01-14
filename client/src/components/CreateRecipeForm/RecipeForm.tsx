@@ -16,6 +16,7 @@ interface RecipeFormProps {
   author: string;
   description: string;
   thumbnail: File | null;
+  oldThumbNail?: string;
   tags: Array<string>;
   difficulty: string;
   steps: string;
@@ -162,7 +163,7 @@ const RecipeForm = (props: RecipeFormProps) => {
             <IconContext.Provider value={{ color: "#e1be96", size: "30px" }}>
               <LuImagePlus />
             </IconContext.Provider>
-            {props.thumbnail != null ? (
+            {props.thumbnail != null || props.oldThumbNail != null ? (
               <span className="upload-desc">1 File Uploaded</span>
             ) : (
               <span className="upload-desc">Upload Image Here</span>
