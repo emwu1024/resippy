@@ -25,19 +25,25 @@ const CreateRecipe = () => {
   const navigate = useNavigate();
 
   const uploadThumbnail = async () => {
+    console.log("HERE");
     if (!thumbnailImage) {
       alert("No thumbnail was selected");
       return null;
     }
-
+    console.log("1");
+    const cloudData = await axios.post("http://localhost:8000/recipes/cloud");
+    console.log("cloudData:", await cloudData.data);
+    const { signature, timestamp } = cloudData.data;
+    console.log("2");
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+    const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+    console.log("3");
     const data = new FormData();
     data.append("file", thumbnailImage);
-    data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_PRESET);
-
+    data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET);
+    console.log("4");
     try {
-      // NOTE: might fail here? 19:37 uses process.env instead but idt that works with vite
-      let cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-      let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+      let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
       const res = await axios.post(apiUrl, data);
       const secureUrl = res.data.secure_url;
       return secureUrl;
@@ -45,12 +51,14 @@ const CreateRecipe = () => {
       // console.log("Thumbnail upload to Cloudinary failed. Logging Error.");
       alert("Thumbnail upload to Cloudinary failed. Logging Error.");
       console.log(error);
+      console.log("6");
     }
   };
 
   const handleSaveRecipe = async () => {
     // Upload to cloudinary and st ore secure url in below variable,then send secure cloudinary URL to backend
     const thumbnail = await uploadThumbnail();
+    console.log("7");
 
     const data = {
       name,
@@ -67,6 +75,7 @@ const CreateRecipe = () => {
     };
 
     setLoading(true);
+    console.log("8");
 
     axios
       .post("http://localhost:8000/recipes", data)
