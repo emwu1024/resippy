@@ -184,6 +184,7 @@ export const createRecipe = async (req, res) => {
     if (
       req.body.isStandardised === true &&
       (!req.body.name ||
+        !req.body.cloudinaryId ||
         !req.body.description ||
         !req.body.author ||
         !req.body.thumbnail ||
@@ -199,6 +200,7 @@ export const createRecipe = async (req, res) => {
     } else if (
       req.body.isStandardised === false &&
       (!req.body.name ||
+        !req.body.cloudinaryId ||
         !req.body.description ||
         !req.body.author ||
         !req.body.thumbnail ||
@@ -223,6 +225,7 @@ export const createRecipe = async (req, res) => {
     // const newImage = req.body.images
 
     const newRecipe = {
+      cloudinaryId: req.body.cloudinaryId,
       name: req.body.name,
       author: req.body.author,
       description: req.body.description,
@@ -249,6 +252,7 @@ export const updateRecipe = async (req, res) => {
     if (
       req.body.isStandardised === true &&
       (!req.body.name ||
+        !req.body.cloudinaryId ||
         !req.body.description ||
         !req.body.author ||
         !req.body.thumbnail ||
@@ -264,6 +268,7 @@ export const updateRecipe = async (req, res) => {
     } else if (
       req.body.isStandardised === false &&
       (!req.body.name ||
+        !req.body.cloudinaryId ||
         !req.body.description ||
         !req.body.author ||
         !req.body.thumbnail ||

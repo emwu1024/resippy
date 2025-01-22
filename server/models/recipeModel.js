@@ -1,7 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const recipeSchema = mongoose.Schema(
   {
+    cloudinaryId: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -28,19 +32,19 @@ const recipeSchema = mongoose.Schema(
     },
     steps: {
       type: Array,
-      required: function() {
+      required: function () {
         return this.isStandardised;
       },
     },
     ingredients: {
       type: Array,
-      required: function() {
+      required: function () {
         return this.isStandardised;
       },
     },
     editorHtml: {
       type: String,
-      required: function() {
+      required: function () {
         return !this.isStandardised;
       },
     },
@@ -58,4 +62,4 @@ const recipeSchema = mongoose.Schema(
   }
 );
 
-export const Recipe = mongoose.model('Recipe', recipeSchema);
+export const Recipe = mongoose.model("Recipe", recipeSchema);

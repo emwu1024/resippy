@@ -19,49 +19,77 @@ const CreateRecipe = () => {
   const [images, setImages] = useState<Array<string>>([]);
   const [isStandardised, setIsStandardised] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
+  const [cloudinaryId, setCloudinaryId] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const uploadThumbnail = async () => {
-    console.log("HERE");
     if (!thumbnailImage) {
       alert("No thumbnail was selected");
       return null;
-    }
-    console.log("1");
-    const cloudData = await axios.post("http://localhost:8000/recipes/cloud");
-    console.log("cloudData:", await cloudData.data);
-    const { signature, timestamp } = cloudData.data;
-    console.log("2");
-    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-    const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
-    console.log("3");
-    const data = new FormData();
-    data.append("file", thumbnailImage);
-    data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET);
-    console.log("4");
-    try {
-      let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
-      const res = await axios.post(apiUrl, data);
-      const secureUrl = res.data.secure_url;
-      return secureUrl;
-    } catch (error) {
-      // console.log("Thumbnail upload to Cloudinary failed. Logging Error.");
-      alert("Thumbnail upload to Cloudinary failed. Logging Error.");
-      console.log(error);
-      console.log("6");
+    } else if (name == "" || author == "" || description == "") {
+      alert("Recipe name or author or description was not entered");
+    } else if (isStandardised && (steps == "" || ingredients == "")) {
+      alert(
+        "You selected the form format. Check that you added steps and ingredients."
+      );
+    } else if (!isStandardised && editorHtml == "<p></p>") {
+      alert(
+        "You selected the Text Editor format. Check that you added some text to the editor."
+      );
+    } else {
+      const uuid = crypto.randomUUID();
+      const cloudinaryPublicId =
+        name.trim().replaceAll(" ", "") + "_" + uuid + "_thumbnail";
+
+      try {
+        const cloudData = await axios.post(
+          `http://localhost:8000/recipes/cloud`,
+          {
+            publicId: cloudinaryPublicId,
+          }
+        );
+
+        const { signature, timestamp, publicId } = cloudData.data;
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+
+        const data = new FormData();
+        data.append("file", thumbnailImage);
+        data.append("public_id", publicId);
+        data.append(
+          "upload_preset",
+          import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
+        );
+
+        try {
+          let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
+          const res = await axios.post(apiUrl, data);
+          setCloudinaryId(cloudinaryPublicId);
+          const secureUrl = res.data.secure_url;
+          return secureUrl;
+        } catch (error) {
+          alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+          console.log(error);
+        }
+      } catch (error) {
+        console.error(
+          "Signature error. Logging the error.",
+          error.response?.data || error.message
+        );
+      }
     }
   };
 
   const handleSaveRecipe = async () => {
-    // Upload to cloudinary and st ore secure url in below variable,then send secure cloudinary URL to backend
+    // Upload to cloudinary and store secure url in below variable,then send secure cloudinary URL to backend
     const thumbnail = await uploadThumbnail();
-    console.log("7");
 
     const data = {
       name,
+      cloudinaryId,
       author,
       description,
       thumbnail,
@@ -75,7 +103,6 @@ const CreateRecipe = () => {
     };
 
     setLoading(true);
-    console.log("8");
 
     axios
       .post("http://localhost:8000/recipes", data)

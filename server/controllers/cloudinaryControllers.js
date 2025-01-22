@@ -10,13 +10,22 @@ export async function getCloudinarySignature(req, res) {
   });
 
   try {
+    const { publicId } = req.body;
+    if (!publicId) {
+      return res.status(400).json({ error: "publicId is required" });
+    }
+
     const timestamp = Math.round(new Date().getTime() / 1000);
     const signature = cloudinary.utils.api_sign_request(
-      { timestamp, upload_preset: "resippys_signed_preset" },
+      {
+        timestamp,
+        public_id: publicId,
+        upload_preset: "resippys_signed_preset",
+      },
       cloudinarySecret
     );
 
-    return res.status(200).json({ timestamp, signature });
+    return res.status(200).json({ timestamp, signature, publicId });
   } catch (error) {
     console.error("Error generating Cloudinary signature:", error);
     return res.status(500).json({ error: "Failed to generate signature" });
