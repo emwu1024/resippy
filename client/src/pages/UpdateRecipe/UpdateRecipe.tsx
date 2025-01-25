@@ -6,6 +6,14 @@ import PageContentContainer from "../../components/PageContentContainer/PageCont
 import RecipeForm from "../../components/CreateRecipeForm/RecipeForm";
 import "./UpdateRecipe.css";
 
+// NOTES:
+/*
+- existing recipes dont have cloudinaryIDs - generate if doesn't exist?
+- check newthumbnail upload logic. not 100% this is right but it might be.
+- if new thumbnail uploaded, call uploadThumbnail and upload photo with the public id and given naming convention
+- brainstorm image array solution
+*/
+
 const UpdateRecipe = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
@@ -21,6 +29,7 @@ const UpdateRecipe = () => {
   const [images, setImages] = useState<Array<string>>([]);
   const [isStandardised, setIsStandardised] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
+  const [cloudinaryId, setCloudinaryId] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -32,6 +41,7 @@ const UpdateRecipe = () => {
       .get(`http://localhost:8000/recipes/${id}`)
       .then((response) => {
         setName(response.data.name);
+        setCloudinaryId(response.data.cloudinaryId);
         setDescription(response.data.description);
         setAuthor(response.data.author);
         setOldThumbnail(response.data.thumbnail);
@@ -57,8 +67,49 @@ const UpdateRecipe = () => {
       return null;
     }
 
+    try {
+      console.log();
+      console.log();
+      console.log();
+      console.log("Cloudinary ID: " + cloudinaryId);
+      const cloudData = await axios.post(
+        `http://localhost:8000/recipes/cloud`,
+        {
+          publicId: cloudinaryId,
+        }
+      );
+
+      const { signature, timestamp } = cloudData.data;
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+      const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+
+      const data = new FormData();
+      data.append("file", newThumbnailImage);
+      data.append("public_id", cloudinaryId);
+      data.append(
+        "upload_preset",
+        import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
+      );
+
+      try {
+        let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
+        const res = await axios.post(apiUrl, data);
+        const secureUrl = res.data.secure_url;
+        return secureUrl;
+      } catch (error) {
+        alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+        console.log(error);
+      }
+    } catch {
+      console.error(
+        "Signature error. Logging the error.",
+        error.response?.data || error.message
+      );
+    }
+
     const data = new FormData();
     data.append("file", newThumbnailImage);
+    data.append("public_id", cloudinaryId);
     data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_PRESET);
 
     try {
@@ -78,6 +129,13 @@ const UpdateRecipe = () => {
   };
 
   const handleEditRecipe = async () => {
+    if (cloudinaryId === undefined) {
+      const uuid = crypto.randomUUID();
+      const cloudinaryPublicId =
+        name.trim().replaceAll(" ", "") + "_" + uuid + "_thumbnail";
+      setCloudinaryId(cloudinaryPublicId);
+    }
+
     setLoading(true);
     let thumbnail = "";
     if (newThumbnailImage != null) {
@@ -88,6 +146,7 @@ const UpdateRecipe = () => {
 
     const data = {
       name,
+      cloudinaryId,
       author,
       description,
       thumbnail,

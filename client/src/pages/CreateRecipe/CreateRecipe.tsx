@@ -26,6 +26,7 @@ const CreateRecipe = () => {
   const navigate = useNavigate();
 
   const uploadThumbnail = async () => {
+    let cloudinaryPublicId = "";
     if (!thumbnailImage) {
       alert("No thumbnail was selected");
       return null;
@@ -40,9 +41,14 @@ const CreateRecipe = () => {
         "You selected the Text Editor format. Check that you added some text to the editor."
       );
     } else {
-      const uuid = crypto.randomUUID();
-      const cloudinaryPublicId =
-        name.trim().replaceAll(" ", "") + "_" + uuid + "_thumbnail";
+      if (cloudinaryId == "") {
+        const uuid = crypto.randomUUID();
+        cloudinaryPublicId =
+          name.trim().replaceAll(" ", "") + "_" + uuid + "_thumbnail";
+        setCloudinaryId(cloudinaryPublicId);
+      } else {
+        cloudinaryPublicId = cloudinaryId;
+      }
 
       try {
         const cloudData = await axios.post(
@@ -52,13 +58,13 @@ const CreateRecipe = () => {
           }
         );
 
-        const { signature, timestamp, publicId } = cloudData.data;
+        const { signature, timestamp } = cloudData.data;
         const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
         const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
 
         const data = new FormData();
         data.append("file", thumbnailImage);
-        data.append("public_id", publicId);
+        data.append("public_id", cloudinaryPublicId);
         data.append(
           "upload_preset",
           import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
@@ -67,7 +73,6 @@ const CreateRecipe = () => {
         try {
           let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
           const res = await axios.post(apiUrl, data);
-          setCloudinaryId(cloudinaryPublicId);
           const secureUrl = res.data.secure_url;
           return secureUrl;
         } catch (error) {

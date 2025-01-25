@@ -25,7 +25,7 @@ export async function getCloudinarySignature(req, res) {
       cloudinarySecret
     );
 
-    return res.status(200).json({ timestamp, signature, publicId });
+    return res.status(200).json({ timestamp, signature });
   } catch (error) {
     console.error("Error generating Cloudinary signature:", error);
     return res.status(500).json({ error: "Failed to generate signature" });
