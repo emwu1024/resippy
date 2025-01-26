@@ -22,8 +22,6 @@ const UpdateRecipe = () => {
   const [oldThumbnail, setOldThumbnail] = useState("");
   const [tags, setTags] = useState<Array<string>>([]);
   const [difficulty, setDifficulty] = useState("5 Mins");
-  // const [steps, setSteps] = useState<Array<string>>([]);
-  // const [ingredients, setIngredients] = useState<Array<string>>([]);
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [images, setImages] = useState<Array<string>>([]);
@@ -61,21 +59,17 @@ const UpdateRecipe = () => {
       });
   }, []);
 
-  const uploadThumbnail = async () => {
+  const uploadThumbnail = async (cloudinaryPublicId: string) => {
     if (!newThumbnailImage) {
       alert("No thumbnail was selected");
       return null;
     }
 
     try {
-      console.log();
-      console.log();
-      console.log();
-      console.log("Cloudinary ID: " + cloudinaryId);
       const cloudData = await axios.post(
         `http://localhost:8000/recipes/cloud`,
         {
-          publicId: cloudinaryId,
+          publicId: cloudinaryPublicId,
         }
       );
 
@@ -85,7 +79,7 @@ const UpdateRecipe = () => {
 
       const data = new FormData();
       data.append("file", newThumbnailImage);
-      data.append("public_id", cloudinaryId);
+      data.append("public_id", cloudinaryPublicId);
       data.append(
         "upload_preset",
         import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
@@ -129,24 +123,27 @@ const UpdateRecipe = () => {
   };
 
   const handleEditRecipe = async () => {
+    let cloudinaryPublicId = "";
     if (cloudinaryId === undefined) {
       const uuid = crypto.randomUUID();
-      const cloudinaryPublicId =
+      cloudinaryPublicId =
         name.trim().replaceAll(" ", "") + "_" + uuid + "_thumbnail";
       setCloudinaryId(cloudinaryPublicId);
+    } else {
+      cloudinaryPublicId = cloudinaryId;
     }
 
     setLoading(true);
     let thumbnail = "";
     if (newThumbnailImage != null) {
-      thumbnail = await uploadThumbnail();
+      thumbnail = await uploadThumbnail(cloudinaryPublicId);
     } else {
       thumbnail = oldThumbnail;
     }
 
     const data = {
       name,
-      cloudinaryId,
+      cloudinaryId: cloudinaryPublicId,
       author,
       description,
       thumbnail,
