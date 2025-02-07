@@ -18,13 +18,12 @@ interface FormTabProps {
 }
 
 const FormTab = (props: FormTabProps) => {
-  const [fileNames, setFileNames] = useState<File[]>([]);
+  // const [fileNames, setFileNames] = useState<File[]>([]);
 
   const handleMultipleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const filesArray = Array.from(e.target.files || []);
-    setFileNames(filesArray);
     for (let i = 0; i < filesArray.length; i++) {
       let base64File = await convertToBase64(filesArray[i]);
       props.setImages((prevImages) => {
@@ -75,21 +74,21 @@ const FormTab = (props: FormTabProps) => {
             <IconContext.Provider value={{ color: "#e1be96", size: "30px" }}>
               <LuImagePlus />
             </IconContext.Provider>
-            {fileNames.length > 0 ? (
+            {props.images.length > 0 ? (
               <span className="upload-desc">
-                {fileNames.length} files uploaded
+                {props.images.length} files uploaded
               </span>
             ) : (
               <span className="upload-desc">Upload Images Here</span>
             )}
           </label>
-          {fileNames.map((file, index) => {
+          {/* {fileNames.map((file, index) => {
             return (
               <p className="file-name-text" key={index}>
                 {file.name}
               </p>
             );
-          })}
+          })} */}
 
           {props.images.length > 0 && (
             <p>{props.images.length} images have been uploaded</p>

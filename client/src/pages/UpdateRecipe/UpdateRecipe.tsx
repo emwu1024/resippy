@@ -6,14 +6,6 @@ import PageContentContainer from "../../components/PageContentContainer/PageCont
 import RecipeForm from "../../components/CreateRecipeForm/RecipeForm";
 import "./UpdateRecipe.css";
 
-// NOTES:
-/*
-- existing recipes dont have cloudinaryIDs - generate if doesn't exist?
-- check newthumbnail upload logic. not 100% this is right but it might be.
-- if new thumbnail uploaded, call uploadThumbnail and upload photo with the public id and given naming convention
-- brainstorm image array solution
-*/
-
 const UpdateRecipe = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
