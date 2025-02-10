@@ -11,22 +11,39 @@ import { ImageList } from "@mui/material";
 interface FormTabProps {
   steps: string;
   ingredients: string;
-  images: Array<string>;
+  images: Array<File>;
+  isImagesDifferent?: boolean;
   setSteps: React.Dispatch<React.SetStateAction<string>>;
   setIngredients: React.Dispatch<React.SetStateAction<string>>;
-  setImages: React.Dispatch<React.SetStateAction<Array<string>>>;
+  setImages: React.Dispatch<React.SetStateAction<Array<File>>>;
+  setIsImagesDifferent?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FormTab = (props: FormTabProps) => {
-  // const [fileNames, setFileNames] = useState<File[]>([]);
+  const [base64Array, setBase64Array] = useState<Array<string>>([]);
 
   const handleMultipleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (
+      props.isImagesDifferent !== undefined &&
+      props.setIsImagesDifferent !== undefined
+    ) {
+      console.log("SETTING ISIMAGESDIFFERENT VALUE:");
+      console.log("Before: " + props.isImagesDifferent);
+      props.setIsImagesDifferent(true);
+      console.log("After: " + props.isImagesDifferent);
+    }
     const filesArray = Array.from(e.target.files || []);
     for (let i = 0; i < filesArray.length; i++) {
       let base64File = await convertToBase64(filesArray[i]);
+
       props.setImages((prevImages) => {
+        const updatedImages = [...prevImages, filesArray[i]];
+        return updatedImages;
+      });
+
+      setBase64Array((prevImages) => {
         const updatedImages = [...prevImages, base64File as string];
         return updatedImages;
       });
@@ -34,8 +51,19 @@ const FormTab = (props: FormTabProps) => {
   };
 
   const handleRemoveImage = (index: number) => {
+    if (
+      props.isImagesDifferent !== undefined &&
+      props.setIsImagesDifferent !== undefined
+    ) {
+      console.log("SETTING ISIMAGESDIFFERENT VALUE:");
+      console.log("Before: " + props.isImagesDifferent);
+      props.setIsImagesDifferent(true);
+      console.log("After: " + props.isImagesDifferent);
+    }
     const updatedImages = props.images.filter((_, i) => i !== index);
+    const updatedBase64 = base64Array.filter((_, i) => i !== index);
     props.setImages(updatedImages);
+    setBase64Array(updatedBase64);
     console.log("After props.images Length: " + props.images.length);
   };
 
@@ -94,6 +122,8 @@ const FormTab = (props: FormTabProps) => {
             <p>{props.images.length} images have been uploaded</p>
           )}
           {props.images.map((image, index) => {
+            console.log("Image Type: ");
+            console.log(typeof image);
             return (
               <div className="uploaded-image-container">
                 <button
@@ -110,7 +140,15 @@ const FormTab = (props: FormTabProps) => {
                     <IoCloseCircle />
                   </IconContext.Provider>
                 </button>
-                <img className="uploaded-image" src={image} alt="" />
+                <img
+                  className="uploaded-image"
+                  src={
+                    typeof image != "object"
+                      ? image
+                      : URL.createObjectURL(image)
+                  }
+                  alt=""
+                />
               </div>
             );
           })}

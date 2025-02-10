@@ -21,7 +21,8 @@ interface RecipeFormProps {
   difficulty: string;
   steps: string;
   ingredients: string;
-  images: Array<string>;
+  images: Array<File>;
+  isImagesDifferent?: boolean;
   editorHtml: string;
   isStandardised: boolean;
   loading: boolean;
@@ -33,7 +34,8 @@ interface RecipeFormProps {
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   setSteps: React.Dispatch<React.SetStateAction<string>>;
   setIngredients: React.Dispatch<React.SetStateAction<string>>;
-  setImages: React.Dispatch<React.SetStateAction<Array<string>>>;
+  setImages: React.Dispatch<React.SetStateAction<Array<File>>>;
+  setIsImagesDifferent?: React.Dispatch<React.SetStateAction<boolean>>;
   setEditorHtml: React.Dispatch<React.SetStateAction<string>>;
   setIsStandardised: React.Dispatch<React.SetStateAction<boolean>>;
   handleSaveRecipe: () => void;
@@ -63,9 +65,11 @@ const RecipeForm = (props: RecipeFormProps) => {
           steps={props.steps}
           ingredients={props.ingredients}
           images={props.images}
+          isImagesDifferent={props.isImagesDifferent}
           setSteps={props.setSteps}
           setIngredients={props.setIngredients}
           setImages={props.setImages}
+          setIsImagesDifferent={props.setIsImagesDifferent}
         ></FormTab>
       ),
     },

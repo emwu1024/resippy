@@ -16,7 +16,8 @@ const UpdateRecipe = () => {
   const [difficulty, setDifficulty] = useState("5 Mins");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [images, setImages] = useState<Array<string>>([]);
+  const [multiImages, setMultiImages] = useState<Array<File>>([]);
+  const [isImagesDifferent, setIsImagesDifferent] = useState(false);
   const [isStandardised, setIsStandardised] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
   const [cloudinaryId, setCloudinaryId] = useState("");
@@ -37,7 +38,7 @@ const UpdateRecipe = () => {
         setOldThumbnail(response.data.thumbnail);
         setTags(response.data.tags);
         setDifficulty(response.data.difficulty);
-        setImages(response.data.images);
+        setMultiImages(response.data.images);
         setIsStandardised(response.data.isStandardised);
         setEditorHtml(response.data.editorHtml);
         setSteps(formatArray(response.data.steps));
@@ -50,6 +51,56 @@ const UpdateRecipe = () => {
         console.log(error);
       });
   }, []);
+
+  // NOTE: current idea for implementation:
+  // - Create a flag to check if any images have been removed or added
+  // - only run uploadMultiImage if flag is true
+  // - re-upload everything if flag is true
+  const uploadMultiImage = async (cloudinaryId: string) => {
+    console.log("Inside UploadMultiImage Method: ");
+    console.log("isImagesDifferent " + isImagesDifferent);
+    try {
+      let cloudinaryPublicId = cloudinaryId;
+      let secureUrlList = [];
+      for (let i = 0; i < multiImages.length; i++) {
+        cloudinaryPublicId = cloudinaryPublicId + "_image_" + (i + 1);
+        const cloudData = await axios.post(
+          `http://localhost:8000/recipes/cloud`,
+          {
+            publicId: cloudinaryPublicId,
+          }
+        );
+
+        const { signature, timestamp } = cloudData.data;
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+
+        const data = new FormData();
+        data.append("file", multiImages[i]);
+        data.append("public_id", cloudinaryPublicId);
+        data.append(
+          "upload_preset",
+          import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
+        );
+
+        try {
+          let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
+          const res = await axios.post(apiUrl, data);
+          const secureUrl = res.data.secure_url;
+          secureUrlList.push(secureUrl);
+        } catch (error) {
+          alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+          console.log(error);
+        }
+      }
+      return secureUrlList;
+    } catch (error: any) {
+      console.error(
+        "Signature error. Logging the error.",
+        error.response?.data || error.message
+      );
+    }
+  };
 
   const uploadThumbnail = async (cloudinaryPublicId: string) => {
     if (!newThumbnailImage) {
@@ -82,7 +133,7 @@ const UpdateRecipe = () => {
         const res = await axios.post(apiUrl, data);
         const secureUrl = res.data.secure_url;
         return secureUrl;
-      } catch (error) {
+      } catch (error: any) {
         alert("Thumbnail upload to Cloudinary failed. Logging Error.");
         console.log(error);
       }
@@ -126,11 +177,28 @@ const UpdateRecipe = () => {
     }
 
     setLoading(true);
+
     let thumbnail = "";
     if (newThumbnailImage != null) {
       thumbnail = await uploadThumbnail(cloudinaryPublicId);
     } else {
       thumbnail = oldThumbnail;
+    }
+
+    console.log("Inside Edit Handler Method: ");
+    console.log("Is Images Different: " + isImagesDifferent);
+    console.log("Multi Images: " + multiImages);
+    console.log("Multi Images Length: " + multiImages.length);
+
+    let images;
+    if (
+      multiImages != undefined &&
+      multiImages.length != 0 &&
+      isImagesDifferent == true
+    ) {
+      images = await uploadMultiImage(cloudinaryPublicId);
+    } else {
+      images = multiImages;
     }
 
     const data = {
@@ -194,8 +262,10 @@ const UpdateRecipe = () => {
           setSteps={setSteps}
           ingredients={ingredients}
           setIngredients={setIngredients}
-          images={images}
-          setImages={setImages}
+          images={multiImages}
+          setImages={setMultiImages}
+          isImagesDifferent={isImagesDifferent}
+          setIsImagesDifferent={setIsImagesDifferent}
           isStandardised={isStandardised}
           setIsStandardised={setIsStandardised}
           editorHtml={editorHtml}
