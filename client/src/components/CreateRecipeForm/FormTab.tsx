@@ -29,10 +29,7 @@ const FormTab = (props: FormTabProps) => {
       props.isImagesDifferent !== undefined &&
       props.setIsImagesDifferent !== undefined
     ) {
-      console.log("SETTING ISIMAGESDIFFERENT VALUE:");
-      console.log("Before: " + props.isImagesDifferent);
       props.setIsImagesDifferent(true);
-      console.log("After: " + props.isImagesDifferent);
     }
     const filesArray = Array.from(e.target.files || []);
     for (let i = 0; i < filesArray.length; i++) {
@@ -55,16 +52,12 @@ const FormTab = (props: FormTabProps) => {
       props.isImagesDifferent !== undefined &&
       props.setIsImagesDifferent !== undefined
     ) {
-      console.log("SETTING ISIMAGESDIFFERENT VALUE:");
-      console.log("Before: " + props.isImagesDifferent);
       props.setIsImagesDifferent(true);
-      console.log("After: " + props.isImagesDifferent);
     }
     const updatedImages = props.images.filter((_, i) => i !== index);
     const updatedBase64 = base64Array.filter((_, i) => i !== index);
     props.setImages(updatedImages);
     setBase64Array(updatedBase64);
-    console.log("After props.images Length: " + props.images.length);
   };
 
   return (
@@ -122,8 +115,6 @@ const FormTab = (props: FormTabProps) => {
             <p>{props.images.length} images have been uploaded</p>
           )}
           {props.images.map((image, index) => {
-            console.log("Image Type: ");
-            console.log(typeof image);
             return (
               <div className="uploaded-image-container">
                 <button

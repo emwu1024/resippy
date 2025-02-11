@@ -57,8 +57,6 @@ const UpdateRecipe = () => {
   // - only run uploadMultiImage if flag is true
   // - re-upload everything if flag is true
   const uploadMultiImage = async (cloudinaryId: string) => {
-    console.log("Inside UploadMultiImage Method: ");
-    console.log("isImagesDifferent " + isImagesDifferent);
     try {
       let cloudinaryPublicId = cloudinaryId;
       let secureUrlList = [];
@@ -184,11 +182,6 @@ const UpdateRecipe = () => {
     } else {
       thumbnail = oldThumbnail;
     }
-
-    console.log("Inside Edit Handler Method: ");
-    console.log("Is Images Different: " + isImagesDifferent);
-    console.log("Multi Images: " + multiImages);
-    console.log("Multi Images Length: " + multiImages.length);
 
     let images;
     if (
