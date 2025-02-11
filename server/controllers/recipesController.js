@@ -1,8 +1,6 @@
 import express from "express";
 import { Recipe } from "../models/recipeModel.js";
 
-const router = express.Router();
-
 // Get all recipes
 export const getRecipes = async (req, res) => {
   const { page } = req.query;
@@ -27,6 +25,43 @@ export const getRecipes = async (req, res) => {
   } catch (error) {
     res.status(500).send({ message: error.message });
     console.log("Server NOT working. Check network?");
+  }
+};
+
+// Get all recipes without images
+export const getRecipesShort = async (req, res) => {
+  const { page } = req.query;
+  try {
+    // Can change limit later
+    const LIMIT = 8;
+    const startIndex = (Number(page) - 1) * LIMIT;
+    const total = await Recipe.countDocuments({});
+
+    console.log("Server Working!");
+
+    const recipes = await Recipe.find({})
+      .select({
+        name: 1,
+        author: 1,
+        thumbnail: 1,
+        difficulty: 1,
+        description: 1,
+        tags: 1,
+        createdAt: 1,
+      })
+      .sort({ _id: -1 })
+      .limit(LIMIT)
+      .skip(startIndex);
+    return res.status(200).json({
+      count: recipes.length,
+      data: recipes,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total / LIMIT),
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+    console.log("Server NOT working. Check network?");
+    console.log(error);
   }
 };
 
@@ -149,6 +184,7 @@ export const createRecipe = async (req, res) => {
     if (
       req.body.isStandardised === true &&
       (!req.body.name ||
+        !req.body.cloudinaryId ||
         !req.body.description ||
         !req.body.author ||
         !req.body.thumbnail ||
@@ -164,6 +200,7 @@ export const createRecipe = async (req, res) => {
     } else if (
       req.body.isStandardised === false &&
       (!req.body.name ||
+        !req.body.cloudinaryId ||
         !req.body.description ||
         !req.body.author ||
         !req.body.thumbnail ||
@@ -188,6 +225,7 @@ export const createRecipe = async (req, res) => {
     // const newImage = req.body.images
 
     const newRecipe = {
+      cloudinaryId: req.body.cloudinaryId,
       name: req.body.name,
       author: req.body.author,
       description: req.body.description,
@@ -214,6 +252,7 @@ export const updateRecipe = async (req, res) => {
     if (
       req.body.isStandardised === true &&
       (!req.body.name ||
+        !req.body.cloudinaryId ||
         !req.body.description ||
         !req.body.author ||
         !req.body.thumbnail ||
@@ -229,6 +268,7 @@ export const updateRecipe = async (req, res) => {
     } else if (
       req.body.isStandardised === false &&
       (!req.body.name ||
+        !req.body.cloudinaryId ||
         !req.body.description ||
         !req.body.author ||
         !req.body.thumbnail ||
@@ -273,5 +313,3 @@ export const deleteRecipe = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
-
-export default router;

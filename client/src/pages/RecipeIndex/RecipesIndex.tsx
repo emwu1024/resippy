@@ -82,7 +82,7 @@ const RecipesIndex = () => {
   const fetchRecipes = async (page: number) => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:8000/recipes", {
+      const { data } = await axios.get("http://localhost:8000/recipes/short", {
         params: { page },
       });
       setRecipes(data.data); // Set fetched recipes to state

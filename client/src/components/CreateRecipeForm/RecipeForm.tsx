@@ -6,7 +6,6 @@ import ChipInput from "../Search/ChipInput";
 import Tabs from "../Tabs/Tabs";
 import Button from "../Buttons/Button/Button";
 import FormTab from "./FormTab";
-import { convertToBase64 } from "../../utils/utils";
 
 import { IconContext } from "react-icons";
 import { LuImagePlus } from "react-icons/lu";
@@ -16,24 +15,27 @@ interface RecipeFormProps {
   name: string;
   author: string;
   description: string;
-  thumbnail: string;
+  thumbnail: File | null;
+  oldThumbNail?: string;
   tags: Array<string>;
   difficulty: string;
   steps: string;
   ingredients: string;
-  images: Array<string>;
+  images: Array<File>;
+  isImagesDifferent?: boolean;
   editorHtml: string;
   isStandardised: boolean;
   loading: boolean;
   setName: React.Dispatch<React.SetStateAction<string>>;
   setAuthor: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
-  setThumbnail: React.Dispatch<React.SetStateAction<string>>;
+  setThumbnail: React.Dispatch<React.SetStateAction<File | null>>;
   setTags: React.Dispatch<React.SetStateAction<Array<string>>>;
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   setSteps: React.Dispatch<React.SetStateAction<string>>;
   setIngredients: React.Dispatch<React.SetStateAction<string>>;
-  setImages: React.Dispatch<React.SetStateAction<Array<string>>>;
+  setImages: React.Dispatch<React.SetStateAction<Array<File>>>;
+  setIsImagesDifferent?: React.Dispatch<React.SetStateAction<boolean>>;
   setEditorHtml: React.Dispatch<React.SetStateAction<string>>;
   setIsStandardised: React.Dispatch<React.SetStateAction<boolean>>;
   handleSaveRecipe: () => void;
@@ -63,9 +65,11 @@ const RecipeForm = (props: RecipeFormProps) => {
           steps={props.steps}
           ingredients={props.ingredients}
           images={props.images}
+          isImagesDifferent={props.isImagesDifferent}
           setSteps={props.setSteps}
           setIngredients={props.setIngredients}
           setImages={props.setImages}
+          setIsImagesDifferent={props.setIsImagesDifferent}
         ></FormTab>
       ),
     },
@@ -84,8 +88,7 @@ const RecipeForm = (props: RecipeFormProps) => {
     const file = e.target.files?.[0];
 
     if (file) {
-      const base64 = await convertToBase64(file);
-      props.setThumbnail(base64);
+      props.setThumbnail(file);
     }
   };
 
@@ -164,7 +167,7 @@ const RecipeForm = (props: RecipeFormProps) => {
             <IconContext.Provider value={{ color: "#e1be96", size: "30px" }}>
               <LuImagePlus />
             </IconContext.Provider>
-            {props.thumbnail != "" ? (
+            {props.thumbnail != null || props.oldThumbNail != null ? (
               <span className="upload-desc">1 File Uploaded</span>
             ) : (
               <span className="upload-desc">Upload Image Here</span>

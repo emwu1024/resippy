@@ -11,51 +11,180 @@ const CreateRecipe = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnailImage, setThumbnailImage] = useState<File | null>(null);
   const [tags, setTags] = useState<Array<string>>([]);
   const [difficulty, setDifficulty] = useState("5 Mins");
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [images, setImages] = useState<Array<string>>([]);
+  const [multipleImages, setMultipleImages] = useState<Array<File>>([]);
   const [isStandardised, setIsStandardised] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
+  const [cloudinaryId, setCloudinaryId] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleSaveRecipe = async () => {
-    const data = {
-      name,
-      author,
-      description,
-      thumbnail,
-      tags,
-      steps,
-      difficulty,
-      ingredients,
-      editorHtml,
-      isStandardised,
-      images,
-    };
+  // NOTE: This should only run after thumbnail which is mandatory so cloudinaryPublicId will have been generated.
+  const uploadMultiImage = async (cloudinaryId: string) => {
+    try {
+      let cloudinaryPublicId = cloudinaryId;
+      let secureUrlList = [];
+      for (let i = 0; i < multipleImages.length; i++) {
+        cloudinaryPublicId = cloudinaryPublicId + "_image_" + (i + 1);
+        const cloudData = await axios.post(
+          `http://localhost:8000/recipes/cloud`,
+          {
+            publicId: cloudinaryPublicId,
+          }
+        );
 
-    setLoading(true);
+        const { signature, timestamp } = cloudData.data;
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
 
-    axios
-      .post("http://localhost:8000/recipes", data)
-      .then(() => {
-        setLoading(false);
-        navigate("/recipes");
-      })
-      .catch((error) => {
-        setLoading(false);
-        if (error.response) {
-          alert(`Error: ${error.response.data.message}`);
-        } else {
-          alert("An unexpected error occurred. Please try again.");
+        const data = new FormData();
+        data.append("file", multipleImages[i]);
+        data.append("public_id", cloudinaryPublicId);
+        data.append(
+          "upload_preset",
+          import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
+        );
+
+        try {
+          let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
+          const res = await axios.post(apiUrl, data);
+          const secureUrl = res.data.secure_url;
+          secureUrlList.push(secureUrl);
+        } catch (error) {
+          alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+          console.log(error);
         }
+      }
+      return secureUrlList;
+    } catch (error) {
+      console.error(
+        "Signature error. Logging the error.",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  const uploadThumbnail = async (cloudinaryId: string) => {
+    let cloudinaryPublicId = cloudinaryId + "_thumbnail";
+    try {
+      const cloudData = await axios.post(
+        `http://localhost:8000/recipes/cloud`,
+        {
+          publicId: cloudinaryPublicId,
+        }
+      );
+
+      const { signature, timestamp } = cloudData.data;
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+      const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+
+      const data = new FormData();
+      data.append("file", thumbnailImage);
+      data.append("public_id", cloudinaryPublicId);
+      data.append(
+        "upload_preset",
+        import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
+      );
+
+      try {
+        let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
+        const res = await axios.post(apiUrl, data);
+        const secureUrl = res.data.secure_url;
+        return secureUrl;
+      } catch (error) {
+        alert("Thumbnail upload to Cloudinary failed. Logging Error.");
         console.log(error);
-      });
+      }
+    } catch (error) {
+      console.error(
+        "Signature error. Logging the error.",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  const getCloudinaryUuid = async () => {
+    let cloudinaryPublicId = "";
+    if (!thumbnailImage) {
+      alert("No thumbnail was selected");
+      return null;
+    } else if (name == "" || author == "" || description == "") {
+      alert("Recipe name or author or description was not entered");
+      return null;
+    } else if (isStandardised && (steps == "" || ingredients == "")) {
+      alert(
+        "You selected the form format. Check that you added steps and ingredients."
+      );
+      return null;
+    } else if (!isStandardised && editorHtml == "") {
+      alert(
+        "You selected the Text Editor format. Check that you added some text to the editor."
+      );
+      return null;
+    } else {
+      if (cloudinaryId == "") {
+        const uuid = crypto.randomUUID();
+        cloudinaryPublicId = name.trim().replaceAll(" ", "") + "_" + uuid;
+        setCloudinaryId(cloudinaryPublicId);
+      } else {
+        cloudinaryPublicId = cloudinaryId;
+      }
+      return cloudinaryPublicId;
+    }
+  };
+
+  const handleSaveRecipe = async () => {
+    // Upload to cloudinary and store secure url in below variable,then send secure cloudinary URL to backend
+    setLoading(true);
+    let cloudinaryId = await getCloudinaryUuid();
+    let thumbnail;
+    let images;
+    if (cloudinaryId != null) {
+      thumbnail = await uploadThumbnail(await cloudinaryId);
+      if (multipleImages != undefined && multipleImages.length != 0) {
+        images = await uploadMultiImage(await cloudinaryId);
+      }
+
+      const data = {
+        name,
+        cloudinaryId,
+        author,
+        description,
+        thumbnail,
+        tags,
+        steps,
+        difficulty,
+        ingredients,
+        editorHtml,
+        isStandardised,
+        images,
+      };
+
+      axios
+        .post("http://localhost:8000/recipes", data)
+        .then(() => {
+          setLoading(false);
+          navigate("/recipes");
+        })
+        .catch((error) => {
+          setLoading(false);
+          if (error.response) {
+            alert(`Error: ${error.response.data.message}`);
+          } else {
+            alert("An unexpected error occurred. Please try again.");
+          }
+          console.log(error);
+        });
+    } else {
+      // alert("publicId was null.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,8 +205,8 @@ const CreateRecipe = () => {
           setAuthor={setAuthor}
           description={description}
           setDescription={setDescription}
-          thumbnail={thumbnail}
-          setThumbnail={setThumbnail}
+          thumbnail={thumbnailImage}
+          setThumbnail={setThumbnailImage}
           tags={tags}
           setTags={setTags}
           difficulty={difficulty}
@@ -86,8 +215,8 @@ const CreateRecipe = () => {
           setSteps={setSteps}
           ingredients={ingredients}
           setIngredients={setIngredients}
-          images={images}
-          setImages={setImages}
+          images={multipleImages}
+          setImages={setMultipleImages}
           isStandardised={isStandardised}
           setIsStandardised={setIsStandardised}
           editorHtml={editorHtml}

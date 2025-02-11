@@ -9,11 +9,16 @@ import {
   getAllTags,
   getRandomRecipe,
   getAllUsedDifficulty,
+  getRecipesShort,
 } from "../controllers/recipesController.js";
+
+import { getCloudinarySignature } from "../controllers/cloudinaryControllers.js";
 
 const router = express.Router();
 
 router.get("/", getRecipes);
+router.get("/short", getRecipesShort);
+router.post("/cloud", getCloudinarySignature);
 router.get("/search", getRecipeBySearch);
 router.get("/tags", getAllTags);
 router.get("/ratings", getAllUsedDifficulty);

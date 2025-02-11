@@ -33,3 +33,4 @@ if (month < 10 ) {
 let formattedDate = day + '.' + month + '.' + date.getFullYear();
 return formattedDate.toString()
 }
+

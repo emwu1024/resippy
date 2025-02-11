@@ -11,23 +11,36 @@ import { ImageList } from "@mui/material";
 interface FormTabProps {
   steps: string;
   ingredients: string;
-  images: Array<string>;
+  images: Array<File>;
+  isImagesDifferent?: boolean;
   setSteps: React.Dispatch<React.SetStateAction<string>>;
   setIngredients: React.Dispatch<React.SetStateAction<string>>;
-  setImages: React.Dispatch<React.SetStateAction<Array<string>>>;
+  setImages: React.Dispatch<React.SetStateAction<Array<File>>>;
+  setIsImagesDifferent?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FormTab = (props: FormTabProps) => {
-  const [fileNames, setFileNames] = useState<File[]>([]);
+  const [base64Array, setBase64Array] = useState<Array<string>>([]);
 
   const handleMultipleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (
+      props.isImagesDifferent !== undefined &&
+      props.setIsImagesDifferent !== undefined
+    ) {
+      props.setIsImagesDifferent(true);
+    }
     const filesArray = Array.from(e.target.files || []);
-    setFileNames(filesArray);
     for (let i = 0; i < filesArray.length; i++) {
       let base64File = await convertToBase64(filesArray[i]);
+
       props.setImages((prevImages) => {
+        const updatedImages = [...prevImages, filesArray[i]];
+        return updatedImages;
+      });
+
+      setBase64Array((prevImages) => {
         const updatedImages = [...prevImages, base64File as string];
         return updatedImages;
       });
@@ -35,9 +48,16 @@ const FormTab = (props: FormTabProps) => {
   };
 
   const handleRemoveImage = (index: number) => {
+    if (
+      props.isImagesDifferent !== undefined &&
+      props.setIsImagesDifferent !== undefined
+    ) {
+      props.setIsImagesDifferent(true);
+    }
     const updatedImages = props.images.filter((_, i) => i !== index);
+    const updatedBase64 = base64Array.filter((_, i) => i !== index);
     props.setImages(updatedImages);
-    console.log("After props.images Length: " + props.images.length);
+    setBase64Array(updatedBase64);
   };
 
   return (
@@ -75,21 +95,21 @@ const FormTab = (props: FormTabProps) => {
             <IconContext.Provider value={{ color: "#e1be96", size: "30px" }}>
               <LuImagePlus />
             </IconContext.Provider>
-            {fileNames.length > 0 ? (
+            {props.images.length > 0 ? (
               <span className="upload-desc">
-                {fileNames.length} files uploaded
+                {props.images.length} files uploaded
               </span>
             ) : (
               <span className="upload-desc">Upload Images Here</span>
             )}
           </label>
-          {fileNames.map((file, index) => {
+          {/* {fileNames.map((file, index) => {
             return (
               <p className="file-name-text" key={index}>
                 {file.name}
               </p>
             );
-          })}
+          })} */}
 
           {props.images.length > 0 && (
             <p>{props.images.length} images have been uploaded</p>
@@ -111,7 +131,15 @@ const FormTab = (props: FormTabProps) => {
                     <IoCloseCircle />
                   </IconContext.Provider>
                 </button>
-                <img className="uploaded-image" src={image} alt="" />
+                <img
+                  className="uploaded-image"
+                  src={
+                    typeof image != "object"
+                      ? image
+                      : URL.createObjectURL(image)
+                  }
+                  alt=""
+                />
               </div>
             );
           })}

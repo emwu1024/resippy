@@ -10,16 +10,17 @@ const UpdateRecipe = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [newThumbnailImage, setNewThumbnailImage] = useState<File | null>(null);
+  const [oldThumbnail, setOldThumbnail] = useState("");
   const [tags, setTags] = useState<Array<string>>([]);
   const [difficulty, setDifficulty] = useState("5 Mins");
-  // const [steps, setSteps] = useState<Array<string>>([]);
-  // const [ingredients, setIngredients] = useState<Array<string>>([]);
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [images, setImages] = useState<Array<string>>([]);
+  const [multiImages, setMultiImages] = useState<Array<File>>([]);
+  const [isImagesDifferent, setIsImagesDifferent] = useState(false);
   const [isStandardised, setIsStandardised] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
+  const [cloudinaryId, setCloudinaryId] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -31,14 +32,13 @@ const UpdateRecipe = () => {
       .get(`http://localhost:8000/recipes/${id}`)
       .then((response) => {
         setName(response.data.name);
+        setCloudinaryId(response.data.cloudinaryId);
         setDescription(response.data.description);
         setAuthor(response.data.author);
-        setThumbnail(response.data.thumbnail);
+        setOldThumbnail(response.data.thumbnail);
         setTags(response.data.tags);
         setDifficulty(response.data.difficulty);
-        setImages(response.data.images);
-        console.log("images:  ");
-        console.log(images);
+        setMultiImages(response.data.images);
         setIsStandardised(response.data.isStandardised);
         setEditorHtml(response.data.editorHtml);
         setSteps(formatArray(response.data.steps));
@@ -52,22 +52,151 @@ const UpdateRecipe = () => {
       });
   }, []);
 
-  const formatArray = (recipeArray: string[]) => {
-    // const recipeString = recipeArray.toString().split(",");
-    const recipeString = recipeArray.join("\n");
-    console.log("HERE: ");
-    console.log(recipeArray);
-    // let returnString = "";
+  // NOTE: current idea for implementation:
+  // - Create a flag to check if any images have been removed or added
+  // - only run uploadMultiImage if flag is true
+  // - re-upload everything if flag is true
+  const uploadMultiImage = async (cloudinaryId: string) => {
+    try {
+      let cloudinaryPublicId = cloudinaryId;
+      let secureUrlList = [];
+      for (let i = 0; i < multiImages.length; i++) {
+        cloudinaryPublicId = cloudinaryPublicId + "_image_" + (i + 1);
+        const cloudData = await axios.post(
+          `http://localhost:8000/recipes/cloud`,
+          {
+            publicId: cloudinaryPublicId,
+          }
+        );
 
-    // recipeString.forEach((item: string) => {
-    //   returnString += item + "\n";
-    // });
+        const { signature, timestamp } = cloudData.data;
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+
+        const data = new FormData();
+        data.append("file", multiImages[i]);
+        data.append("public_id", cloudinaryPublicId);
+        data.append(
+          "upload_preset",
+          import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
+        );
+
+        try {
+          let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
+          const res = await axios.post(apiUrl, data);
+          const secureUrl = res.data.secure_url;
+          secureUrlList.push(secureUrl);
+        } catch (error) {
+          alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+          console.log(error);
+        }
+      }
+      return secureUrlList;
+    } catch (error: any) {
+      console.error(
+        "Signature error. Logging the error.",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  const uploadThumbnail = async (cloudinaryPublicId: string) => {
+    if (!newThumbnailImage) {
+      alert("No thumbnail was selected");
+      return null;
+    }
+
+    try {
+      const cloudData = await axios.post(
+        `http://localhost:8000/recipes/cloud`,
+        {
+          publicId: cloudinaryPublicId,
+        }
+      );
+
+      const { signature, timestamp } = cloudData.data;
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+      const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+
+      const data = new FormData();
+      data.append("file", newThumbnailImage);
+      data.append("public_id", cloudinaryPublicId);
+      data.append(
+        "upload_preset",
+        import.meta.env.VITE_CLOUDINARY_SIGNED_PRESET
+      );
+
+      try {
+        let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload?api_key=${apiKey}&timestamp=${timestamp}&signature=${signature}`;
+        const res = await axios.post(apiUrl, data);
+        const secureUrl = res.data.secure_url;
+        return secureUrl;
+      } catch (error: any) {
+        alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+        console.log(error);
+      }
+    } catch {
+      console.error(
+        "Signature error. Logging the error.",
+        error.response?.data || error.message
+      );
+    }
+
+    const data = new FormData();
+    data.append("file", newThumbnailImage);
+    data.append("public_id", cloudinaryId);
+    data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_PRESET);
+
+    try {
+      let cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+      let apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+      const res = await axios.post(apiUrl, data);
+      const secureUrl = res.data.secure_url;
+      return secureUrl;
+    } catch (error) {
+      alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+    }
+  };
+
+  const formatArray = (recipeArray: string[]) => {
+    const recipeString = recipeArray.join("\n");
     return recipeString;
   };
 
-  const handleEditRecipe = () => {
+  const handleEditRecipe = async () => {
+    let cloudinaryPublicId = "";
+    if (cloudinaryId === undefined) {
+      const uuid = crypto.randomUUID();
+      cloudinaryPublicId =
+        name.trim().replaceAll(" ", "") + "_" + uuid + "_thumbnail";
+      setCloudinaryId(cloudinaryPublicId);
+    } else {
+      cloudinaryPublicId = cloudinaryId;
+    }
+
+    setLoading(true);
+
+    let thumbnail = "";
+    if (newThumbnailImage != null) {
+      thumbnail = await uploadThumbnail(cloudinaryPublicId);
+    } else {
+      thumbnail = oldThumbnail;
+    }
+
+    let images;
+    if (
+      multiImages != undefined &&
+      multiImages.length != 0 &&
+      isImagesDifferent == true
+    ) {
+      images = await uploadMultiImage(cloudinaryPublicId);
+    } else {
+      images = multiImages;
+    }
+
     const data = {
       name,
+      cloudinaryId: cloudinaryPublicId,
       author,
       description,
       thumbnail,
@@ -79,8 +208,6 @@ const UpdateRecipe = () => {
       isStandardised,
       images,
     };
-
-    setLoading(true);
 
     axios
       .put(`http://localhost:8000/recipes/${id}`, data)
@@ -117,8 +244,9 @@ const UpdateRecipe = () => {
           setAuthor={setAuthor}
           description={description}
           setDescription={setDescription}
-          thumbnail={thumbnail}
-          setThumbnail={setThumbnail}
+          thumbnail={newThumbnailImage}
+          oldThumbNail={oldThumbnail}
+          setThumbnail={setNewThumbnailImage}
           tags={tags}
           setTags={setTags}
           difficulty={difficulty}
@@ -127,8 +255,10 @@ const UpdateRecipe = () => {
           setSteps={setSteps}
           ingredients={ingredients}
           setIngredients={setIngredients}
-          images={images}
-          setImages={setImages}
+          images={multiImages}
+          setImages={setMultiImages}
+          isImagesDifferent={isImagesDifferent}
+          setIsImagesDifferent={setIsImagesDifferent}
           isStandardised={isStandardised}
           setIsStandardised={setIsStandardised}
           editorHtml={editorHtml}

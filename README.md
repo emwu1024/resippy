@@ -117,6 +117,11 @@ The backupdb.sh script attached just needs to be modified with your details and 
 32. 11.10.24: UI for individual recipe page and search index are mostly finished, now working on edit page
 33. 01.12.24: UI adjustment for individual recipe and wip improved design for homepage and about page
 34. 05.01.25: Bug fixes and populating the website with recipes.
+35. 11.01.25: Looked into cloudinary, started implementing following this with a few tweaks: https://www.youtube.com/watch?v=UkqgaKJxfZ0
+    1. Finished frontend create recipe section for thumbnail upload,
+    2. Next time continue with implementing update functionality and double checking backend
+    3. Also work on other images, not just thumbnail
+    4. Also found another bug when all uploaded images have been removed the filename text and 1 file uploaded text aren't removed. To be fixed next time.
 
 ## Back Log
 
