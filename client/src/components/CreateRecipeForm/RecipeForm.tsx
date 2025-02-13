@@ -43,7 +43,7 @@ interface RecipeFormProps {
 
 const RecipeForm = (props: RecipeFormProps) => {
   // Tab Code:
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
 
   const difficultyList = [
     "5 Mins",
@@ -59,6 +59,15 @@ const RecipeForm = (props: RecipeFormProps) => {
 
   const tabSections = [
     {
+      label: "Text Editor",
+      content: (
+        <Tiptap
+          editorHtml={props.editorHtml}
+          setEditorHtml={props.setEditorHtml}
+        />
+      ),
+    },
+    {
       label: "Form",
       content: (
         <FormTab
@@ -71,15 +80,6 @@ const RecipeForm = (props: RecipeFormProps) => {
           setImages={props.setImages}
           setIsImagesDifferent={props.setIsImagesDifferent}
         ></FormTab>
-      ),
-    },
-    {
-      label: "Text Editor",
-      content: (
-        <Tiptap
-          editorHtml={props.editorHtml}
-          setEditorHtml={props.setEditorHtml}
-        />
       ),
     },
   ];

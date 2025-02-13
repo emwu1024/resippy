@@ -6,7 +6,7 @@ export const getRecipes = async (req, res) => {
   const { page } = req.query;
   try {
     // Can change limit later
-    const LIMIT = 8;
+    const LIMIT = 12;
     const startIndex = (Number(page) - 1) * LIMIT;
     const total = await Recipe.countDocuments({});
 
@@ -33,7 +33,7 @@ export const getRecipesShort = async (req, res) => {
   const { page } = req.query;
   try {
     // Can change limit later
-    const LIMIT = 8;
+    const LIMIT = 12;
     const startIndex = (Number(page) - 1) * LIMIT;
     const total = await Recipe.countDocuments({});
 

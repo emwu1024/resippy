@@ -17,7 +17,7 @@ const CreateRecipe = () => {
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [multipleImages, setMultipleImages] = useState<Array<File>>([]);
-  const [isStandardised, setIsStandardised] = useState(false);
+  const [isStandardised, setIsStandardised] = useState(true);
   const [editorHtml, setEditorHtml] = useState("");
   const [cloudinaryId, setCloudinaryId] = useState("");
 
