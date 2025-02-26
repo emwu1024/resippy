@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import mongoSanitize from "express-mongo-sanitize";
 import { PORT, mongoDBURL } from "./config.js";
 import recipesRoute from "./routes/recipesRoute.js";
 import cors from "cors";
@@ -10,6 +11,12 @@ const app = express();
 // middleware for parsing request body
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
+app.use(
+  mongoSanitize({
+    replaceWith: "_", // Prevents dot notation attacks like {"profile.password": "hacked"}
+    allowDots: false, // Ensures nested objects with dots are sanitized
+  })
+);
 
 // Allows all origins by default and prevents CORS errors from cropping up.
 app.use(cors());
