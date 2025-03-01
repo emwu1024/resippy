@@ -12,6 +12,8 @@ import {
   getRecipesShort,
 } from "../controllers/recipesController.js";
 
+import { validateRecipe } from "../validators/recipesValidator.js";
+
 import { getCloudinarySignature } from "../controllers/cloudinaryControllers.js";
 
 const router = express.Router();
@@ -24,8 +26,8 @@ router.get("/tags", getAllTags);
 router.get("/ratings", getAllUsedDifficulty);
 router.get("/random", getRandomRecipe);
 router.get("/:id", getRecipe);
-router.post("/", createRecipe);
-router.put("/:id", updateRecipe);
+router.post("/", validateRecipe, createRecipe);
+router.put("/:id", validateRecipe, updateRecipe);
 router.delete("/:id", deleteRecipe);
 
 export default router;

@@ -181,39 +181,6 @@ export const getRandomRecipe = async (req, res) => {
 //   Create recipe
 export const createRecipe = async (req, res) => {
   try {
-    if (
-      req.body.isStandardised === true &&
-      (!req.body.name ||
-        !req.body.cloudinaryId ||
-        !req.body.description ||
-        !req.body.author ||
-        !req.body.thumbnail ||
-        !req.body.difficulty ||
-        !req.body.steps ||
-        !req.body.ingredients)
-    ) {
-      console.log(req.body);
-      return res.status(400).send({
-        message:
-          "You forgot a field: \n You selected the Standardised format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Steps, Ingredients",
-      });
-    } else if (
-      req.body.isStandardised === false &&
-      (!req.body.name ||
-        !req.body.cloudinaryId ||
-        !req.body.description ||
-        !req.body.author ||
-        !req.body.thumbnail ||
-        !req.body.difficulty ||
-        !req.body.editorHtml)
-    ) {
-      console.log(req.body);
-      return res.status(400).send({
-        message:
-          "You forgot a field: \n You selected the Rich Text format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Text Editor Content",
-      });
-    }
-
     // Since steps, ingredients, and tags are arrays they will be processed differently
     let stepsString = req.body.steps;
     let stepsArray = stepsString.split("\n");
@@ -221,23 +188,14 @@ export const createRecipe = async (req, res) => {
     let ingredientsString = req.body.ingredients;
     let ingredientsArray = ingredientsString.split("\n");
 
-    // Images are optional and are for the custom format option, this will be an array of base 64 strings
-    // const newImage = req.body.images
-
     const newRecipe = {
-      cloudinaryId: req.body.cloudinaryId,
-      name: req.body.name,
-      author: req.body.author,
-      description: req.body.description,
-      thumbnail: req.body.thumbnail,
-      tags: req.body.tags,
-      difficulty: req.body.difficulty,
+      ...req.body,
       steps: stepsArray,
       ingredients: ingredientsArray,
-      editorHtml: req.body.editorHtml,
-      isStandardised: req.body.isStandardised,
-      images: req.body.images,
     };
+
+    console.log("New Recipe: ");
+    console.log(newRecipe);
 
     const recipe = await Recipe.create(newRecipe);
     return res.status(201).send(recipe);
@@ -249,38 +207,38 @@ export const createRecipe = async (req, res) => {
 // Update recipe
 export const updateRecipe = async (req, res) => {
   try {
-    if (
-      req.body.isStandardised === true &&
-      (!req.body.name ||
-        !req.body.cloudinaryId ||
-        !req.body.description ||
-        !req.body.author ||
-        !req.body.thumbnail ||
-        !req.body.difficulty ||
-        !req.body.steps ||
-        !req.body.ingredients)
-    ) {
-      console.log(req.body);
-      return res.status(400).send({
-        message:
-          "You forgot a field: \n You selected the Standardised format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Steps, Ingredients",
-      });
-    } else if (
-      req.body.isStandardised === false &&
-      (!req.body.name ||
-        !req.body.cloudinaryId ||
-        !req.body.description ||
-        !req.body.author ||
-        !req.body.thumbnail ||
-        !req.body.difficulty ||
-        !req.body.editorHtml)
-    ) {
-      console.log(req.body);
-      return res.status(400).send({
-        message:
-          "You forgot a field: \n You selected the Rich Text format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Text Editor Content",
-      });
-    }
+    // if (
+    //   req.body.isStandardised === true &&
+    //   (!req.body.name ||
+    //     !req.body.cloudinaryId ||
+    //     !req.body.description ||
+    //     !req.body.author ||
+    //     !req.body.thumbnail ||
+    //     !req.body.difficulty ||
+    //     !req.body.steps ||
+    //     !req.body.ingredients)
+    // ) {
+    //   console.log(req.body);
+    //   return res.status(400).send({
+    //     message:
+    //       "You forgot a field: \n You selected the Standardised format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Steps, Ingredients",
+    //   });
+    // } else if (
+    //   req.body.isStandardised === false &&
+    //   (!req.body.name ||
+    //     !req.body.cloudinaryId ||
+    //     !req.body.description ||
+    //     !req.body.author ||
+    //     !req.body.thumbnail ||
+    //     !req.body.difficulty ||
+    //     !req.body.editorHtml)
+    // ) {
+    //   console.log(req.body);
+    //   return res.status(400).send({
+    //     message:
+    //       "You forgot a field: \n You selected the Rich Text format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Text Editor Content",
+    //   });
+    // }
 
     req.body.steps = req.body.steps.trim().split("\n");
 

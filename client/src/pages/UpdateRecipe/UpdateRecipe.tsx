@@ -52,10 +52,6 @@ const UpdateRecipe = () => {
       });
   }, []);
 
-  // NOTE: current idea for implementation:
-  // - Create a flag to check if any images have been removed or added
-  // - only run uploadMultiImage if flag is true
-  // - re-upload everything if flag is true
   const uploadMultiImage = async (cloudinaryId: string) => {
     try {
       let cloudinaryPublicId = cloudinaryId;
@@ -218,7 +214,7 @@ const UpdateRecipe = () => {
       .catch((error) => {
         setLoading(false);
         if (error.response) {
-          alert(`Error: ${error.response.data.message}`);
+          alert(`Error: ${error.response.data.errors[0].msg}`);
         } else {
           alert("An unexpected error occurred. Please try again.");
         }

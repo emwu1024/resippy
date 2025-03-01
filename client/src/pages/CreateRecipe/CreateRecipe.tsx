@@ -175,7 +175,7 @@ const CreateRecipe = () => {
         .catch((error) => {
           setLoading(false);
           if (error.response) {
-            alert(`Error: ${error.response.data.message}`);
+            alert(`Error: ${error.response.data.errors[0].msg}`);
           } else {
             alert("An unexpected error occurred. Please try again.");
           }
