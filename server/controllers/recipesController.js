@@ -207,39 +207,6 @@ export const createRecipe = async (req, res) => {
 // Update recipe
 export const updateRecipe = async (req, res) => {
   try {
-    // if (
-    //   req.body.isStandardised === true &&
-    //   (!req.body.name ||
-    //     !req.body.cloudinaryId ||
-    //     !req.body.description ||
-    //     !req.body.author ||
-    //     !req.body.thumbnail ||
-    //     !req.body.difficulty ||
-    //     !req.body.steps ||
-    //     !req.body.ingredients)
-    // ) {
-    //   console.log(req.body);
-    //   return res.status(400).send({
-    //     message:
-    //       "You forgot a field: \n You selected the Standardised format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Steps, Ingredients",
-    //   });
-    // } else if (
-    //   req.body.isStandardised === false &&
-    //   (!req.body.name ||
-    //     !req.body.cloudinaryId ||
-    //     !req.body.description ||
-    //     !req.body.author ||
-    //     !req.body.thumbnail ||
-    //     !req.body.difficulty ||
-    //     !req.body.editorHtml)
-    // ) {
-    //   console.log(req.body);
-    //   return res.status(400).send({
-    //     message:
-    //       "You forgot a field: \n You selected the Rich Text format so check that these fields are filled in: Name, Description, Author, Thumbnail, Difficulty, Text Editor Content",
-    //   });
-    // }
-
     req.body.steps = req.body.steps.trim().split("\n");
 
     req.body.ingredients = req.body.ingredients.trim().split("\n");

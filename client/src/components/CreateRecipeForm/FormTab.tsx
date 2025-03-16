@@ -5,8 +5,6 @@ import { IconContext } from "react-icons";
 import { IoCloseCircle } from "react-icons/io5";
 
 import "./FormTab.css";
-import { convertToBase64 } from "../../utils/utils";
-import { ImageList } from "@mui/material";
 
 interface FormTabProps {
   steps: string;
@@ -25,25 +23,24 @@ const FormTab = (props: FormTabProps) => {
   const handleMultipleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (
-      props.isImagesDifferent !== undefined &&
-      props.setIsImagesDifferent !== undefined
-    ) {
-      props.setIsImagesDifferent(true);
-    }
     const filesArray = Array.from(e.target.files || []);
-    for (let i = 0; i < filesArray.length; i++) {
-      let base64File = await convertToBase64(filesArray[i]);
 
-      props.setImages((prevImages) => {
-        const updatedImages = [...prevImages, filesArray[i]];
-        return updatedImages;
-      });
+    if (Number(props.images.length) + Number(filesArray.length) > 6) {
+      alert("Maximum of 6 images per recipe.");
+    } else {
+      if (
+        props.isImagesDifferent !== undefined &&
+        props.setIsImagesDifferent !== undefined
+      ) {
+        props.setIsImagesDifferent(true);
+      }
 
-      setBase64Array((prevImages) => {
-        const updatedImages = [...prevImages, base64File as string];
-        return updatedImages;
-      });
+      for (let i = 0; i < filesArray.length; i++) {
+        props.setImages((prevImages) => {
+          const updatedImages = [...prevImages, filesArray[i]];
+          return updatedImages;
+        });
+      }
     }
   };
 
@@ -86,6 +83,7 @@ const FormTab = (props: FormTabProps) => {
         <div className="form-field-container">
           <label className="form-label" htmlFor="image-upload-input-multiple">
             <p>Images</p>
+            <p className="help-text">Maximum of 6 images</p>
           </label>
 
           <label
