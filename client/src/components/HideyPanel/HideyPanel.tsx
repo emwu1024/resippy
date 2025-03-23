@@ -5,7 +5,7 @@ const HideyPanel = (props: any) => {
   const [isNudgeDone, setIsNudgeDone] = useState(true);
   const [isSwingingDone, setIsSwingingDone] = useState(false);
 
-  const onAnimationEnd = async (e: React.MouseEvent<HTMLDivElement>) => {
+  const onAnimationEnd = async (e: React.AnimationEvent<HTMLDivElement>) => {
     setIsNudgeDone(true);
     setIsSwingingDone(true);
   };

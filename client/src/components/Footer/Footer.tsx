@@ -1,9 +1,8 @@
-import React from "react";
 import "./Footer.css";
 
 import { IconContext } from "react-icons";
 import { FaGithub } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (

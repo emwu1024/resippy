@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./home.css";
 
@@ -7,7 +7,6 @@ import PageContentContainer from "../../components/PageContentContainer/PageCont
 import axios from "axios";
 
 const Home = () => {
-  const [randomId, setRandomId] = useState("");
   const [rating, setRating] = useState("all");
   const [usedRatings, setUsedRatings] = useState<string[]>([]);
 
@@ -39,7 +38,6 @@ const Home = () => {
       );
 
       const randomId = response.data;
-      setRandomId(randomId);
       navigate(`/recipes/${randomId}`);
     } catch (error) {
       console.error("Error fetching random ID:", error);

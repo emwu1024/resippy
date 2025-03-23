@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
-import WipComponent from "../../components/WipComponent/WipComponent";
 
 import "./Attribution.css";
 

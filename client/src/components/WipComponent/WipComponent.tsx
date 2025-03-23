@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import "./WipComponent.css";
-// import logo from "../../assets/cooking-in-progress.png";
 import logo from "../../assets/cooking-in-progress-fire.png";
 
 const WipComponent = () => {

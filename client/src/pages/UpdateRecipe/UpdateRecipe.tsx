@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -131,7 +131,7 @@ const UpdateRecipe = () => {
         alert("Thumbnail upload to Cloudinary failed. Logging Error 1.");
         console.log(error);
       }
-    } catch {
+    } catch (error: any) {
       console.error(
         "Signature error. Logging the error.",
         error.response?.data || error.message
