@@ -3,14 +3,14 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import mongoSanitize from "express-mongo-sanitize";
 import rateLimit from "express-rate-limit";
-import { PORT } from "./config.js";
+// import { PORT } from "./config.js";
 import recipesRoute from "./routes/recipesRoute.js";
 import cors from "cors";
 
 // create an instance of the express application
 const app = express();
 dotenv.config();
-const port = process.env.PORT || PORT;
+const port = process.env.PORT || 8000;
 
 // Rate Limiting Middleware:
 const limiter = rateLimit({
