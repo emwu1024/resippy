@@ -31,9 +31,3 @@ export async function getCloudinarySignature(req, res) {
     return res.status(500).json({ error: "Failed to generate signature" });
   }
 }
-
-// TO DO:
-// add the signed code to updaterecipes
-// come up with strategy for shared public_id (this may need to be added to signature generator later)
-// integrate other photos to cloudinary
-// Solution idea: folders? multipart upload? separate unique ID generated with a library

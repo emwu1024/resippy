@@ -118,6 +118,7 @@ body {
   /* font-weight: 200; */
   margin: 0px;
   margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   font-family: "Nunito", sans-serif;
   color: var(--faded-body-text-color);
 }

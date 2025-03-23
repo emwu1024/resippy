@@ -122,6 +122,7 @@ The backupdb.sh script attached just needs to be modified with your details and 
     2. Next time continue with implementing update functionality and double checking backend
     3. Also work on other images, not just thumbnail
     4. Also found another bug when all uploaded images have been removed the filename text and 1 file uploaded text aren't removed. To be fixed next time.
+36. 11.02.25: CLOUDINARY DONE!! Now onto analytics.
 
 ## Back Log
 

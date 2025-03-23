@@ -17,7 +17,7 @@ const CreateRecipe = () => {
   const [steps, setSteps] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [multipleImages, setMultipleImages] = useState<Array<File>>([]);
-  const [isStandardised, setIsStandardised] = useState(false);
+  const [isStandardised, setIsStandardised] = useState(true);
   const [editorHtml, setEditorHtml] = useState("");
   const [cloudinaryId, setCloudinaryId] = useState("");
 
@@ -175,7 +175,7 @@ const CreateRecipe = () => {
         .catch((error) => {
           setLoading(false);
           if (error.response) {
-            alert(`Error: ${error.response.data.message}`);
+            alert(`Error: ${error.response.data.errors[0].msg}`);
           } else {
             alert("An unexpected error occurred. Please try again.");
           }

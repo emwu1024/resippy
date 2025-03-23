@@ -1,5 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
+import mongoSanitize from "express-mongo-sanitize";
+import rateLimit from "express-rate-limit";
 import { PORT, mongoDBURL } from "./config.js";
 import recipesRoute from "./routes/recipesRoute.js";
 import cors from "cors";
@@ -7,9 +9,23 @@ import cors from "cors";
 // create an instance of the express application
 const app = express();
 
+// Rate Limiting Middleware:
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Too many requests from this IP Address. Please try again later.",
+});
+
 // middleware for parsing request body
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
+app.use(
+  mongoSanitize({
+    replaceWith: "_", // Prevents dot notation attacks like {"profile.password": "hacked"}
+    allowDots: false, // Ensures nested objects with dots are sanitized
+  })
+);
+app.use(limiter);
 
 // Allows all origins by default and prevents CORS errors from cropping up.
 app.use(cors());
