@@ -1,11 +1,10 @@
 import { v2 as cloudinary } from "cloudinary";
-import { cloudinarySecret } from "../config.js";
 
 export async function getCloudinarySignature(req, res) {
   cloudinary.config({
     cloud_name: "deanbe7nk",
     api_key: "325373837994629",
-    api_secret: cloudinarySecret,
+    api_secret: process.env.CLOUDINARY_SECRET,
     signature_algorithm: "sha1",
   });
 
@@ -22,7 +21,7 @@ export async function getCloudinarySignature(req, res) {
         public_id: publicId,
         upload_preset: "resippys_signed_preset",
       },
-      cloudinarySecret
+      process.env.CLOUDINARY_SECRET
     );
 
     return res.status(200).json({ timestamp, signature });

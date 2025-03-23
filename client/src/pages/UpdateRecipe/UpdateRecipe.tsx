@@ -83,7 +83,7 @@ const UpdateRecipe = () => {
           const secureUrl = res.data.secure_url;
           secureUrlList.push(secureUrl);
         } catch (error) {
-          alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+          alert("Multi Image upload to Cloudinary failed. Logging Error.");
           console.log(error);
         }
       }
@@ -128,7 +128,7 @@ const UpdateRecipe = () => {
         const secureUrl = res.data.secure_url;
         return secureUrl;
       } catch (error: any) {
-        alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+        alert("Thumbnail upload to Cloudinary failed. Logging Error 1.");
         console.log(error);
       }
     } catch {
@@ -150,7 +150,7 @@ const UpdateRecipe = () => {
       const secureUrl = res.data.secure_url;
       return secureUrl;
     } catch (error) {
-      alert("Thumbnail upload to Cloudinary failed. Logging Error.");
+      alert("Thumbnail upload to Cloudinary failed. Logging Error 2.");
     }
   };
 

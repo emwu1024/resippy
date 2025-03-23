@@ -1,13 +1,16 @@
 import express from "express";
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 import mongoSanitize from "express-mongo-sanitize";
 import rateLimit from "express-rate-limit";
-import { PORT, mongoDBURL } from "./config.js";
+import { PORT } from "./config.js";
 import recipesRoute from "./routes/recipesRoute.js";
 import cors from "cors";
 
 // create an instance of the express application
 const app = express();
+dotenv.config();
+const port = process.env.PORT || PORT;
 
 // Rate Limiting Middleware:
 const limiter = rateLimit({
@@ -34,12 +37,12 @@ app.use("/recipes", recipesRoute);
 
 // mongoose is a Object Data Modeling library for MongoDB in Node.js, connect() uses Promise based approach
 mongoose
-  .connect(mongoDBURL)
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("Connected to Database");
     // listen is a function of Express to start a server and listen to incoming connections with a callback function as second argument that gets executed when server starts
-    app.listen(PORT, () => {
-      console.log(`App is running on the port: ${PORT}`);
+    app.listen(port, () => {
+      console.log(`App is running on the port: ${port}`);
     });
   })
   .catch((error) => {
