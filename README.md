@@ -36,7 +36,7 @@ This project is a repository for recipes I have previously made so I can remembe
 ### Backend
 
 1. If running project from scratch:
-   1. Create config.js file from config.js.template with your mongoDB information
+   1. Create .env file from .env.template with your mongoDB information
    2. Run `npm install` in server folder
 2. Navigate to the 'server' folder.
 3. Run `npm run dev`
