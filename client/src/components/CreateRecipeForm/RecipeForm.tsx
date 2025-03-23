@@ -197,7 +197,7 @@ const RecipeForm = (props: RecipeFormProps) => {
       {props.loading && (
         <div className="loading-icon">
           {/* Value in color doesn't seem to matter as it is being set by CSS, but the attribute still needs to be there otherwise it defaults to the default color */}
-          <CircularProgress color="#c17d42" size="2rem" />
+          <CircularProgress sx={{ color: "#c17d42" }} size="2rem" />
         </div>
       )}
 

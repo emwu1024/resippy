@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import "./ShowRecipe.css";
 
-import Recipe from "../RecipeIndex/RecipesIndex";
 import { GiPaperClip } from "react-icons/gi";
 import Stain from "../../assets/coffeestain.png";
 
@@ -28,7 +24,7 @@ const ShowForm = (props: ShowFormProps) => {
           <p>By: {props.author}</p>
           <p>Difficulty: {props.difficulty}</p>
           <p>{props.description}</p>
-          {props.images.map((image, index) => (
+          {props.images.map((image) => (
             <img className="recipe-img" src={image} alt="" />
           ))}
         </div>
@@ -37,7 +33,7 @@ const ShowForm = (props: ShowFormProps) => {
           <div className="page-margin-top paperclip-page">
             <h2 className="subheading-2 paperclip-page-header">Ingredients</h2>
             <ul className="paperclip-page-content">
-              {props.ingredients.map((ingredient, index) => (
+              {props.ingredients.map((ingredient) => (
                 <li className="paperclip-page-text">{ingredient}</li>
               ))}
             </ul>
@@ -50,7 +46,7 @@ const ShowForm = (props: ShowFormProps) => {
           <div className="steps-container">
             <h2 className="subheading-2 steps-header">Steps</h2>
             <ol className="steps-list">
-              {props.steps.map((step, index) => (
+              {props.steps.map((step) => (
                 <li>{step}</li>
               ))}
             </ol>

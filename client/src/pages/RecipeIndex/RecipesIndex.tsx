@@ -143,12 +143,11 @@ const RecipesIndex = () => {
         </div>
         {loading ? (
           <div className="loading-icon">
-            {/* Value in color doesn't seem to matter as it is being set by CSS, but the attribute still needs to be there otherwise it defaults to the default color */}
-            <CircularProgress color="#c17d42" size="4rem" />
+            <CircularProgress sx={{ color: "#c17d42" }} size="4rem" />
           </div>
         ) : (
           <div className="cards-container">
-            {recipes.map((recipe, index) => (
+            {recipes.map((recipe) => (
               <Link to={`/recipes/${recipe._id}`} key={recipe._id}>
                 <Card
                   recipeId={recipe._id}

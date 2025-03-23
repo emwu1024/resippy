@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -62,7 +62,7 @@ const CreateRecipe = () => {
         }
       }
       return secureUrlList;
-    } catch (error) {
+    } catch (error: any) {
       console.error(
         "Signature error. Logging the error.",
         error.response?.data || error.message
@@ -85,7 +85,11 @@ const CreateRecipe = () => {
       const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
 
       const data = new FormData();
-      data.append("file", thumbnailImage);
+      if (thumbnailImage) {
+        data.append("file", thumbnailImage);
+      } else {
+        throw new Error("Thumbnail image is null");
+      }
       data.append("public_id", cloudinaryPublicId);
       data.append(
         "upload_preset",
@@ -101,7 +105,7 @@ const CreateRecipe = () => {
         alert("Thumbnail upload to Cloudinary failed. Logging Error.");
         console.log(error);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(
         "Signature error. Logging the error.",
         error.response?.data || error.message

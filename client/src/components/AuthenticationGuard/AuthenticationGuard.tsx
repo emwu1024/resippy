@@ -1,11 +1,17 @@
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import React from "react";
+import { ComponentType } from "react";
 
-export const AuthenticationGuard = ({ component }) => {
+interface AuthentificationGuardProps {
+  component: ComponentType;
+}
+
+export const AuthenticationGuard = ({
+  component,
+}: AuthentificationGuardProps) => {
   const Component = withAuthenticationRequired(component, {
     onRedirecting: () => (
       <div className="page-layout">
-        <p>404 Denied </p>
+        <p>Access Denied </p>
         <p>...</p>
         <p>(lol jk implement proper error msg later)</p>
         {/* <PageLoader /> */}
