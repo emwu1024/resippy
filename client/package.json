@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "preinstall": "echo '@tiptap-pro:registry=https://registry.tiptap.dev/' >> .npmrc && echo '//registry.tiptap.dev/:_authToken=${NPM_AUTH_TOKEN}' >> .npmrc",
+    "preinstall": "echo '@tiptap-pro:registry=https://registry.tiptap.dev/' >> .npmrc && echo '//registry.tiptap.dev/:_authToken=${TIPTAP_PRO_TOKEN}' >> .npmrc",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
