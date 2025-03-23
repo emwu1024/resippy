@@ -17,7 +17,7 @@ const Home = () => {
     const fetchTags = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/recipes/ratings"
+          "https://resippy.onrender.com/recipes/ratings"
         );
         setUsedRatings(response.data);
       } catch (error) {
@@ -29,11 +29,14 @@ const Home = () => {
 
   const randomiseRecipe = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/recipes/random`, {
-        params: {
-          rating: rating || "all",
-        },
-      });
+      const response = await axios.get(
+        `https://resippy.onrender.com/recipes/random`,
+        {
+          params: {
+            rating: rating || "all",
+          },
+        }
+      );
 
       const randomId = response.data;
       setRandomId(randomId);

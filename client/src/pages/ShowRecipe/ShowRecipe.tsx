@@ -31,7 +31,7 @@ const ShowRecipe = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/recipes/${id}`)
+      .get(`https://resippy.onrender.com/recipes/${id}`)
       .then((response) => {
         setRecipe(response.data);
       })
