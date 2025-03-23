@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 
 import "./ShowRecipe.css";
-import Recipe from "../RecipeIndex/RecipesIndex";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import ShowEditor from "./ShowEditor";
 import ShowForm from "./ShowForm";

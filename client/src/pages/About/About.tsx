@@ -1,14 +1,5 @@
-import React, { useState } from "react";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
-import WipComponent from "../../components/WipComponent/WipComponent";
-// import AuthorPic from "../../assets/example-pic.webp";
-// import AuthorPic from "../../assets/authorimage1.jpg";
-// import AuthorPic from "../../assets/authorimage2.jpg";
 import AuthorPic from "../../assets/authorimage3.jpg";
-// import AuthorPic from "../../assets/authorimage4.jpg";
-// import AuthorPic from "../../assets/authorimage5.jpg";
-// import AuthorPic from "../../assets/authorimage6.jpg";
-// import AuthorPic from "../../assets/authorimage7.jpg";
 
 import "./About.css";
 
@@ -21,7 +12,6 @@ const About = () => {
             <img
               className="about-author-img"
               src={AuthorPic}
-              // src="../../assets/authorimage3.HEIC"
               alt={`A brown mug and a metal bowl of mango sago on a table with plants in the background.`}
             />
           </div>

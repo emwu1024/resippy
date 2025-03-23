@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 interface TabProps {
   label: string;
   onClick: () => any;
