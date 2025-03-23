@@ -51,7 +51,7 @@ export const validateRecipe = [
 
   body("editorHtml").custom((value, { req }) => {
     if (!req.body.isStandardised) {
-      if (!value.trim() || typeof value !== string) {
+      if (!value.trim() || typeof value !== "string") {
         throw new Error(
           "Formated selected is Editor so the text in the editor cannot be empty and must be a string."
         );
