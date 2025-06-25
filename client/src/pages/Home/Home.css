@@ -32,6 +32,10 @@
     font-size: 2rem;
   }
 
+  .hero-image {
+    background-attachment: scroll;
+  }
+
   .desc-container {
     font-size: var(--description-text-size-mobile);
   }
