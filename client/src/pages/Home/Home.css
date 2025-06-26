@@ -2,7 +2,7 @@
 @import url("https://use.typekit.net/buu0hkn.css");
 
 .hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../assets/main-hero-1.jpg");
   height: 100vh;
   background-position: center center;
@@ -30,6 +30,10 @@
 
   .hero-text {
     font-size: 2rem;
+  }
+
+  .hero-image {
+    background-attachment: scroll;
   }
 
   .desc-container {
