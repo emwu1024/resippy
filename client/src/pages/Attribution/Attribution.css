@@ -1,5 +1,5 @@
 .attribution-container {
-  height: 40vh;
+  min-height: 40vh;
 }
 
 .attribution-list {
