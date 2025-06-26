@@ -33,7 +33,7 @@ const CreateRecipe = () => {
       for (let i = 0; i < multipleImages.length; i++) {
         cloudinaryPublicId = cloudinaryPublicId + "_image_" + (i + 1);
         const cloudData = await axios.post(
-          `http://localhost:8000/recipes/cloud`,
+          `https://resippy.onrender.com/recipes/cloud`,
           {
             publicId: cloudinaryPublicId,
           }
@@ -74,7 +74,7 @@ const CreateRecipe = () => {
     let cloudinaryPublicId = cloudinaryId + "_thumbnail";
     try {
       const cloudData = await axios.post(
-        `http://localhost:8000/recipes/cloud`,
+        `https://resippy.onrender.com/recipes/cloud`,
         {
           publicId: cloudinaryPublicId,
         }
@@ -171,7 +171,7 @@ const CreateRecipe = () => {
       };
 
       axios
-        .post("http://localhost:8000/recipes", data)
+        .post("https://resippy.onrender.com/recipes", data)
         .then(() => {
           setLoading(false);
           navigate("/recipes");

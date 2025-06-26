@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./home.css";
+import "./Home.css";
 
 import Button from "../../components/Buttons/Button/Button";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
@@ -16,7 +16,7 @@ const Home = () => {
     const fetchTags = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/recipes/ratings"
+          "https://resippy.onrender.com/recipes/ratings"
         );
         setUsedRatings(response.data);
       } catch (error) {
@@ -28,11 +28,14 @@ const Home = () => {
 
   const randomiseRecipe = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/recipes/random`, {
-        params: {
-          rating: rating || "all",
-        },
-      });
+      const response = await axios.get(
+        `https://resippy.onrender.com/recipes/random`,
+        {
+          params: {
+            rating: rating || "all",
+          },
+        }
+      );
 
       const randomId = response.data;
       navigate(`/recipes/${randomId}`);
