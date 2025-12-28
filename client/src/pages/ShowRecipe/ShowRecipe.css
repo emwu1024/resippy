@@ -1,5 +1,5 @@
 .book-container {
-  background: url("https://i.imgur.com/0kjMcUe.png");
+  background: url("../../assets/paperbg.jpeg");
   filter: brightness(0.95) sepia(30%) saturate(100%) hue-rotate(-10deg);
   /* height: 100vh; */
   overflow: auto;
@@ -117,12 +117,7 @@ h6 {
   }
 
   .paperclip-page-content {
-    background: repeating-linear-gradient(
-      white,
-      white 25px,
-      #9198e5 26px,
-      #9198e5 27px
-    );
+    background: repeating-linear-gradient(white, white 25px, #9198e5 26px, #9198e5 27px);
     /* background-size: 40px 40px;
     background-image: linear-gradient(
         to right,
