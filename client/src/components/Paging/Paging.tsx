@@ -15,7 +15,7 @@ const Paging = ({ page }: PagingProps) => {
     const fetchRecipes = async (page: number) => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8000/recipes?page=${page}`
+          `https://resippy.onrender.com/recipes?page=${page}`
         );
         setNumberOfPages(data.numberOfPages);
       } catch (error) {

@@ -16,7 +16,9 @@ const ChipInput = (props: ChipInputProps) => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/recipes/tags");
+        const response = await axios.get(
+          "https://resippy.onrender.com/recipes/tags"
+        );
         setTagSet(response.data);
       } catch (error) {
         console.error("Error fetching tags:", error);

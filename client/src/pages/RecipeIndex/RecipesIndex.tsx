@@ -45,7 +45,7 @@ const RecipesIndex = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:8000/recipes/search`,
+          `https://resippy.onrender.com/recipes/search`,
           {
             params: {
               searchQuery: search || "none",
@@ -82,9 +82,12 @@ const RecipesIndex = () => {
   const fetchRecipes = async (page: number) => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:8000/recipes/short", {
-        params: { page },
-      });
+      const { data } = await axios.get(
+        "https://resippy.onrender.com/recipes/short",
+        {
+          params: { page },
+        }
+      );
       setRecipes(data.data); // Set fetched recipes to state
     } catch (error) {
       console.error("Error fetching recipes:", error);
